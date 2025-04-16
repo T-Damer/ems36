@@ -111,7 +111,7 @@ export const headerData = {
       ],
     },
   ],
-  actions: [{ icon: 'tabler:phone', href: 'tel:+7(900)300-63-23', target: '_blank' }],
+  actions: [{ ariaLabel: 'Позвонить', icon: 'tabler:phone', href: 'tel:+7(900)300-63-23', target: '_blank' }],
 };
 
 export const footerData = {
@@ -155,5 +155,7 @@ export const footerData = {
     { text: 'Terms', href: getPermalink('/terms') },
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
   ],
-  socialLinks: [{ ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/T-Damer' }],
+  socialLinks: [
+    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/T-Damer', target: '_blank' },
+  ],
 };
