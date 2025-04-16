@@ -1,6 +1,6 @@
 site:
   name: ЭлеваторМельСервис
-  site: 'https://t-damer.github.io'
+  site: 'https://t-damer.github.io/ems36/'
   base: '/ems36/'
   trailingSlash: true
 
@@ -11,7 +11,7 @@ metadata:
   title:
     default: EMS36
     template: '%s — ems36'
-  description: "\U0001F680 "
+  description: "\U0001F680 Компания «Элеватор Мель Сервис» производство транспортного технологического оборудования"
   robots:
     index: true
     follow: true
@@ -23,8 +23,8 @@ metadata:
         height: 628
     type: website
   twitter:
-    handle: '@onwidget'
-    site: '@onwidget'
+    handle: '@True_Damer'
+    site: '@True_Damer'
     cardType: summary_large_image
 
 i18n:
