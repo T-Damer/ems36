@@ -85,6 +85,11 @@
   @apply rotate-45 translate-y-[-8px] translate-x-[14px];
 }
 
+svg[data-icon='tabler:phone'] {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* To deprecated */
 
 .dd *:first-child {
