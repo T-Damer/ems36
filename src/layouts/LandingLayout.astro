@@ -4,6 +4,7 @@ import Header from '~/components/widgets/Header.astro';
 
 import { headerData } from '~/navigation';
 import type { MetaData } from '~/types';
+import { getHomePermalink } from '~/utils/permalinks';
 
 export interface Props {
   metadata?: MetaData;
@@ -19,7 +20,7 @@ const { metadata } = Astro.props;
         links={headerData?.links[2] ? [headerData.links[2]] : undefined}
         actions={[
           {
-            href: 'https://github.com/onwidget/astrowind',
+            href: getHomePermalink(),
           },
         ]}
         showToggleTheme

@@ -6,32 +6,28 @@ export const headerData = {
       text: 'Продукция',
       links: [
         {
-          text: 'Features (Anchor Link)',
-          href: getPermalink('/#features'),
+          text: 'Элеваторы',
+          href: getPermalink('/elevators'),
         },
         {
-          text: 'Services',
-          href: getPermalink('/services'),
+          text: 'Транспортеры',
+          href: getPermalink('/transporters'),
         },
         {
-          text: 'Pricing',
-          href: getPermalink('/pricing'),
+          text: 'Клапаны',
+          href: getPermalink('/valves'),
         },
         {
-          text: 'About us',
-          href: getPermalink('/about'),
+          text: 'Задвижки',
+          href: getPermalink('/shutters'),
         },
         {
-          text: 'Contact',
-          href: getPermalink('/contact'),
+          text: 'Металообработка',
+          href: getPermalink('/metal-works'),
         },
         {
-          text: 'Terms',
-          href: getPermalink('/terms'),
-        },
-        {
-          text: 'Privacy policy',
-          href: getPermalink('/privacy'),
+          text: 'Детали для сельхозтехники',
+          href: getPermalink('/parts-agriculture'),
         },
       ],
     },
@@ -39,50 +35,29 @@ export const headerData = {
       text: 'Документация',
       links: [
         {
-          text: 'Blog List',
-          href: getBlogPermalink(),
+          text: 'Образцы паспортов',
+          href: getPermalink('/passport-examples'),
         },
         {
-          text: 'Article',
-          href: getPermalink('get-started-website-with-astro-tailwind-css', 'post'),
+          text: 'Руководство по эксплуатации',
+          href: getPermalink('/exp-manual'),
         },
         {
-          text: 'Article (with MDX)',
-          href: getPermalink('markdown-elements-demo-post', 'post'),
+          text: 'Разрешительные документы',
+          href: getPermalink('/permitting-docs'),
         },
-        {
-          text: 'Category Page',
-          href: getPermalink('tutorials', 'category'),
-        },
-        {
-          text: 'Tag Page',
-          href: getPermalink('astro', 'tag'),
-        },
+        { text: 'Статьи', href: getBlogPermalink() },
       ],
     },
     {
       text: 'Контакты',
       links: [
         {
-          text: 'Blog List',
-          href: getBlogPermalink(),
+          text: 'Адреса и телефоны',
+          href: getPermalink('/contacts'),
         },
-        {
-          text: 'Article',
-          href: getPermalink('get-started-website-with-astro-tailwind-css', 'post'),
-        },
-        {
-          text: 'Article (with MDX)',
-          href: getPermalink('markdown-elements-demo-post', 'post'),
-        },
-        {
-          text: 'Category Page',
-          href: getPermalink('tutorials', 'category'),
-        },
-        {
-          text: 'Tag Page',
-          href: getPermalink('astro', 'tag'),
-        },
+        { text: 'Новости', href: getBlogPermalink() },
+        { text: 'О компании', href: getPermalink('/about') },
       ],
     },
   ],
@@ -92,43 +67,31 @@ export const headerData = {
 export const footerData = {
   links: [
     {
-      title: 'Product',
+      title: 'Продукция',
       links: [
-        { text: 'Features', href: '#' },
-        { text: 'Security', href: '#' },
-        { text: 'Team', href: '#' },
-        { text: 'Enterprise', href: '#' },
-        { text: 'Customer stories', href: '#' },
-        { text: 'Pricing', href: '#' },
+        { text: 'Элеваторы', href: getPermalink('/elevators') },
+        { text: 'Транспортеры', href: getPermalink('/transporters') },
+        { text: 'Клапаны', href: getPermalink('/valves') },
+        { text: 'Задвижки', href: getPermalink('/shutters') },
+        { text: 'Металообработка', href: getPermalink('/metal-works') },
+        {
+          text: 'Детали для сельхозтехники',
+          href: getPermalink('/parts-agriculture'),
+        },
       ],
     },
+
     {
-      title: 'Platform',
+      title: 'Компания',
       links: [
-        { text: 'Partners', href: '#' },
-        { text: 'AstroWind Desktop', href: '#' },
-      ],
-    },
-    {
-      title: 'Support',
-      links: [
-        { text: 'Docs', href: '#' },
-        { text: 'Professional Services', href: '#' },
-        { text: 'Status', href: '#' },
-      ],
-    },
-    {
-      title: 'Company',
-      links: [
-        { text: 'About', href: '#' },
-        { text: 'Blog', href: '#' },
-        { text: 'Shop', href: '#' },
+        { text: 'О нас', href: getPermalink('/about') },
+        { text: 'Статьи', href: getBlogPermalink() },
       ],
     },
   ],
   secondaryLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
-    { text: 'Privacy Policy', href: getPermalink('/privacy') },
+    { text: 'Условия пользования', href: getPermalink('/terms') },
+    { text: 'Политика конфиденциальности', href: getPermalink('/privacy') },
   ],
   socialLinks: [
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/T-Damer', target: '_blank' },
