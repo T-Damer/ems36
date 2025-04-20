@@ -1,7 +1,7 @@
 site:
   name: ЭлеваторМельСервис
-  site: 'https://t-damer.github.io/ems36/'
-  base: '/ems36/'
+  site: 'https://t-damer.github.io/'
+  base: '/'
   trailingSlash: true
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
