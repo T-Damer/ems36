@@ -1,10 +1,8 @@
 site:
   name: ЭлеваторМельСервис
-  site: 'https://t-damer.github.io/'
+  site: 'https://ems36.ru/'
   base: '/'
   trailingSlash: true
-
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
 
 # Default SEO metadata
 metadata:

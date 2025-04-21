@@ -9,7 +9,7 @@ tags:
   - сайт
   - разработка
 metadata:
-  canonical: https://t-damer.github.io/
+  canonical: https://ems36.ru/
 ---
 
 Мы давно хотели обновить наш старый сайт, многое в нем не работало, поэтому мы решили обновить его
