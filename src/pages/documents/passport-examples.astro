@@ -1,0 +1,21 @@
+---
+import FileList from '~/components/widgets/FileList.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Образцы паспортов',
+};
+
+const passports = await Astro.glob('/src/assets/files/passports/*').then((files) => {
+  return files.map((file) => file.default);
+});
+---
+
+<Layout metadata={metadata}>
+  <Hero tagline={metadata.title}>
+    <Fragment slot="content">
+      <FileList fileList={passports} />
+    </Fragment>
+  </Hero>
+</Layout>

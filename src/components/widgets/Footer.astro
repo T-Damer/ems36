@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
+import Link from '../common/Link.astro';
 
 interface Link {
   text?: string;
@@ -41,11 +42,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
             secondaryLinks.map(({ text, href }, index) => (
               <>
                 {index !== 0 ? ' · ' : ''}
-                <a
-                  class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
-                  href={href}
-                  set:html={text}
-                />
+                <Link href={href} text={text} />
               </>
             ))
           }

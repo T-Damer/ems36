@@ -36,15 +36,15 @@ export const headerData = {
       links: [
         {
           text: 'Образцы паспортов',
-          href: getPermalink('/passport-examples'),
+          href: getPermalink('/documents/passport-examples'),
         },
         {
           text: 'Руководство по эксплуатации',
-          href: getPermalink('/exp-manual'),
+          href: getPermalink('/documents/exp-manual'),
         },
         {
           text: 'Разрешительные документы',
-          href: getPermalink('/permitting-docs'),
+          href: getPermalink('/documents/permitting-docs'),
         },
         { text: 'Статьи', href: getBlogPermalink() },
       ],
