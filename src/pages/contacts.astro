@@ -1,9 +1,9 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import { mapsLink } from '~/utils/permalinks';
 import YaMaps from '~/components/widgets/YaMaps.astro';
 import Hero from '~/components/widgets/Hero.astro';
+import { defaultOrgAddress } from '~/utils/openMaps';
 
 const metadata = {
   title: 'Контакты',
@@ -28,8 +28,8 @@ const metadata = {
       },
       {
         title: 'Местоположение',
-        description: '394019, Воронежская обл., Воронеж, ул. Краснодонская д. 1а, офис 19',
-        callToAction: { href: mapsLink, text: 'Открыть на картах' },
+        description: defaultOrgAddress,
+        callToAction: { onclick: 'openMaps()', text: 'Открыть на картах' },
         icon: 'tabler:map-pin',
       },
     ]}
@@ -41,3 +41,10 @@ const metadata = {
     </Fragment>
   </Hero>
 </Layout>
+
+<script>
+  import openMaps from '~/utils/openMaps';
+
+  declare const window: any;
+  window.openMaps = openMaps;
+</script>
