@@ -2,14 +2,13 @@
 import FileList from '~/components/widgets/FileList.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import getFilesFromDir from '~/utils/getFilesFromDir';
 
 const metadata = {
   title: 'Образцы паспортов',
 };
 
-const passports = await Astro.glob('/public/files/passports/*').then((files) => {
-  return files.map((file) => file.default);
-});
+const passports = await getFilesFromDir('files/passports');
 ---
 
 <Layout metadata={metadata}>
