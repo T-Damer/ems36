@@ -7,7 +7,7 @@ const metadata = {
   title: 'Разрешительные документы',
 };
 
-const passports = await Astro.glob('/src/assets/files/permitting-docs/*').then((files) => {
+const passports = await Astro.glob('/public/files/permitting-docs/*').then((files) => {
   return files.map((file) => file.default);
 });
 ---

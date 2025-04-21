@@ -7,7 +7,7 @@ const metadata = {
   title: 'Руководство по эксплуатации',
 };
 
-const passports = await Astro.glob('/src/assets/files/exp-manual/*').then((files) => {
+const passports = await Astro.glob('/public/files/exp-manual/*').then((files) => {
   return files.map((file) => file.default);
 });
 ---
