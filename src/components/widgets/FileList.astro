@@ -1,11 +1,13 @@
 ---
 import { Icon } from 'astro-icon/components';
+import getFilesFromDir from '~/utils/getFilesFromDir';
 
-export interface Props {
-  fileList: string[];
+interface Props {
+  dir: string;
 }
 
-const { fileList = [] } = Astro.props;
+const { dir } = Astro.props;
+const fileList = await getFilesFromDir(dir);
 ---
 
 <section class="flex flex-col gap-y-2 border border-slate-200 rounded-2xl max-w-4xl p-4 mx-auto">
