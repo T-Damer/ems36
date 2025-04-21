@@ -50,7 +50,7 @@ export default defineConfig({
 
     ...whenExternalScripts(() =>
       partytown({
-        config: { forward: ['dataLayer.push'] },
+        config: { forward: ['dataLayer.push', 'ym'] },
       })
     ),
 
