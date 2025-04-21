@@ -132,3 +132,5 @@ export const applyGetPermalinks = (menu: object = {}) => {
   }
   return menu;
 };
+
+export const mapsLink = 'https://yandex.ru/maps/-/CHbpA6mO';

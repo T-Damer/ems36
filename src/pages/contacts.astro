@@ -1,0 +1,43 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import { mapsLink } from '~/utils/permalinks';
+import YaMaps from '~/components/widgets/YaMaps.astro';
+import Hero from '~/components/widgets/Hero.astro';
+
+const metadata = {
+  title: 'Контакты',
+};
+---
+
+<Layout metadata={metadata}>
+  <Features2
+    title="Свяжитесь с нами!"
+    items={[
+      {
+        title: 'Телефон',
+        description: '+7 (900) 300-63-23',
+        callToAction: { href: 'tel:+79003006323', text: 'Позвонить' },
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Почта',
+        description: 'elevatormelservis36@yandex.ru',
+        callToAction: { href: 'mailto:elevatormelservis36@yandex.ru', text: 'Написать' },
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Местоположение',
+        description: '394019, Воронежская обл., Воронеж, ул. Краснодонская д. 1а, офис 19',
+        callToAction: { href: mapsLink, text: 'Открыть на картах' },
+        icon: 'tabler:map-pin',
+      },
+    ]}
+  />
+
+  <Hero tagline="Карты">
+    <Fragment slot="content">
+      <YaMaps />
+    </Fragment>
+  </Hero>
+</Layout>
