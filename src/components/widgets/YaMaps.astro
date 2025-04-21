@@ -1,14 +1,22 @@
 ---
-
+import { Icon } from 'astro-icon/components';
 ---
 
-<div class="relative w-full h-full">
+<div class="flex flex-col items-center relative w-full h-full">
   <a
     href="https://yandex.ru/maps/org/elevatormelservis/8057948607/?utm_medium=mapframe&utm_source=maps"
-    style="color:#eee;font-size:12px;position:absolute;top:0px;">ЭлеваторМельСервис</a
+    class="text-slate-300 inline-flex gap-x-1 items-center">ЭлеваторМельСервис<Icon name="tabler:external-link" /></a
   >
-  <iframe
+  <!-- <iframe
     src="https://yandex.ru/map-widget/v1/org/elevatormelservis/8057948607/?l=trf%2Ctrfe%2Cmasstransit&ll=39.137810%2C51.672055&z=14.04"
+    width="560"
+    height="400"
+    frameborder="1"
+    allowfullscreen="true"
+    style="position:relative;"></iframe> -->
+
+  <iframe
+    src="https://maps.google.com/maps?q=%D0%92%D0%BE%D1%80%D0%BE%D0%BD%D0%B5%D0%B6%2C%20%D1%83%D0%BB.%20%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B4%D0%BE%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%2C%201%D0%B0&t=m&z=14&output=embed&iwloc=near"
     width="560"
     height="400"
     frameborder="1"
