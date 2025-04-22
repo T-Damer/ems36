@@ -1,9 +1,6 @@
 ---
 import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import Layout from '~/layouts/PageLayout.astro';
-import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'О нас',
@@ -19,20 +16,15 @@ const metadata = {
       src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
       alt: 'Изображение рабочего процесса',
     }}
+    content="Дорогой друг, мы бесконечно благодарны за проявленный интерес к нашему заводу! Команда ЭМС всегда стремится воплотить в жизнь самые сложные технические задания. При этом, имея за плечами колоссальный опыт в ремонте, монтаже, разработке и производстве технологического оборудования, мы стараемся довести каждый конвейер, норию либо самую простую задвижку до совершенства. Чтобы обслуживающий персонал получал удовольствие от эксплуатации оборудования и ремонты (куда же без них) проходили лего, быстро и без больших затрат."
   >
     <Fragment slot="title">
-      Компания «ЭлеваторМельСервис» <br />
-      <span class="text-accent dark:text-white highlight">производство транспортного технологического оборудования</span
-      >
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">
+        Компания ЭлеваторМельСервис <br />
+        <span class="text-accent dark:text-white highlight"
+          >производство транспортного технологического оборудования</span
+        >
+      </h1>
     </Fragment>
   </Hero>
-
-  <Stats
-    title="Статистика"
-    stats={[
-      { title: 'Офисов', amount: '1' },
-      { title: 'Сотрудников', amount: '70' },
-      { title: 'Выполненных заказов', amount: '300+' },
-    ]}
-  />
 </Layout>
