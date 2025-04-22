@@ -9,7 +9,7 @@ metadata:
   title:
     default: EMS36
     template: '%s — ems36'
-  description: "\U0001F680 Компания «Элеватор Мель Сервис» производство транспортного технологического оборудования"
+  description: 'Компания ЭлеваторМельСервис - производство транспортного технологического оборудования'
   robots:
     index: true
     follow: true
@@ -28,6 +28,35 @@ metadata:
 i18n:
   language: en
   textDirection: ltr
+
+pages:
+  documents:
+    pathname: 'documents'
+    metadata:
+      title: 'Документы — ЭлеваторМельСервис'
+      description: 'Техническая документация и сертификаты на оборудование ЭлеваторМельСервис'
+      robots:
+        index: true
+        follow: true
+      openGraph:
+        images:
+          - url: '~/assets/images/default.png'
+            width: 1200
+            height: 628
+
+  products:
+    pathname: 'products'
+    metadata:
+      title: 'Продукция — ЭлеваторМельСервис'
+      description: 'Производство транспортного технологического оборудования для элеваторов и мельниц'
+      robots:
+        index: true
+        follow: true
+      openGraph:
+        images:
+          - url: '~/assets/images/default.png'
+            width: 1200
+            height: 628
 
 apps:
   blog:
