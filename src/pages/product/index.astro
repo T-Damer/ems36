@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '~/layouts/PageLayout.astro';
+import { fetchProducts } from '~/utils/product';
+import { SITE } from '~/config';
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  const products = await fetchProducts();
+  const types = new Set(products.map((product) => product.type?.slug).filter(Boolean));
+
+  return Array.from(types).map((type) => ({
+    params: { type },
+    props: { type },
+  }));
+}) satisfies GetStaticPaths;
+
+const { type } = Astro.props;
+
+const metadata = {
+  title: `Продукция ${type ? `- ${type}` : ''}`,
+  description: 'Производство транспортного технологического оборудования для элеваторов и мельниц',
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-8">Продукция {type ? `- ${type}` : ''}</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a
+        href="/product/valves/"
+        class="block p-6 bg-white dark:bg-slate-800 rounded-lg shadow hover:shadow-lg transition-shadow"
+      >
+        <h2 class="text-xl font-semibold mb-2">Клапаны</h2>
+        <p class="text-slate-600 dark:text-slate-400">Электромагнитные клапаны для автоматизации систем</p>
+      </a>
+    </div>
+  </div>
+</Layout>

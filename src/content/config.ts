@@ -52,19 +52,34 @@ const postCollection = defineCollection({
     publishDate: z.date().optional(),
     updateDate: z.date().optional(),
     draft: z.boolean().optional(),
-
     title: z.string(),
     excerpt: z.string().optional(),
     image: z.string().optional(),
-
     category: z.string().optional(),
     tags: z.array(z.string()).optional(),
     author: z.string().optional(),
+    metadata: metadataDefinition(),
+  }),
+});
 
+const productCollection = defineCollection({
+  loader: glob({ pattern: ['**/*.md', '**/*.mdx'], base: 'src/data/product' }),
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string().optional(),
+    image: z.string().optional(),
+    type: z.string(),
+    dimensions: z.string().optional(),
+    weight: z.string().optional(),
+    author: z.string().optional(),
+    publishDate: z.date().optional(),
+    updateDate: z.date().optional(),
+    draft: z.boolean().optional(),
     metadata: metadataDefinition(),
   }),
 });
 
 export const collections = {
   post: postCollection,
+  product: productCollection,
 };

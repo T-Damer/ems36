@@ -90,6 +90,28 @@ apps:
     isRelatedPostsEnabled: true
     relatedPostsCount: 4
 
+  product:
+    isEnabled: true
+    productsPerPage: 6
+
+    product:
+      isEnabled: true
+      permalink: '/product/%type%/%slug%'
+      robots:
+        index: true
+
+    list:
+      isEnabled: true
+      pathname: 'product'
+      robots:
+        index: true
+
+    type:
+      isEnabled: true
+      pathname: 'type'
+      robots:
+        index: true
+
 analytics:
   vendors:
     googleAnalytics:

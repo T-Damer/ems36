@@ -27,6 +27,10 @@ export const TAG_BASE = cleanSlug(APP_BLOG?.tag?.pathname) || 'tag';
 
 export const POST_PERMALINK_PATTERN = trimSlash(APP_BLOG?.post?.permalink || `${BLOG_BASE}/%slug%`);
 
+export const PRODUCT_BASE = '/product';
+export const TYPE_BASE = '/product';
+export const PRODUCT_PERMALINK_PATTERN = '/product/%type%/%slug%';
+
 /** */
 export const getCanonical = (path = ''): string | URL => {
   const url = String(new URL(path, SITE.site));

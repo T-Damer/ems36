@@ -1,33 +1,34 @@
-import { getPermalink, getBlogPermalink } from './utils/permalinks';
+import { getPermalink, getBlogPermalink } from '~/utils/permalinks';
 
 export const headerData = {
   links: [
     {
       text: 'Продукция',
+      href: getPermalink('/product'),
       links: [
         {
           text: 'Элеваторы',
-          href: getPermalink('/elevators'),
+          href: getPermalink('/product/elevators'),
         },
         {
           text: 'Транспортеры',
-          href: getPermalink('/transporters'),
+          href: getPermalink('/product/transporters'),
         },
         {
           text: 'Клапаны',
-          href: getPermalink('/valves'),
+          href: getPermalink('/product/valves'),
         },
         {
           text: 'Задвижки',
-          href: getPermalink('/shutters'),
+          href: getPermalink('/product/shutters'),
         },
         {
           text: 'Металообработка',
-          href: getPermalink('/metal-works'),
+          href: getPermalink('/product/metal-works'),
         },
         {
           text: 'Детали для сельхозтехники',
-          href: getPermalink('/parts-agriculture'),
+          href: getPermalink('/product/parts-agriculture'),
         },
       ],
     },

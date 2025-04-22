@@ -8,6 +8,7 @@ export type Config = {
   i18n?: I18NConfig;
   apps?: {
     blog?: AppBlogConfig;
+    product?: AppProductConfig;
   };
   ui?: unknown;
   analytics?: unknown;
@@ -61,6 +62,34 @@ export interface AppBlogConfig {
     };
   };
   tag: {
+    isEnabled: boolean;
+    pathname: string;
+    robots: {
+      index: boolean;
+      follow: boolean;
+    };
+  };
+}
+export interface AppProductConfig {
+  isEnabled: boolean;
+  productsPerPage: number;
+  product: {
+    isEnabled: boolean;
+    permalink: string;
+    robots: {
+      index: boolean;
+      follow: boolean;
+    };
+  };
+  list: {
+    isEnabled: boolean;
+    pathname: string;
+    robots: {
+      index: boolean;
+      follow: boolean;
+    };
+  };
+  type: {
     isEnabled: boolean;
     pathname: string;
     robots: {
@@ -172,6 +201,39 @@ const getAppBlog = (config: Config) => {
   return merge({}, _default, config?.apps?.blog ?? {}) as AppBlogConfig;
 };
 
+const getAppProduct = (config: Config) => {
+  const _default = {
+    isEnabled: false,
+    productsPerPage: 6,
+    product: {
+      isEnabled: true,
+      permalink: '/product/%slug%',
+      robots: {
+        index: true,
+        follow: true,
+      },
+    },
+    list: {
+      isEnabled: true,
+      pathname: 'product',
+      robots: {
+        index: true,
+        follow: true,
+      },
+    },
+    type: {
+      isEnabled: true,
+      pathname: 'type',
+      robots: {
+        index: true,
+        follow: true,
+      },
+    },
+  };
+
+  return merge({}, _default, config?.apps?.product ?? {}) as AppProductConfig;
+};
+
 const getUI = (config: Config) => {
   const _default = {
     theme: 'system',
@@ -198,6 +260,7 @@ export default (config: Config) => ({
   I18N: getI18N(config),
   METADATA: getMetadata(config),
   APP_BLOG: getAppBlog(config),
+  APP_PRODUCT: getAppProduct(config),
   UI: getUI(config),
   ANALYTICS: getAnalytics(config),
 });

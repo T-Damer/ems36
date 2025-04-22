@@ -1,0 +1,31 @@
+---
+import type { Product as ProductType } from '~/types';
+import ToProductLink from './ToProductLink.astro';
+
+interface Props {
+  product: ProductType;
+}
+
+const { product } = Astro.props;
+---
+
+<article class="prose prose-slate dark:prose-invert mx-auto">
+  <header class="mb-8">
+    <h1 class="mb-2">{product.title}</h1>
+    {product.excerpt && <p class="text-xl text-slate-500 dark:text-slate-400">{product.excerpt}</p>}
+  </header>
+
+  {
+    product.image && (
+      <figure class="mb-8">
+        <img src={product.image} alt={product.title} class="rounded-lg" />
+      </figure>
+    )
+  }
+
+  <div class="mb-8">
+    {product.Content ? <product.Content /> : <Fragment set:html={product.content || ''} />}
+  </div>
+
+  <ToProductLink />
+</article>
