@@ -1,7 +1,9 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
-import { fetchProducts } from '~/utils/product';
+import { getPermalink } from '~/utils/permalinks';
+import { fetchProducts, getStaticPathsProduct } from '~/utils/product';
 
 export const prerender = true;
 
@@ -48,4 +50,7 @@ const metadata = {
       }
     </div>
   </div>
+  <a class="inline-flex w-full justify-center items-center gap-x-1 pb-1 underline" href={getPermalink('/product')}
+    ><Icon name="tabler:arrow-back" />Назад ко всей продукции</a
+  >
 </Layout>

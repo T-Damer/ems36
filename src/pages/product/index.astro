@@ -1,6 +1,8 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
+import { getPermalink } from '~/utils/permalinks';
 import { fetchProducts } from '~/utils/product';
 
 export const prerender = true;
@@ -48,4 +50,8 @@ const metadata = {
       </a>
     </div>
   </section>
+
+  <a class="inline-flex w-full justify-center items-center gap-x-1 pb-1 underline" href={getPermalink('/')}
+    ><Icon name="tabler:arrow-back" />На главную</a
+  >
 </Layout>
