@@ -8,7 +8,7 @@ interface Props {
   url: string;
 }
 
-const { product, url } = Astro.props;
+const { product } = Astro.props;
 ---
 
 <article class="mx-auto max-w-4xl">
@@ -37,17 +37,7 @@ const { product, url } = Astro.props;
         )
       }
     </div>
-    {
-      product.image && (
-        <figure class="mb-8">
-          {typeof product.image === 'string' ? (
-            <img src={product.image} alt={product.title} class="rounded-lg" />
-          ) : (
-            <Image src={product.image} alt={product.title} class="rounded-lg" />
-          )}
-        </figure>
-      )
-    }
+    {product.image && <Image src={product.image} alt={product.title} class="rounded-lg" />}
   </header>
 
   <div class="prose prose-lg mx-auto dark:prose-invert">

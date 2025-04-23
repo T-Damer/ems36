@@ -4,31 +4,15 @@ export const headerData = {
   links: [
     {
       text: 'Продукция',
-      href: getPermalink('/product'),
       links: [
-        {
-          text: 'Элеваторы',
-          href: getPermalink('/product/elevators'),
-        },
-        {
-          text: 'Транспортеры',
-          href: getPermalink('/product/transporters'),
-        },
+        { text: 'Вся продукция', href: getPermalink('/product') },
         {
           text: 'Клапаны',
           href: getPermalink('/product/valves'),
         },
         {
-          text: 'Задвижки',
-          href: getPermalink('/product/shutters'),
-        },
-        {
-          text: 'Металообработка',
-          href: getPermalink('/product/metal-works'),
-        },
-        {
-          text: 'Детали для сельхозтехники',
-          href: getPermalink('/product/parts-agriculture'),
+          text: 'Конвейеры',
+          href: getPermalink('/product/conveyors'),
         },
       ],
     },
@@ -70,15 +54,8 @@ export const footerData = {
     {
       title: 'Продукция',
       links: [
-        { text: 'Элеваторы', href: getPermalink('/elevators') },
-        { text: 'Транспортеры', href: getPermalink('/transporters') },
-        { text: 'Клапаны', href: getPermalink('/valves') },
-        { text: 'Задвижки', href: getPermalink('/shutters') },
-        { text: 'Металообработка', href: getPermalink('/metal-works') },
-        {
-          text: 'Детали для сельхозтехники',
-          href: getPermalink('/parts-agriculture'),
-        },
+        { text: 'Элеваторы', href: getPermalink('/product/elevators') },
+        { text: 'Конвейеры', href: getPermalink('/product/conveyors') },
       ],
     },
 

@@ -3,11 +3,11 @@ import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { Product } from '~/types';
 import { APP_PRODUCT, SITE } from '~/config';
-import { cleanSlug, trimSlash, PRODUCT_BASE, PRODUCT_PERMALINK_PATTERN, TYPE_BASE } from './permalinks';
+import { cleanSlug, PRODUCT_BASE, PRODUCT_PERMALINK_PATTERN, TYPE_BASE } from './permalinks';
 
-const TYPE_NAMES: Record<string, string> = {
+const productNames = {
   valves: 'Клапаны',
-  // Add other product types here
+  conveyors: 'Конвейеры',
 };
 
 const generatePermalink = async ({
@@ -38,11 +38,9 @@ const generatePermalink = async ({
     .replace('%minute%', minute)
     .replace('%second%', second);
 
-  // Remove any duplicate segments in the URL
   const segments = permalink.split('/').filter(Boolean);
-  const uniqueSegments = segments.filter((segment, index) => segment !== segments[index - 1]);
 
-  return '/' + uniqueSegments.join('/') + (SITE.trailingSlash ? '/' : '');
+  return '/' + segments.join('/') + (SITE.trailingSlash ? '/' : '');
 };
 
 const getNormalizedProduct = async (product: CollectionEntry<'product'>): Promise<Product> => {
@@ -67,7 +65,7 @@ const getNormalizedProduct = async (product: CollectionEntry<'product'>): Promis
   const type = rawType
     ? {
         slug: cleanSlug(rawType),
-        title: TYPE_NAMES[rawType] || rawType,
+        title: productNames[rawType] || rawType,
       }
     : undefined;
 
