@@ -1,7 +1,7 @@
 ---
 title: Конвейер цепной стационарный
 excerpt: Конвейер
-image: /src/assets/images/products/conveyors/КСЛ(Ж)-500.0000.000.00СБ - Ленточный конвейер металмонт с лентой.jpg
+image: /images/products/conveyors/КСЛ(Ж)-500.0000.000.00СБ - Ленточный конвейер металмонт с лентой.jpg
 type: conveyors
 publishDate: 2025-04-22
 updateDate: 2025-04-22

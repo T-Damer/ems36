@@ -1,7 +1,7 @@
 ---
 title: Клапан Двойной
 excerpt: Клапан
-image: /src/assets/images/products/valves/КДП-300.45.0000.00СБ - Клапан двойной.jpg
+image: /images/products/valves/КДП-300.45.0000.00СБ - Клапан двойной.jpg
 type: valves
 publishDate: 2025-04-22
 updateDate: 2025-04-22
