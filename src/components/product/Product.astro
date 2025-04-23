@@ -10,7 +10,7 @@ interface Props {
 const { product } = Astro.props;
 ---
 
-<article class="prose prose-slate dark:prose-invert mx-auto">
+<article class="prose prose-slate dark:prose-invert mx-auto px-4">
   <header class="mb-8">
     <h1 class="mb-2">{product.title}</h1>
     {product.excerpt && <p class="text-xl text-slate-500 dark:text-slate-400">{product.excerpt}</p>}
@@ -19,7 +19,16 @@ const { product } = Astro.props;
   {
     product.image && (
       <figure class="mb-8">
-        <img src={product.image} alt={product.title} class="rounded-lg" />
+        <Image
+          src={product.image}
+          alt={product.title}
+          sizes="(max-width: 900px) 400px, 900px"
+          widths={[400, 900]}
+          width={900}
+          height={506}
+          loading="eager"
+          decoding="async"
+        />
       </figure>
     )
   }

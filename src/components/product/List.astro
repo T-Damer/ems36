@@ -16,11 +16,16 @@ const { products } = Astro.props;
       <article class="flex flex-col rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
         {product.image && (
           <figure class="relative aspect-[4/3] overflow-hidden rounded-t-lg">
-            {typeof product.image === 'string' ? (
-              <img src={product.image} alt={product.title} class="h-full w-full object-cover" />
-            ) : (
-              <Image src={product.image} alt={product.title} class="h-full w-full object-cover" />
-            )}
+            <Image
+              src={product.image}
+              alt={product.title}
+              sizes="(max-width: 900px) 400px, 900px"
+              widths={[400, 900]}
+              width={900}
+              height={506}
+              loading="eager"
+              decoding="async"
+            />
           </figure>
         )}
         <div class="flex flex-1 flex-col p-6">
