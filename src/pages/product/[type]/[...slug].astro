@@ -1,0 +1,35 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import Layout from '~/layouts/PageLayout.astro';
+import Product from '~/components/product/Product.astro';
+
+import { productRobots, getStaticPathsProduct } from '~/utils/product';
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  return await getStaticPathsProduct();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { product } = Astro.props as Props;
+
+if (!product) {
+  return Astro.redirect('/product/');
+}
+
+const metadata = {
+  title: product.title,
+  description: product.excerpt,
+  robots: productRobots,
+  openGraph: {
+    type: 'article',
+  },
+};
+---
+
+<Layout metadata={metadata}>
+  <Product product={product} />
+</Layout>

@@ -4,6 +4,7 @@
 
 html {
   scroll-behavior: smooth;
+  text-wrap: pretty;
 }
 
 @layer utilities {
