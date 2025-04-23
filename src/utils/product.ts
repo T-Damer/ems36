@@ -2,8 +2,8 @@ import type { PaginateFunction } from 'astro';
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { Product } from '~/types';
-import { APP_PRODUCT, SITE } from '~/config';
-import { cleanSlug, PRODUCT_BASE, PRODUCT_PERMALINK_PATTERN, TYPE_BASE } from './permalinks';
+import { cleanSlug, PRODUCT_BASE, PRODUCT_PERMALINK_PATTERN } from './permalinks';
+import { APP_PRODUCT, SITE } from 'astrowind:config';
 
 const productNames = {
   valves: 'Клапаны',
@@ -102,8 +102,6 @@ const getNormalizedProduct = async (product: CollectionEntry<'product'>): Promis
 
     publishDate: publishDateObj,
     updateDate: updateDateObj,
-
-    readingTime: remarkPluginFrontmatter?.readingTime,
   };
 };
 
