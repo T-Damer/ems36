@@ -1,0 +1,19 @@
+name: Submit to IndexNow
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit URL to IndexNow
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" "https://yandex.ru/indexnow?url=http://ems36.ru/product.html&key=4f1a1c67614643f8b8d6ce380c049e1c&keyLocation=http://ems36.ru/4f1a1c67614643f8b8d6ce380c049e1c.txt")
+          
+          if [ "$response" -eq 200 ]; then
+            echo "IndexNow submission successful"
+          else
+            echo "IndexNow submission failed with status code $response"
+            exit 1
+          fi
