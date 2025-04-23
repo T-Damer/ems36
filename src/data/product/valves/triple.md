@@ -1,7 +1,7 @@
 ---
 title: Клапан Тройной
 excerpt: Клапан
-image: /images/products/valves/КОР-200.45.0000.00СБ - Клапан одинарный.jpg
+image: /images/products/valves/КТЭ-300.45.0000.00СБ - Клапан тройной.jpg
 type: valves
 publishDate: 2024-04-22
 updateDate: 2024-04-22
