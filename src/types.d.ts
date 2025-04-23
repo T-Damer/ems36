@@ -8,39 +8,30 @@ export interface Post {
   /** A post's unique slug – part of the post's URL based on its name, i.e. a post called "My Sample Page" has a slug "my-sample-page". */
   slug: string;
 
-  /**  */
   permalink: string;
 
-  /**  */
   publishDate: Date;
-  /**  */
+
   updateDate?: Date;
 
-  /**  */
   title: string;
-  /** Optional summary of post content. */
   excerpt?: string;
-  /**  */
+
   image?: ImageMetadata | string;
 
-  /**  */
   category?: Taxonomy;
-  /**  */
+
   tags?: Taxonomy[];
-  /**  */
+
   author?: string;
 
-  /**  */
   metadata?: MetaData;
 
-  /**  */
   draft?: boolean;
 
-  /**  */
   Content?: AstroComponentFactory;
   content?: string;
 
-  /**  */
   readingTime?: number;
 }
 
@@ -298,40 +289,27 @@ export interface Product {
   /** A product's unique slug – part of the product's URL based on its name, i.e. a product called "Valve E-03" has a slug "valve-e-03". */
   slug: string;
 
-  /**  */
   permalink: string;
 
-  /**  */
   publishDate: Date;
-  /**  */
+
   updateDate?: Date;
 
-  /**  */
   title: string;
-  /** Optional summary of product content. */
   excerpt?: string;
-  /**  */
+
   image?: ImageMetadata | string;
 
-  /**  */
   type?: Taxonomy;
-  /** Product dimensions */
   dimensions?: string;
-  /** Product weight */
   weight?: string;
-  /**  */
+
   author?: string;
 
-  /**  */
   metadata?: MetaData;
 
-  /**  */
   draft?: boolean;
 
-  /**  */
   Content?: AstroComponentFactory;
   content?: string;
-
-  /**  */
-  readingTime?: number;
 }

@@ -207,7 +207,7 @@ const getAppProduct = (config: Config) => {
     productsPerPage: 6,
     product: {
       isEnabled: true,
-      permalink: '/product/%slug%',
+      permalink: '/product/%type%/%slug%',
       robots: {
         index: true,
         follow: true,
