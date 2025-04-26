@@ -1,6 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
-import getFilesFromDir from '~/utils/getFilesFromDir';
+import getFilesFromDir, { getFileNameFromPath } from '~/utils/getFilesFromDir';
 
 interface Props {
   dir: string;
@@ -18,7 +18,7 @@ const fileList = await getFilesFromDir(dir);
           <div>
             <Icon name="tabler:file-type-pdf" />
           </div>
-          <span class="text-left leading-tight">{decodeURIComponent(href).split('/').pop()}</span>
+          <span class="text-left leading-tight">{getFileNameFromPath(href)}</span>
         </div>
       </a>
     ))

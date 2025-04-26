@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets';
+import { getFileNameFromPath } from '~/utils/getFilesFromDir';
+
+interface Props {
+  images: string[];
+}
+
+const { images = [] } = Astro.props;
+---
+
+<div class="relative flex w-full h-96 snap-x gap-6 overflow-x-auto no-scrollbar">
+  {
+    images.map((image) => (
+      <div class="shrink-0 first:pl-8 last:pr-8">
+        <Image
+          class="h-80 shrink-0 rounded-lg object-contain bg-white"
+          widths={[400, 768, 1024, 2040]}
+          sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
+          loading="eager"
+          width={600}
+          height={600}
+          src={image}
+          alt={getFileNameFromPath(image)}
+        />
+      </div>
+    ))
+  }
+</div>

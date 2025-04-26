@@ -8,6 +8,11 @@ import { APP_PRODUCT, SITE } from 'astrowind:config';
 const productNames = {
   valves: 'Клапаны',
   conveyors: 'Конвейеры',
+  elevators: 'Элеваторы',
+  shutter: 'Задвижки',
+  pitfalls: 'Ямы завальные',
+  zav: 'Зерноочистительные агрегаты',
+  other: 'Другая продукция',
 };
 
 const generatePermalink = async ({
@@ -51,6 +56,7 @@ const getNormalizedProduct = async (product: CollectionEntry<'product'>): Promis
     title,
     excerpt,
     image,
+    images,
     type: rawType,
     dimensions,
     weight,
@@ -87,6 +93,7 @@ const getNormalizedProduct = async (product: CollectionEntry<'product'>): Promis
     title: title,
     excerpt: excerpt,
     image: image,
+    images,
 
     type: type,
     dimensions: dimensions,

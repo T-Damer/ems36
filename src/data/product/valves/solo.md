@@ -1,7 +1,9 @@
 ---
 title: Клапан Одинарный
 excerpt: Клапан
-image: /images/products/valves/КОР-200.45.0000.00СБ - Клапан одинарный.jpg
+images:
+  - /images/products/valves/solo/Одинарный1.jpg
+  - /images/products/valves/solo/Одинарный2.jpg
 type: valves
 publishDate: 2024-04-22
 updateDate: 2024-04-22

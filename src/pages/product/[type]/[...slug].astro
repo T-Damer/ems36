@@ -14,7 +14,7 @@ export const getStaticPaths = (async () => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { product } = Astro.props as Props;
+const { product } = Astro.props;
 
 if (!product) {
   return Astro.redirect('/product/');

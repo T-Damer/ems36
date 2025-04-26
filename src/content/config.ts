@@ -68,6 +68,7 @@ const productCollection = defineCollection({
     title: z.string(),
     excerpt: z.string().optional(),
     image: z.string().optional(),
+    images: z.array(z.string()).optional().default([]),
     type: z.string(),
     dimensions: z.string().optional(),
     weight: z.string().optional(),

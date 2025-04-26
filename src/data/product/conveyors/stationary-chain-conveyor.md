@@ -1,7 +1,21 @@
 ---
-title: Конвейер цепной стационарный
-excerpt: Конвейер
-image: /images/products/conveyors/chain/СборкаКСН.png
+title: Конвейер стационарный
+excerpt: Конвейер цепной
+images:
+  - /images/products/conveyors/chain/Цепной1.png
+  - /images/products/conveyors/chain/Цепной2.jpg
+  - /images/products/conveyors/chain/Цепной3.jpg
+  - /images/products/conveyors/chain/Цепной4.jpg
+  - /images/products/conveyors/chain/Цепной6.jpg
+  - /images/products/conveyors/chain/Цепной7.jpg
+  - /images/products/conveyors/chain/Цепной8.jpg
+  - /images/products/conveyors/chain/Цепной9.jpg
+  - /images/products/conveyors/chain/Цепной10.jpg
+  - /images/products/conveyors/chain/Цепной11.jpg
+  - /images/products/conveyors/chain/Цепной12.png
+  - /images/products/conveyors/chain/Цепной13.jpg
+  - /images/products/conveyors/chain/Цепной14.pn
+  - /images/products/conveyors/chain/Цепной15.jpg
 type: conveyors
 publishDate: 2025-04-22
 updateDate: 2025-04-22

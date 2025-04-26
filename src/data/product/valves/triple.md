@@ -1,7 +1,9 @@
 ---
 title: Клапан Тройной
 excerpt: Клапан
-image: /images/products/valves/КТЭ-300.45.0000.00СБ - Клапан тройной.jpg
+images:
+  - /images/products/valves/triple/Тройной1.jpg
+  - /images/products/valves/triple/Тройной2.jpg
 type: valves
 publishDate: 2024-04-22
 updateDate: 2024-04-22

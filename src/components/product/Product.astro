@@ -2,6 +2,7 @@
 import type { Product as ProductType } from '~/types';
 import ToProductLink from './ToProductLink.astro';
 import Image from 'astro/components/Image.astro';
+import Carousel from '../ui/Carousel.astro';
 
 interface Props {
   product: ProductType;
@@ -32,6 +33,8 @@ const { product } = Astro.props;
       </figure>
     )
   }
+
+  {product.images?.length ? <Carousel images={product.images} /> : null}
 
   <div class="mb-8">
     {product.Content ? <product.Content /> : <Fragment set:html={product.content || ''} />}

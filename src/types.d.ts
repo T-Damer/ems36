@@ -299,6 +299,7 @@ export interface Product {
   excerpt?: string;
 
   image?: ImageMetadata | string;
+  images?: string[];
 
   type?: Taxonomy;
   dimensions?: string;

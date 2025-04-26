@@ -27,27 +27,61 @@ const metadata = {
     follow: true,
   },
 };
+
+const links = [
+  {
+    href: 'valves',
+    title: 'Клапаны',
+    subTitle: 'Одинарные, двойные, тройные и др.',
+  },
+  {
+    href: 'conveyors',
+    title: 'Конвейеры',
+    subTitle: 'Винтовые, ленточные и др.',
+  },
+  {
+    href: 'elevators',
+    title: 'Элеваторы',
+    subTitle: 'Ковшовые, цепные и др.',
+  },
+  {
+    href: 'shutters',
+    title: 'Задвижки',
+    subTitle: 'Реечные, винтовые и др.',
+  },
+  {
+    href: 'pitfalls',
+    title: 'Ямы завальные',
+    subTitle: 'Стационарные',
+  },
+  {
+    href: 'zav',
+    title: 'Зерноочистительный агрегат',
+    subTitle: 'ЗАВ комплекс',
+  },
+  {
+    href: 'other',
+    title: 'Прочее',
+    subTitle: 'Нории, музы, лестницы и др.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
   <section class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold mb-8">Продукция {type ? `- ${type}` : ''}</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <a
-        href="/product/valves/"
-        class="block p-6 bg-white dark:bg-slate-800 rounded-lg shadow hover:shadow-lg transition-shadow"
-      >
-        <h2 class="text-xl font-semibold mb-2">Клапаны</h2>
-        <p class="text-slate-600 dark:text-slate-400">Одинарные, двойные, тройные и др.</p>
-      </a>
-
-      <a
-        href="/product/conveyors/"
-        class="block p-6 bg-white dark:bg-slate-800 rounded-lg shadow hover:shadow-lg transition-shadow"
-      >
-        <h2 class="text-xl font-semibold mb-2">Конвейеры</h2>
-        <p class="text-slate-600 dark:text-slate-400">Ленточные, цепные и др.</p>
-      </a>
+      {
+        links.map((link) => (
+          <a
+            href={`/product/${link.href}/`}
+            class="block p-6 bg-white dark:bg-slate-800 rounded-lg shadow hover:shadow-lg transition-shadow"
+          >
+            <h2 class="text-xl font-semibold mb-2">{link.title}</h2>
+            <p class="text-slate-600 dark:text-slate-400">{link.subTitle}</p>
+          </a>
+        ))
+      }
     </div>
   </section>
 

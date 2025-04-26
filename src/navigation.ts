@@ -4,6 +4,7 @@ export const headerData = {
   links: [
     {
       text: 'Продукция',
+      title: 'Продукция',
       links: [
         { text: 'Вся продукция', href: getPermalink('/product') },
         {
@@ -14,10 +15,16 @@ export const headerData = {
           text: 'Конвейеры',
           href: getPermalink('/product/conveyors'),
         },
+        { text: 'Элеваторы', href: getPermalink('/product/elevators') },
+        { text: 'Задвижки', href: getPermalink('/product/shutters') },
+        { text: 'Ямы Завальные', href: getPermalink('/product/pitfalls') },
+        { text: 'Зерноочестительный агрегат', href: getPermalink('/product/zav') },
+        { text: 'Прочее', href: getPermalink('/product/other') },
       ],
     },
     {
       text: 'Документация',
+      title: 'Документация',
       links: [
         {
           text: 'Образцы паспортов',
@@ -36,6 +43,7 @@ export const headerData = {
     },
     {
       text: 'Контакты',
+      title: 'Контакты',
       links: [
         {
           text: 'Адреса и телефоны',
@@ -50,23 +58,7 @@ export const headerData = {
 };
 
 export const footerData = {
-  links: [
-    {
-      title: 'Продукция',
-      links: [
-        { text: 'Элеваторы', href: getPermalink('/product/elevators') },
-        { text: 'Конвейеры', href: getPermalink('/product/conveyors') },
-      ],
-    },
-
-    {
-      title: 'Компания',
-      links: [
-        { text: 'О нас', href: getPermalink('/about') },
-        { text: 'Статьи', href: getBlogPermalink() },
-      ],
-    },
-  ],
+  links: headerData.links,
   secondaryLinks: [
     { text: 'Условия пользования', href: getPermalink('/terms') },
     { text: 'Политика конфиденциальности', href: getPermalink('/privacy') },
