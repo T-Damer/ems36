@@ -1,6 +1,11 @@
 ---
 title: Ковшовый Ленточный
 excerpt: Элеватор
+images:
+  - /images/products/elevators/Нория1.jpg
+  - /images/products/elevators/Нория2.jpg
+  - /images/products/elevators/Нория3.jpg
+  - /images/products/elevators/Нория4.jpg
 type: elevators
 publishDate: 2025-04-22
 updateDate: 2025-04-22

@@ -65,5 +65,11 @@ export const footerData = {
   ],
   socialLinks: [
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/T-Damer', target: '_blank' },
+    {
+      ariaLabel: 'WhatsApp',
+      icon: 'tabler:brand-whatsapp',
+      href: 'https://wa.me/whatsappphonenumber?text=urlencodedtext',
+      target: '_blank',
+    },
   ],
 };

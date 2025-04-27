@@ -20,7 +20,12 @@ export const getStaticPaths = (async () => {
 const { type } = Astro.props;
 
 const products = await fetchProducts();
-const typeProducts = products.filter((product) => product.type?.slug === type);
+const typeProducts = products
+  .sort((a, b) => {
+    if (a.id < b.id) return -1;
+    return 1;
+  })
+  .filter((product) => product.type?.slug === type);
 const typeName = typeProducts[0]?.type?.title || type;
 
 const metadata = {
