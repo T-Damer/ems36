@@ -14,7 +14,7 @@ images:
   - /images/products/conveyors/chain/Цепной11.jpg
   - /images/products/conveyors/chain/Цепной12.png
   - /images/products/conveyors/chain/Цепной13.jpg
-  - /images/products/conveyors/chain/Цепной14.pn
+  - /images/products/conveyors/chain/Цепной14.png
   - /images/products/conveyors/chain/Цепной15.jpg
 type: conveyors
 publishDate: 2025-04-22
