@@ -10,14 +10,21 @@ interface Props {
 const { images = [] } = Astro.props;
 ---
 
-<div class="flex items-center w-full">
-  <Icon name="tabler:arrow-left" />
-  <div class="relative flex w-full h-96 snap-x snap-mandatory gap-6 overflow-x-scroll no-scrollbar">
+<div class="flex items-center gap-x-1 w-full">
+  <Icon
+    name="tabler:arrow-left"
+    class="bg-slate-200 hover:bg-slate-300 active:bg-slate-100 transition-color rounded-full dark:text-black"
+    onclick="const box = document.getElementById('carousel-wrapper'); box.scrollBy({left: -120, behavior: 'smooth'})"
+  />
+  <div
+    id="carousel-wrapper"
+    class="relative flex w-full h-96 snap-x snap-mandatory gap-x-6 overflow-x-scroll no-scrollbar"
+  >
     {
       images.map((image) => (
         <div class="snap-center shrink-0">
           <Image
-            class="h-80 w-80 shrink-0 rounded-lg object-contain bg-white hover:scale-125 transition-transform"
+            class="h-80 w-80 shrink-0 rounded-lg object-contain bg-white hover:scale-125 hover:shadow-md active:shadow-md active:scale-125 cursor-zoom-in transition-transform"
             widths={[400, 768, 1024, 2040]}
             sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
             loading="eager"
@@ -30,5 +37,9 @@ const { images = [] } = Astro.props;
       ))
     }
   </div>
-  <Icon name="tabler:arrow-right" />
+  <Icon
+    name="tabler:arrow-right"
+    class="bg-slate-200 hover:bg-slate-300 active:bg-slate-100 transition-color rounded-full dark:text-black"
+    onclick="const box2 = document.getElementById('carousel-wrapper'); box2.scrollBy({left: 120, behavior: 'smooth'})"
+  />
 </div>
