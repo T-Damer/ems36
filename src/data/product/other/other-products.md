@@ -1,16 +1,16 @@
 ---
 title: Прочее
 images:
-  - '/images/products/other/Механизм управления задвижкой - ручной.jpg'
-  - '/images/products/other/Механизм управления задвижкой - электрический.jpg'
-  - '/images/products/other/Площадка обслуживания нории.jpg'
-  - '/images/products/other/ФЛВ-600 Фильтр локальный вертикальный.jpg'
-  - '/images/products/other/ФЛГ-600 Фильтр локальный горизонтальный.jpg'
-  - '/images/products/other/ЭКЛ-10СМ-А.jpg'
-  - '/images/products/other/ЭКЛ-50.jpg'
-  - '/images/products/other/ЭКЛ-50Д.jpg'
-  - '/images/products/other/ЭКЛ-100Ф.jpg'
-  - '/images/products/other/Лестница.jpg'
+  - '/images/products/other/Другое1.jpg'
+  - '/images/products/other/Другое2.jpg'
+  - '/images/products/other/Другое3.jpg'
+  - '/images/products/other/Другое4.jpg'
+  - '/images/products/other/Другое5.jpg'
+  - '/images/products/other/Другое6.jpg'
+  - '/images/products/other/Другое7.jpg'
+  - '/images/products/other/Другое8.jpg'
+  - '/images/products/other/Другое9.jpg'
+  - '/images/products/other/Другое10.jpg'
 
 type: other
 publishDate: 2025-04-27
