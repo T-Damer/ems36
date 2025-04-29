@@ -9,7 +9,7 @@ const productNames = {
   valves: 'Клапаны',
   conveyors: 'Конвейеры',
   elevators: 'Элеваторы',
-  shutter: 'Задвижки',
+  shutters: 'Задвижки',
   pitfalls: 'Ямы завальные',
   zav: 'Зерноочистительные агрегаты',
   other: 'Другая продукция',
