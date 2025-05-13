@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { getFileNameFromPath } from '~/utils/getFilesFromDir';
+import ImageZoom from 'starlight-image-zoom/components/ImageZoom.astro';
 
 interface Props {
   images: string[];
@@ -24,7 +25,7 @@ const { images = [] } = Astro.props;
       images.map((image) => (
         <div class="snap-center shrink-0">
           <Image
-            class="h-80 w-80 shrink-0 rounded-lg object-contain bg-white hover:scale-125 hover:shadow-md active:shadow-md active:scale-125 cursor-zoom-in transition-transform"
+            class="h-80 w-80 shrink-0 rounded-lg object-contain bg-white hover:shadow-md active:shadow-md cursor-zoom-in transition-transform z-20"
             widths={[400, 768, 1024, 2040]}
             sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
             loading="eager"
@@ -32,6 +33,7 @@ const { images = [] } = Astro.props;
             height={600}
             src={image}
             alt={getFileNameFromPath(image)}
+            data-zoomable
           />
         </div>
       ))
@@ -43,3 +45,13 @@ const { images = [] } = Astro.props;
     onclick="const box2 = document.getElementById('carousel-wrapper'); box2.scrollBy({left: 120, behavior: 'smooth'})"
   />
 </div>
+
+<script>
+  import mediumZoom from 'medium-zoom';
+
+  mediumZoom('img', {
+    margin: 24,
+    background: 'rgba(0,0,0,0.5)',
+    scrollOffset: 0,
+  });
+</script>
