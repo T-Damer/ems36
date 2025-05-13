@@ -18,7 +18,7 @@ export const headerData = {
         { text: 'Элеваторы', href: getPermalink('/product/elevators') },
         { text: 'Задвижки', href: getPermalink('/product/shutters') },
         { text: 'Ямы Завальные', href: getPermalink('/product/pitfalls') },
-        { text: 'Зерноочестительный агрегат', href: getPermalink('/product/zav') },
+        { text: 'Зерноочистительный агрегат', href: getPermalink('/product/zav') },
         { text: 'Прочее', href: getPermalink('/product/other') },
       ],
     },
