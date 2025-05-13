@@ -2,7 +2,6 @@
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import { getFileNameFromPath } from '~/utils/getFilesFromDir';
-import ImageZoom from 'starlight-image-zoom/components/ImageZoom.astro';
 
 interface Props {
   images: string[];
@@ -45,13 +44,3 @@ const { images = [] } = Astro.props;
     onclick="const box2 = document.getElementById('carousel-wrapper'); box2.scrollBy({left: 120, behavior: 'smooth'})"
   />
 </div>
-
-<script>
-  import mediumZoom from 'medium-zoom';
-
-  mediumZoom('img', {
-    margin: 24,
-    background: 'rgba(0,0,0,0.5)',
-    scrollOffset: 0,
-  });
-</script>
