@@ -11,7 +11,7 @@ jobs:
         run: |
           response=$(curl -s -o /dev/null -w "%{http_code}" "https://yandex.ru/indexnow?url=http://ems36.ru/product.html&key=4f1a1c67614643f8b8d6ce380c049e1c&keyLocation=http://ems36.ru/4f1a1c67614643f8b8d6ce380c049e1c.txt")
           
-          if [ "$response" -eq 200 ]; then
+          if [ "$response" -eq 200 ] || [ "$response" -eq 202 ]; then
             echo "IndexNow submission successful"
           else
             echo "IndexNow submission failed with status code $response"
