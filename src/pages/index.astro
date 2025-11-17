@@ -8,6 +8,8 @@ import Steps from '~/components/widgets/Steps.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 
+import siloFieldImage from '~/assets/images/silo-field.png';
+
 const metadata = {
   title: 'ЭлеваторМельСервис',
   description:
@@ -28,7 +30,7 @@ const metadata = {
       },
       { text: 'Узнать больше', href: '#features' },
     ]}
-    image={{ src: '~/assets/images/silo-field.png', alt: 'Silo field' }}
+    image={{ src: siloFieldImage, alt: 'Silo field' }}
   >
     <Fragment slot="title">
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
