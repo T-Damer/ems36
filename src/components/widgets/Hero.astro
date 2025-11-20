@@ -80,14 +80,15 @@ const {
             <div class="relative m-auto max-w-5xl">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
-              ) : typeof image.src === 'string' &&
-                (image.src.endsWith('.mp4') || image.src.endsWith('.webm') || image.src.endsWith('.ogg')) ? (
+              ) : typeof image.src === 'string' && image.src.endsWith('.mp4') ? (
                 <MuxPlayer
                   playbackId="hx02E3CKikPGlY86zUHbhSMmpR02s027KvrrhvoJRUgw02I"
                   metadata={{ video_title: 'ems36' }}
                   style={{
                     display: 'block',
                     aspectRatio: '16/9',
+                    borderRadius: '0.5rem',
+                    overflow: 'hidden',
                   }}
                   accentColor="#0461EF"
                 />
