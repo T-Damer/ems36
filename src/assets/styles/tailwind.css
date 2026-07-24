@@ -76,7 +76,7 @@ html {
   top: 70px;
   left: 0;
   right: 0;
-  bottom: 70px !important;
+  bottom: 0 !important;
   padding: 0 5px;
   background-color: var(--aw-color-bg-page);
   overscroll-behavior: contain;
@@ -86,7 +86,7 @@ html {
   transform: rotate(180deg);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .dropdown:focus .dropdown-menu,
   .dropdown:focus-within .dropdown-menu,
   .dropdown:hover .dropdown-menu {

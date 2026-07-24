@@ -5,17 +5,40 @@ import { getPermalink } from '~/utils/permalinks';
 
 <section class="bg-blue-50 dark:bg-slate-800 not-prose">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-md text-center font-medium">
-    <div>
-      <span class="font-bold">
-        <Icon name="tabler:info-square" class="w-5 h-5 inline-block align-text-bottom" /> Нужна консультация?</span
-      > Позвоните нам <a href="tel:+79003006323" class="italic underline">+7 (900) 300-63-23</a> или <a
-        href="https://wa.link/8n75w8"
-        class="italic underline">напишите в WhatsApp</a
-      >
+    <div class="font-bold">
+      <Icon name="tabler:info-square" class="w-5 h-5 inline-block align-text-bottom" /> Нужна консультация?
     </div>
-    <div>
-      Контакты наших отделов можете найти на <a href={getPermalink('/contacts')} class="underline">странице контактов</a
-      >
-    </div>
+    <ul class="mx-auto mt-2 max-w-xl space-y-1 text-left">
+      <li>
+        <a
+          href="tel:+79003006323"
+          class="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-white/60 dark:hover:bg-slate-700"
+        >
+          <Icon name="tabler:phone" class="h-5 w-5 flex-none" />
+          <span>
+            <span class="font-bold">Звоните</span>
+            <span class="font-bold italic underline">+7 (900) 300-63-23</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://wa.link/8n75w8"
+          class="flex items-center gap-3 rounded-md px-3 py-2 font-bold italic underline hover:bg-white/60 dark:hover:bg-slate-700"
+        >
+          <Icon name="tabler:brand-whatsapp" class="h-5 w-5 flex-none" />
+          <span>Напишите в WhatsApp</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href={getPermalink('/contacts')}
+          class="flex items-center gap-3 rounded-md px-3 py-2 underline hover:bg-white/60 dark:hover:bg-slate-700"
+        >
+          <Icon name="tabler:address-book" class="h-5 w-5 flex-none" />
+          <span>Посмотрите контакты наших отделов на отдельной странице</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </section>
