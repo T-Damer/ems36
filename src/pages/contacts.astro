@@ -14,6 +14,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <Features2
     title="Свяжитесь с нами!"
+    columns={2}
     items={[
       {
         title: 'Телефон',
@@ -32,6 +33,14 @@ const metadata = {
         description: defaultOrgAddress,
         callToAction: { onclick: 'openMaps()', text: 'Открыть на картах' },
         icon: 'tabler:map-pin',
+        classes: { panel: 'sm:col-span-2' },
+      },
+      {
+        title: 'Телефоны отделов',
+        description:
+          '<a class="font-medium underline" href="tel:+79507737511">Бухгалтерия</a><br><a class="underline" href="tel:+79507737511">+7 (950) 773 75 11</a><br><br><a class="font-medium underline" href="tel:+79507737347">Отдел снабжения</a><br><a class="underline" href="tel:+79507737347">+7 (950) 773 73 47</a><br><br><a class="font-medium underline" href="tel:+79507737252">Отдел продаж</a><br><a class="underline" href="tel:+79507737252">+7 (950) 773 72 52</a>',
+        icon: 'phone-list-bold',
+        classes: { panel: 'sm:col-span-2' },
       },
     ]}
   />

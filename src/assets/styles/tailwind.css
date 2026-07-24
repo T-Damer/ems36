@@ -64,6 +64,13 @@ html {
   @apply py-3;
 } */
 
+#header.expanded {
+  position: fixed;
+  inset: 0;
+  height: 100dvh;
+  background-color: var(--aw-color-bg-page);
+}
+
 #header.expanded nav {
   position: fixed;
   top: 70px;
@@ -71,12 +78,20 @@ html {
   right: 0;
   bottom: 70px !important;
   padding: 0 5px;
+  background-color: var(--aw-color-bg-page);
+  overscroll-behavior: contain;
 }
 
-.dropdown:focus .dropdown-menu,
-.dropdown:focus-within .dropdown-menu,
-.dropdown:hover .dropdown-menu {
-  display: block;
+[data-aw-toggle-submenu][aria-expanded='true'] > svg {
+  transform: rotate(180deg);
+}
+
+@media (min-width: 768px) {
+  .dropdown:focus .dropdown-menu,
+  .dropdown:focus-within .dropdown-menu,
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
 }
 
 [astro-icon].icon-light > * {
