@@ -1,0 +1,223 @@
+- generic [ref=f12e1]:
+  - banner [ref=f12e2]:
+    - generic [ref=f12e4]:
+      - link "logo ЭлеваторМельСервис" [ref=f12e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f12e7]:
+          - img "logo" [ref=f12e8]
+          - generic [ref=f12e9]: ЭлеваторМельСервис
+      - navigation "Main navigation" [ref=f12e10]:
+        - list [ref=f12e11]:
+          - listitem [ref=f12e12]:
+            - button "Продукция" [ref=f12e13] [cursor=pointer]
+          - listitem [ref=f12e16]:
+            - button "Документация" [ref=f12e17] [cursor=pointer]
+          - listitem [ref=f12e20]:
+            - button "Контакты" [ref=f12e21] [cursor=pointer]
+      - generic [ref=f12e25]:
+        - generic [ref=f12e26]:
+          - button "Toggle between Dark and Light mode" [ref=f12e27] [cursor=pointer]
+          - link "WhatsApp" [ref=f12e30] [cursor=pointer]:
+            - /url: https://wa.link/8n75w8
+        - link [ref=f12e34] [cursor=pointer]:
+          - /url: tel:+7(900)300-63-23
+  - main [ref=f12e37]:
+    - generic [ref=f12e40]:
+      - generic [ref=f12e41]:
+        - heading [level=1]
+        - heading "ЭлеваторМельСервис" [level=1] [ref=f12e42]
+        - generic [ref=f12e43]:
+          - paragraph [ref=f12e44]: Компания «ЭлеваторМельСервис» производство транспортного технологического оборудования
+          - generic [ref=f12e45]:
+            - link "Написать письмо" [ref=f12e47] [cursor=pointer]:
+              - /url: mailto:elevatormelservis36@yandex.ru
+            - link "Узнать больше" [ref=f12e51] [cursor=pointer]:
+              - /url: "#features"
+      - generic "Рабочий процесс" [active] [ref=f12e54]:
+        - generic "Рабочий процесс" [ref=f12e55]:
+          - region "video player" [ref=f12e56]:
+            - generic:
+              - generic: Рабочий процесс
+              - generic:
+                - generic:
+                  - button "pause"
+              - generic:
+                - generic [ref=f12e276] [cursor=pointer]:
+                  - slider "seek" [ref=f12e283]: "0.1909320543723"
+                  - generic: en 0:00
+                - generic [ref=f12e284]:
+                  - generic:
+                    - button "pause" [ref=f12e285] [cursor=pointer]:
+                      - generic [ref=f12e292]: Pause
+                    - button "seek back 10 seconds" [ref=f12e293] [cursor=pointer]:
+                      - img [ref=f12e294]:
+                        - generic [ref=f12e296]: "10"
+                      - generic [ref=f12e297]: Seek backward
+                    - button "seek forward 10 seconds" [ref=f12e298] [cursor=pointer]:
+                      - img [ref=f12e299]:
+                        - generic [ref=f12e300]: "10"
+                      - generic [ref=f12e303]: Seek forward
+                    - progressbar "playback time" [ref=f12e304]: 0:28 / 2:28
+                    - button "mute" [ref=f12e305] [cursor=pointer]:
+                      - generic [ref=f12e315]: Mute
+                    - slider "volume" [ref=f12e324] [cursor=pointer]: "1"
+                    - button "quality" [expanded] [ref=f12e326] [cursor=pointer]
+                    - menu [ref=f12e344]:
+                      - generic [ref=f12e346]:
+                        - menuitemradio "1080p" [ref=f12e347] [cursor=pointer]
+                        - menuitemradio "720p" [ref=f12e354] [cursor=pointer]
+                        - menuitemradio "480p" [ref=f12e361] [cursor=pointer]
+                        - menuitemradio "Auto (1080p)" [checked] [ref=f12e368] [cursor=pointer]
+                    - button "Playback rate 1" [ref=f12e330] [cursor=pointer]:
+                      - text: 1x
+                      - generic [ref=f12e331]: Playback rate
+                    - button "enter picture in picture mode" [ref=f12e332] [cursor=pointer]:
+                      - generic [ref=f12e336]: Enter picture in picture mode
+                    - button "enter fullscreen mode" [ref=f12e337] [cursor=pointer]:
+                      - generic [ref=f12e343]: Enter fullscreen mode
+    - generic [ref=f12e64]:
+      - generic [ref=f12e65]: Нужна консультация?
+      - list [ref=f12e68]:
+        - listitem [ref=f12e69]:
+          - link "Звоните +7 (900) 300-63-23" [ref=f12e70] [cursor=pointer]:
+            - /url: tel:+79003006323
+        - listitem [ref=f12e74]:
+          - link "Напишите в WhatsApp" [ref=f12e75] [cursor=pointer]:
+            - /url: https://wa.link/8n75w8
+        - listitem [ref=f12e79]:
+          - link "Посмотрите контакты наших отделов" [ref=f12e80] [cursor=pointer]:
+            - /url: /contacts/
+    - generic [ref=f12e85]:
+      - heading "Почему мы?" [level=2] [ref=f12e87]
+      - generic [ref=f12e88]:
+        - generic [ref=f12e94]:
+          - heading "Экономия времени" [level=3] [ref=f12e95]
+          - paragraph [ref=f12e96]: Вы экономите свое время, потому что мы используем только передовые технологии
+        - generic [ref=f12e102]:
+          - heading "Защита потребителя" [level=3] [ref=f12e103]
+          - paragraph [ref=f12e104]: Вы защищены как потребитель - качество наших услуг соответствует самым современным стандартам
+        - generic [ref=f12e110]:
+          - heading "Одна точка производства" [level=3] [ref=f12e111]
+          - paragraph [ref=f12e112]: весь цикл производства располагается в одном месте
+    - generic [ref=f12e116]:
+      - heading "Что нужно для получения услуг от нашей компании" [level=2] [ref=f12e118]
+      - generic [ref=f12e119]:
+        - generic [ref=f12e127]:
+          - paragraph [ref=f12e128]: "Шаг 1: Связаться с нами"
+          - paragraph [ref=f12e129]: Написать нам в чате или отправить запрос на электронную почту.
+        - generic [ref=f12e137]:
+          - paragraph [ref=f12e138]: "Шаг 2: Позвоните"
+          - paragraph [ref=f12e139]: Позвоните нам. Мы всегда на связи и рады Вам помочь
+        - generic [ref=f12e147]:
+          - paragraph [ref=f12e148]: "Шаг 3: Ожидайте ответа"
+          - paragraph [ref=f12e149]: С Вами свяжется наш менеджер, уточнит все детали и вышлет наше предложение
+        - paragraph [ref=f12e157]: Вот и все!
+    - generic [ref=f12e159]:
+      - generic [ref=f12e160]:
+        - generic [ref=f12e161]:
+          - heading "Узнайте больше из наших статей" [level=2] [ref=f12e162]
+          - link "Посмотреть все публикации »" [ref=f12e163] [cursor=pointer]:
+            - /url: /blog/
+        - paragraph [ref=f12e164]: Здесь мы храним новости и документацию. Вы можете узнать больше о нашей компании, о наших задумках и начинаниях. Мы также публикуем новости о появлении новых товаров и услуг
+      - article [ref=f12e166]:
+        - link [ref=f12e168] [cursor=pointer]:
+          - /url: /new-website/
+          - img "Обновление сайта" [ref=f12e169]
+        - heading [level=3] [ref=f12e170]:
+          - link "Обновление сайта" [ref=f12e171] [cursor=pointer]:
+            - /url: /new-website/
+        - paragraph [ref=f12e172]: Начинаем с чистого листа
+    - generic [ref=f12e175]:
+      - generic [ref=f12e176]:
+        - generic [ref=f12e177]: 250+
+        - generic [ref=f12e178]: Клиентов
+      - generic [ref=f12e179]:
+        - generic [ref=f12e180]: "4"
+        - generic [ref=f12e181]: Года работы
+      - generic [ref=f12e182]:
+        - generic [ref=f12e183]: "70"
+        - generic [ref=f12e184]: Сотрудников
+      - generic [ref=f12e185]:
+        - generic [ref=f12e186]: 3000+
+        - generic [ref=f12e187]: Заказов
+      - generic [ref=f12e188]:
+        - generic [ref=f12e189]: 2000м²
+        - generic [ref=f12e190]: Производственных площадей
+  - contentinfo [ref=f12e191]:
+    - generic [ref=f12e192]:
+      - generic [ref=f12e193]:
+        - generic [ref=f12e194]:
+          - link "ЭлеваторМельСервис" [ref=f12e196] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f12e197]:
+            - link "Условия пользования" [ref=f12e198] [cursor=pointer]:
+              - /url: /terms/
+            - text: ·
+            - link "Политика конфиденциальности" [ref=f12e199] [cursor=pointer]:
+              - /url: /privacy/
+        - generic [ref=f12e200]:
+          - generic [ref=f12e201]: Продукция
+          - list [ref=f12e202]:
+            - listitem [ref=f12e203]:
+              - link "Вся продукция" [ref=f12e204] [cursor=pointer]:
+                - /url: /product/
+            - listitem [ref=f12e205]:
+              - link "Клапаны" [ref=f12e206] [cursor=pointer]:
+                - /url: /product/valves/
+            - listitem [ref=f12e207]:
+              - link "Конвейеры" [ref=f12e208] [cursor=pointer]:
+                - /url: /product/conveyors/
+            - listitem [ref=f12e209]:
+              - link "Элеваторы" [ref=f12e210] [cursor=pointer]:
+                - /url: /product/elevators/
+            - listitem [ref=f12e211]:
+              - link "Задвижки" [ref=f12e212] [cursor=pointer]:
+                - /url: /product/shutters/
+            - listitem [ref=f12e213]:
+              - link "Ямы Завальные" [ref=f12e214] [cursor=pointer]:
+                - /url: /product/pitfalls/
+            - listitem [ref=f12e215]:
+              - link "Зерноочистительный агрегат" [ref=f12e216] [cursor=pointer]:
+                - /url: /product/zav/
+            - listitem [ref=f12e217]:
+              - link "Прочее" [ref=f12e218] [cursor=pointer]:
+                - /url: /product/other/
+        - generic [ref=f12e219]:
+          - generic [ref=f12e220]: Документация
+          - list [ref=f12e221]:
+            - listitem [ref=f12e222]:
+              - link "Образцы паспортов" [ref=f12e223] [cursor=pointer]:
+                - /url: /documents/passport-examples/
+            - listitem [ref=f12e224]:
+              - link "Руководство по эксплуатации" [ref=f12e225] [cursor=pointer]:
+                - /url: /documents/exp-manual/
+            - listitem [ref=f12e226]:
+              - link "Разрешительные документы" [ref=f12e227] [cursor=pointer]:
+                - /url: /documents/permitting-docs/
+            - listitem [ref=f12e228]:
+              - link "Статьи" [ref=f12e229] [cursor=pointer]:
+                - /url: /blog/
+        - generic [ref=f12e230]:
+          - generic [ref=f12e231]: Контакты
+          - list [ref=f12e232]:
+            - listitem [ref=f12e233]:
+              - link "Адреса и телефоны" [ref=f12e234] [cursor=pointer]:
+                - /url: /contacts/
+            - listitem [ref=f12e235]:
+              - link "Новости" [ref=f12e236] [cursor=pointer]:
+                - /url: /blog/
+            - listitem [ref=f12e237]:
+              - link "О компании" [ref=f12e238] [cursor=pointer]:
+                - /url: /about/
+      - list [ref=f12e240]:
+        - listitem [ref=f12e241]:
+          - link "Github" [ref=f12e242] [cursor=pointer]:
+            - /url: https://github.com/T-Damer
+        - listitem [ref=f12e245]:
+          - link "WhatsApp" [ref=f12e246] [cursor=pointer]:
+            - /url: https://wa.me/whatsappphonenumber?text=urlencodedtext
+  - generic [ref=f12e251]:
+    - button [ref=f12e252]
+    - button [ref=f12e258]
+    - button [ref=f12e262]
+    - button [ref=f12e270]

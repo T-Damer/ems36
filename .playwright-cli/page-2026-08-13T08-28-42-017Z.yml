@@ -1,0 +1,254 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "г. Воронеж, ул. Краснодонская, д. 1а" [ref=e6] [cursor=pointer]:
+          - /url: /kontakty/#map
+        - generic [ref=e9]:
+          - link "+7 (980) 557-81-58" [ref=e10] [cursor=pointer]:
+            - /url: tel:+79805578158
+          - link "+7 (473) 233-43-41" [ref=e13] [cursor=pointer]:
+            - /url: tel:+74732334341
+      - button "Переключить тему" [ref=e16] [cursor=pointer]
+    - generic [ref=e19]:
+      - link "ООО «СВН Лазер136» СВН Лазер136 Металлообработка в Воронеже" [ref=e20] [cursor=pointer]:
+        - /url: /
+        - img "ООО «СВН Лазер136»" [ref=e21]
+        - generic [ref=e22]:
+          - text: СВН Лазер136
+          - generic [ref=e23]: Металлообработка в Воронеже
+      - navigation [ref=e24]:
+        - link "Главная" [ref=e25] [cursor=pointer]:
+          - /url: /
+        - link "Услуги" [ref=e26] [cursor=pointer]:
+          - /url: /uslugi/
+        - link "Статьи" [ref=e27] [cursor=pointer]:
+          - /url: /stat/
+        - link "Галерея" [ref=e28] [cursor=pointer]:
+          - /url: /galereya/
+        - link "Видео" [ref=e29] [cursor=pointer]:
+          - /url: /video/
+        - link "Контакты" [ref=e30] [cursor=pointer]:
+          - /url: /kontakty/
+      - link "Рассчитать стоимость" [ref=e32] [cursor=pointer]:
+        - /url: /kontakty/
+  - main [ref=e33]:
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - img "Лазерная резка металла" [ref=e37]
+          - generic [ref=e40]:
+            - paragraph [ref=e41]: Толщина до 20 мм · точность до 0,2 мм
+            - heading [level=1] [ref=e42]:
+              - link "Лазерная резка металла" [ref=e43] [cursor=pointer]:
+                - /url: /uslugi/lazernaya-rezka-metalla/
+        - generic:
+          - img "Гибка металла"
+          - generic:
+            - generic:
+              - paragraph: Листогибочный пресс с ЧПУ · до 8 мм
+              - heading "Гибка металла" [level=2]:
+                - link "Гибка металла":
+                  - /url: /uslugi/gibka-metalla/
+        - generic:
+          - img "Токарно-фрезерные работы"
+          - generic:
+            - generic:
+              - paragraph: Изготовление деталей любой сложности
+              - heading "Токарно-фрезерные работы" [level=2]:
+                - link "Токарно-фрезерные работы":
+                  - /url: /uslugi/tokarno-frezernye/
+        - generic [ref=e44]:
+          - button "Слайд 1" [ref=e45]
+          - button "Слайд 2" [ref=e46]
+          - button "Слайд 3" [ref=e47]
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: Готовы обсудить ваш проект?
+          - paragraph [ref=e52]: Пришлите чертежи или опишите задачу — рассчитаем стоимость и сроки.
+        - link "Заказать звонок" [ref=e53] [cursor=pointer]:
+          - /url: /kontakty/
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - img "Гарантия низкой цены" [ref=e57]
+        - paragraph [ref=e58]: Гарантия низкой цены
+        - paragraph [ref=e59]: Всем посетителям при заказе с сайта — скидка 5% на все услуги.
+      - generic [ref=e60]:
+        - img "Скорость" [ref=e61]
+        - paragraph [ref=e62]: Скорость
+        - paragraph [ref=e63]: Максимальный срок изготовления — 3 дня с момента оплаты.
+      - generic [ref=e64]:
+        - img "Качество" [ref=e65]
+        - paragraph [ref=e66]: Качество
+        - paragraph [ref=e67]: Высокоточные немецкие станки TRUMPF TruLaser 3030.
+    - generic [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - heading "Наши услуги" [level=2] [ref=e72]
+          - paragraph [ref=e73]: Полный цикл металлообработки — от идеи до готового изделия.
+        - link "Все услуги" [ref=e74] [cursor=pointer]:
+          - /url: /uslugi/
+      - generic [ref=e77]:
+        - link [ref=e78] [cursor=pointer]:
+          - /url: /uslugi/lazernaya-rezka-metalla/
+          - img "Лазерная резка металла" [ref=e80]
+          - generic [ref=e81]:
+            - heading "Лазерная резка металла" [level=3] [ref=e86]
+            - paragraph [ref=e87]: Высокоточная резка металла толщиной до 20 мм на станках TRUMPF TruLaser 3030.
+            - generic [ref=e88]: Подробнее
+        - link [ref=e91] [cursor=pointer]:
+          - /url: /uslugi/gibka-metalla/
+          - img "Гибка металла" [ref=e93]
+          - generic [ref=e94]:
+            - heading "Гибка металла" [level=3] [ref=e99]
+            - paragraph [ref=e100]: Гибка листового металла на листогибочном прессе с ЧПУ Finn-Power, до 8 мм.
+            - generic [ref=e101]: Подробнее
+        - link [ref=e104] [cursor=pointer]:
+          - /url: /uslugi/svarka-metallokonstrukczij/
+          - img "Сварка металлоконструкций" [ref=e106]
+          - generic [ref=e107]:
+            - heading "Сварка металлоконструкций" [level=3] [ref=e112]
+            - paragraph [ref=e113]: Сварка конструкционной стали, алюминия и нержавейки. Изготовление металлоконструкций.
+            - generic [ref=e114]: Подробнее
+        - link [ref=e117] [cursor=pointer]:
+          - /url: /uslugi/lentochnopilnyie-rabotyi/
+          - img "Ленточнопильные работы" [ref=e119]
+          - generic [ref=e120]:
+            - heading "Ленточнопильные работы" [level=3] [ref=e125]
+            - paragraph [ref=e126]: Высокопроизводительная резка металлов всех видов на ленточнопильных станках.
+            - generic [ref=e127]: Подробнее
+        - link [ref=e130] [cursor=pointer]:
+          - /url: /uslugi/tokarno-frezernye/
+          - img "Токарные и фрезерные работы" [ref=e132]
+          - generic [ref=e133]:
+            - heading "Токарные и фрезерные работы" [level=3] [ref=e138]
+            - paragraph [ref=e139]: Фрезеровка корпусных деталей, кронштейнов, рычагов и других изделий на станках с ЧПУ.
+            - generic [ref=e140]: Подробнее
+        - link [ref=e143] [cursor=pointer]:
+          - /url: /uslugi/konstruktorskie-uslugi/
+          - img "Конструкторские услуги" [ref=e145]
+          - generic [ref=e146]:
+            - heading "Конструкторские услуги" [level=3] [ref=e151]
+            - paragraph [ref=e152]: Разработка конструкторской документации, проектирование оборудования и механизмов.
+            - generic [ref=e153]: Подробнее
+        - link [ref=e156] [cursor=pointer]:
+          - /url: /uslugi/dizajnerskie-uslugi/
+          - img "Дизайнерские услуги" [ref=e158]
+          - generic [ref=e159]:
+            - heading "Дизайнерские услуги" [level=3] [ref=e164]
+            - paragraph [ref=e165]: Разработка эскизов и дизайн-проектов с учётом технических возможностей производства.
+            - generic [ref=e166]: Подробнее
+    - generic [ref=e169]:
+      - heading "Услуги металлообработки в Воронеже" [level=2] [ref=e170]
+      - generic [ref=e171]:
+        - paragraph [ref=e172]:
+          - generic [ref=e173]: Компания ООО «СВН Лазер136» предлагает комплексные услуги металлообработки на заказ и специализируется на производстве изделий из металла по индивидуальным проектам. В наше время все чаще востребована услуга по лазерной резке металла.
+        - paragraph [ref=e174]:
+          - generic [ref=e175]:
+            - strong [ref=e176]
+            - text: Лазерная резка металла – это самый современный и высокоточный из способов термической резки металла толщиной до 20 мм, когда под воздействием лазерного луча участок разрезаемого металла плавится и выдувается струей газа, при этом ширина реза и зона термического воздействия минимальны.
+        - paragraph [ref=e177]: Технология лазерной резки не предусматривает механического воздействия на обрабатываемый металл, а низкая температура и высокая скорость резки приводят к минимальной деформации металла или её полному отсутствию.
+        - paragraph [ref=e178]: Благодаря использованию высококачественного оборудования, постоянного внедрения новых технологий и регулярного повышения квалификации специалистов мы способны соответствовать самым высоким требованиям к производству изделий.
+        - paragraph [ref=e179]:
+          - generic [ref=e180]:
+            - strong [ref=e181]
+            - text: Высокая точность, минимальное температурное влияние, качественная поверхность реза, минимальный процент отхода, партия деталей от 1 шт., а также отличная производительность и удобство в работе, выгодно выделяют её в сравнении с альтернативными способами разделения материалов.
+        - paragraph [ref=e182]: Лазерная резка позволяет получить деталь или детали в минимальное время, по минимальной цене с высоким качеством.
+        - paragraph [ref=e183]:
+          - generic [ref=e184]:
+            - text: Возможности технологии можно увидеть в разделе
+            - link "Оборудование" [ref=e185] [cursor=pointer]:
+              - /url: /oborudovanie/
+            - text: .
+        - paragraph [ref=e186]: Уточнить цены на наши услуги вы можете по телефону +7 (980) 557-81-58
+        - paragraph [ref=e187]:
+          - strong [ref=e189]: Почему стоит работать именно с нами?
+        - list [ref=e190]:
+          - listitem [ref=e191]: Мы предлагаем комплексные услуги металлообработки в Воронеже.
+          - listitem [ref=e192]: Предлагаем качественную лазерную резку металла в Воронеже.
+          - listitem [ref=e193]: Имеем большой опыт по гибке листового металла.
+          - listitem [ref=e194]: Используем современные технологии в обработке металлов
+          - listitem [ref=e195]: Выгодные системы скидок для постоянных партнеров.
+        - paragraph [ref=e196]:
+          - generic [ref=e197]: "Для бесперебойного выполнения заказов мы:"
+        - list [ref=e198]:
+          - listitem [ref=e199]: обеспечили работу нашего производства в круглосуточном режиме;
+          - listitem [ref=e200]: постоянно увеличиваем количество оборудования и оптимизируем производственные процессы;
+          - listitem [ref=e201]: закупаем металл только у производителей и сертифицированных дилеров;
+          - listitem [ref=e202]: поддерживаем запас основных видов металла на нашем складе;
+          - listitem [ref=e203]: сводим производственные потери к минимуму;
+          - listitem [ref=e204]: организовываем доставку продукции заказчикам.
+        - paragraph [ref=e205]: Мы всегда учитываем, что на достижение высоких результатов в работе решающее влияние оказывают характеристики оборудования. Именно поэтому мы предлагаем нашим клиентам исполнение заказа на автоматизированных установках лазерной резки TruLaser 3030 с углекислотным лазером, которые сочетают высокую мощность с непревзойденным качеством резки. Прочный и надежный лазер TruFlow позволяет получать зеркально гладкие кромки реза, которые в большинстве случаев не требуют дополнительной обработки. Благодаря компактным габаритным размерам и простой концепции управления станки TruLaser 3030 представляют собой превосходный комплексный пакет для производства деталей путем лазерной резки.
+        - paragraph [ref=e206]: За счет высокого темпа раскроя данная технология гарантирует оптимальную стоимость готовых изделий. В сравнении с обычной механической резкой металла, резка металла лазером - более быстрый и достаточно недорогой способ. Выбрав резка лазером металла, у вас появляется возможность создать уникальные детали и металлоконструкции по вашим чертежам или же заказать серийное производство нужного вам количества готовых изделий в кратчайшие сроки. Кроме того, данный способ резки металла подразумевает минимум производственных отходов. Компания «СВН Лазер136» готова выполнить ваш заказ на лазерную резку и гибку металлоизделий из ваших материалов, произвести закупку необходимого количества материала под определенный заказ без наценки, обеспечить круглосуточную отгрузку в самые короткие сроки, а также оказать техподдержку на всех этапах выполнения заказа.
+        - paragraph [ref=e207]: Чтобы заказать услугу или узнать стоимость лазерной резки, отправьте нам письмо на почту info@svnl.pro или свяжитесь с нашими менеджерами по указанному на сайте телефону в Воронеже. Но можно быть заранее уверенным, что в нашей компании цены на лазерную резку металла одни из самых адекватных в регионе. Мы имеем возможность держать цены на лазерную резку металла ниже средних по Воронежу благодаря высокому уровню технической оснащенности нашей компании и профессионализму рабочих.
+  - contentinfo [ref=e208]:
+    - generic [ref=e209]:
+      - generic [ref=e210]:
+        - generic [ref=e211]:
+          - img "ООО «СВН Лазер136»" [ref=e213]
+          - paragraph [ref=e214]: "Комплексные услуги металлообработки на заказ: лазерная резка, гибка, сварка и изготовление металлоконструкций по индивидуальным проектам."
+          - link "Наша группа ВКонтакте" [ref=e215] [cursor=pointer]:
+            - /url: http://vk.com/svnlazer
+        - generic [ref=e218]:
+          - heading "Услуги" [level=3] [ref=e219]
+          - list [ref=e220]:
+            - listitem [ref=e221]:
+              - link "Лазерная резка" [ref=e222] [cursor=pointer]:
+                - /url: /uslugi/lazernaya-rezka-metalla/
+            - listitem [ref=e223]:
+              - link "Гибка металла" [ref=e224] [cursor=pointer]:
+                - /url: /uslugi/gibka-metalla/
+            - listitem [ref=e225]:
+              - link "Сварка" [ref=e226] [cursor=pointer]:
+                - /url: /uslugi/svarka-metallokonstrukczij/
+            - listitem [ref=e227]:
+              - link "Ленточнопильные работы" [ref=e228] [cursor=pointer]:
+                - /url: /uslugi/lentochnopilnyie-rabotyi/
+            - listitem [ref=e229]:
+              - link "Токарно-фрезерные работы" [ref=e230] [cursor=pointer]:
+                - /url: /uslugi/tokarno-frezernye/
+            - listitem [ref=e231]:
+              - link "Конструкторские услуги" [ref=e232] [cursor=pointer]:
+                - /url: /uslugi/konstruktorskie-uslugi/
+            - listitem [ref=e233]:
+              - link "Дизайнерские услуги" [ref=e234] [cursor=pointer]:
+                - /url: /uslugi/dizajnerskie-uslugi/
+        - generic [ref=e235]:
+          - heading "Компания" [level=3] [ref=e236]
+          - list [ref=e237]:
+            - listitem [ref=e238]:
+              - link "О компании" [ref=e239] [cursor=pointer]:
+                - /url: /o-kompanii/
+            - listitem [ref=e240]:
+              - link "Оборудование" [ref=e241] [cursor=pointer]:
+                - /url: /oborudovanie/
+            - listitem [ref=e242]:
+              - link "Галерея" [ref=e243] [cursor=pointer]:
+                - /url: /galereya/
+            - listitem [ref=e244]:
+              - link "Статьи" [ref=e245] [cursor=pointer]:
+                - /url: /stat/
+            - listitem [ref=e246]:
+              - link "Реквизиты" [ref=e247] [cursor=pointer]:
+                - /url: /rekvizityi/
+        - generic [ref=e248]:
+          - heading "Контакты" [level=3] [ref=e249]
+          - list [ref=e250]:
+            - listitem [ref=e251]: г. Воронеж, ул. Краснодонская, д. 1а
+            - listitem [ref=e252]:
+              - link "+7 (980) 557-81-58" [ref=e253] [cursor=pointer]:
+                - /url: tel:+79805578158
+            - listitem [ref=e254]:
+              - link "+7 (473) 233-43-41" [ref=e255] [cursor=pointer]:
+                - /url: tel:+74732334341
+            - listitem [ref=e256]:
+              - link "info@svnl.pro" [ref=e257] [cursor=pointer]:
+                - /url: mailto:info@svnl.pro
+      - generic [ref=e258]:
+        - paragraph [ref=e259]: © 2026 ООО «СВН Лазер136». Все права защищены.
+        - paragraph [ref=e260]: г. Воронеж, ул. Краснодонская, д. 1а
+  - generic [ref=e263]:
+    - button [ref=e264]
+    - button [ref=e270]
+    - button [ref=e274]
+    - button [ref=e282]

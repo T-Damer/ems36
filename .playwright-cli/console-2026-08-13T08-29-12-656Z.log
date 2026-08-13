@@ -1,0 +1,88 @@
+[    1908ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[    2866ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[    2866ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[    2866ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[    2866ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[    2866ms] [ERROR] Media type  is an unrecognized or unsupported type for src /videos/factory/master.m3u8. @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:3
+[   62428ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[   62541ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[   62541ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[   62541ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[   62541ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[   62541ms] [ERROR] Media type  is an unrecognized or unsupported type for src /videos/factory/master.m3u8. @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:3
+[   69183ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[   69301ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[   69301ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[   69301ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[   69301ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[   69301ms] [ERROR] Media type  is an unrecognized or unsupported type for src /videos/factory/master.m3u8. @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:3
+[  116821ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[  116946ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[  116946ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[  116947ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[  116947ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[  116947ms] [ERROR] Media type  is an unrecognized or unsupported type for src /videos/factory/master.m3u8. @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:3
+[  121854ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[  121956ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[  121956ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[  121956ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[  121956ms] [ERROR] invalid url @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:0
+[  121956ms] [ERROR] Media type  is an unrecognized or unsupported type for src /videos/factory/master.m3u8. @ http://127.0.0.1:4322/node_modules/@mux/playback-core/dist/index.mjs?v=461ad7ef:3
+[  171023ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[  175993ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[  257542ms] [LOG] [vite] server connection lost. Polling for restart... @ http://127.0.0.1:4322/@vite/client:1650
+[  257543ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  258544ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  259547ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  260548ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  261551ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  262553ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  263555ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  264558ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  265559ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  266560ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  267561ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  268563ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  269564ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  270568ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  271569ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  272571ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  273573ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  274576ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  275578ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  276580ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  277585ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  278587ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  279591ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  280595ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  281599ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  282607ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  283613ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  284619ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  285622ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  286628ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  287638ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  288649ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  289653ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  290663ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  291676ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  292695ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  293703ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  294726ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  295737ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  296750ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  297774ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  298812ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  299853ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  300883ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  301915ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  302938ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  304020ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  305084ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  306126ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  308811ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[  315862ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://127.0.0.1:4322/_image?href=%2F%40fs%2FUsers%2Fd%2FProjects%2FAlexander%2Fems36%2Fsrc%2Fassets%2Ffavicons%2Fweb-app-manifest-192x192.png%3ForigWidth%3D192%26origHeight%3D192%26origFormat%3Dpng&w=192&h=192&f=webp:0
+[  370862ms] [LOG] [vite] server connection lost. Polling for restart... @ http://127.0.0.1:4322/@vite/client:1650
+[  370884ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  371908ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721
+[  372942ms] [ERROR] WebSocket connection to 'ws://127.0.0.1:4322/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://127.0.0.1:4322/@vite/client:1721

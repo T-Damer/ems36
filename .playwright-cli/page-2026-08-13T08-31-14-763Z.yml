@@ -1,0 +1,185 @@
+- generic [active] [ref=f8e1]:
+  - banner [ref=f8e2]:
+    - generic [ref=f8e4]:
+      - link "logo ЭлеваторМельСервис" [ref=f8e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f8e7]:
+          - img "logo" [ref=f8e8]
+          - generic [ref=f8e9]: ЭлеваторМельСервис
+      - navigation "Main navigation" [ref=f8e10]:
+        - list [ref=f8e11]:
+          - listitem [ref=f8e12]:
+            - button "Продукция" [ref=f8e13] [cursor=pointer]
+          - listitem [ref=f8e16]:
+            - button "Документация" [ref=f8e17] [cursor=pointer]
+          - listitem [ref=f8e20]:
+            - button "Контакты" [ref=f8e21] [cursor=pointer]
+      - generic [ref=f8e25]:
+        - generic [ref=f8e26]:
+          - button "Toggle between Dark and Light mode" [ref=f8e27] [cursor=pointer]
+          - link "WhatsApp" [ref=f8e30] [cursor=pointer]:
+            - /url: https://wa.link/8n75w8
+        - link [ref=f8e34] [cursor=pointer]:
+          - /url: tel:+7(900)300-63-23
+  - main [ref=f8e37]:
+    - generic [ref=f8e40]:
+      - generic [ref=f8e41]:
+        - heading [level=1]
+        - heading "ЭлеваторМельСервис" [level=1] [ref=f8e42]
+        - generic [ref=f8e43]:
+          - paragraph [ref=f8e44]: Компания «ЭлеваторМельСервис» производство транспортного технологического оборудования
+          - generic [ref=f8e45]:
+            - link "Написать письмо" [ref=f8e47] [cursor=pointer]:
+              - /url: mailto:elevatormelservis36@yandex.ru
+            - link "Узнать больше" [ref=f8e51] [cursor=pointer]:
+              - /url: "#features"
+      - generic "Рабочий процесс" [ref=f8e54]:
+        - generic "Рабочий процесс" [ref=f8e55]:
+          - region "video player" [ref=f8e56]:
+            - button "play" [ref=f8e60] [cursor=pointer]
+    - generic [ref=f8e64]:
+      - generic [ref=f8e65]: Нужна консультация?
+      - list [ref=f8e68]:
+        - listitem [ref=f8e69]:
+          - link "Звоните +7 (900) 300-63-23" [ref=f8e70] [cursor=pointer]:
+            - /url: tel:+79003006323
+        - listitem [ref=f8e74]:
+          - link "Напишите в WhatsApp" [ref=f8e75] [cursor=pointer]:
+            - /url: https://wa.link/8n75w8
+        - listitem [ref=f8e79]:
+          - link "Посмотрите контакты наших отделов" [ref=f8e80] [cursor=pointer]:
+            - /url: /contacts/
+    - generic [ref=f8e85]:
+      - heading "Почему мы?" [level=2] [ref=f8e87]
+      - generic [ref=f8e88]:
+        - generic [ref=f8e94]:
+          - heading "Экономия времени" [level=3] [ref=f8e95]
+          - paragraph [ref=f8e96]: Вы экономите свое время, потому что мы используем только передовые технологии
+        - generic [ref=f8e102]:
+          - heading "Защита потребителя" [level=3] [ref=f8e103]
+          - paragraph [ref=f8e104]: Вы защищены как потребитель - качество наших услуг соответствует самым современным стандартам
+        - generic [ref=f8e110]:
+          - heading "Одна точка производства" [level=3] [ref=f8e111]
+          - paragraph [ref=f8e112]: весь цикл производства располагается в одном месте
+    - generic [ref=f8e116]:
+      - heading "Что нужно для получения услуг от нашей компании" [level=2] [ref=f8e118]
+      - generic [ref=f8e119]:
+        - generic [ref=f8e127]:
+          - paragraph [ref=f8e128]: "Шаг 1: Связаться с нами"
+          - paragraph [ref=f8e129]: Написать нам в чате или отправить запрос на электронную почту.
+        - generic [ref=f8e137]:
+          - paragraph [ref=f8e138]: "Шаг 2: Позвоните"
+          - paragraph [ref=f8e139]: Позвоните нам. Мы всегда на связи и рады Вам помочь
+        - generic [ref=f8e147]:
+          - paragraph [ref=f8e148]: "Шаг 3: Ожидайте ответа"
+          - paragraph [ref=f8e149]: С Вами свяжется наш менеджер, уточнит все детали и вышлет наше предложение
+        - paragraph [ref=f8e157]: Вот и все!
+    - generic [ref=f8e159]:
+      - generic [ref=f8e160]:
+        - generic [ref=f8e161]:
+          - heading "Узнайте больше из наших статей" [level=2] [ref=f8e162]
+          - link "Посмотреть все публикации »" [ref=f8e163] [cursor=pointer]:
+            - /url: /blog/
+        - paragraph [ref=f8e164]: Здесь мы храним новости и документацию. Вы можете узнать больше о нашей компании, о наших задумках и начинаниях. Мы также публикуем новости о появлении новых товаров и услуг
+      - article [ref=f8e166]:
+        - link [ref=f8e168] [cursor=pointer]:
+          - /url: /new-website/
+          - img "Обновление сайта" [ref=f8e169]
+        - heading [level=3] [ref=f8e170]:
+          - link "Обновление сайта" [ref=f8e171] [cursor=pointer]:
+            - /url: /new-website/
+        - paragraph [ref=f8e172]: Начинаем с чистого листа
+    - generic [ref=f8e175]:
+      - generic [ref=f8e176]:
+        - generic [ref=f8e177]: 250+
+        - generic [ref=f8e178]: Клиентов
+      - generic [ref=f8e179]:
+        - generic [ref=f8e180]: "4"
+        - generic [ref=f8e181]: Года работы
+      - generic [ref=f8e182]:
+        - generic [ref=f8e183]: "70"
+        - generic [ref=f8e184]: Сотрудников
+      - generic [ref=f8e185]:
+        - generic [ref=f8e186]: 3000+
+        - generic [ref=f8e187]: Заказов
+      - generic [ref=f8e188]:
+        - generic [ref=f8e189]: 2000м²
+        - generic [ref=f8e190]: Производственных площадей
+  - contentinfo [ref=f8e191]:
+    - generic [ref=f8e192]:
+      - generic [ref=f8e193]:
+        - generic [ref=f8e194]:
+          - link "ЭлеваторМельСервис" [ref=f8e196] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f8e197]:
+            - link "Условия пользования" [ref=f8e198] [cursor=pointer]:
+              - /url: /terms/
+            - text: ·
+            - link "Политика конфиденциальности" [ref=f8e199] [cursor=pointer]:
+              - /url: /privacy/
+        - generic [ref=f8e200]:
+          - generic [ref=f8e201]: Продукция
+          - list [ref=f8e202]:
+            - listitem [ref=f8e203]:
+              - link "Вся продукция" [ref=f8e204] [cursor=pointer]:
+                - /url: /product/
+            - listitem [ref=f8e205]:
+              - link "Клапаны" [ref=f8e206] [cursor=pointer]:
+                - /url: /product/valves/
+            - listitem [ref=f8e207]:
+              - link "Конвейеры" [ref=f8e208] [cursor=pointer]:
+                - /url: /product/conveyors/
+            - listitem [ref=f8e209]:
+              - link "Элеваторы" [ref=f8e210] [cursor=pointer]:
+                - /url: /product/elevators/
+            - listitem [ref=f8e211]:
+              - link "Задвижки" [ref=f8e212] [cursor=pointer]:
+                - /url: /product/shutters/
+            - listitem [ref=f8e213]:
+              - link "Ямы Завальные" [ref=f8e214] [cursor=pointer]:
+                - /url: /product/pitfalls/
+            - listitem [ref=f8e215]:
+              - link "Зерноочистительный агрегат" [ref=f8e216] [cursor=pointer]:
+                - /url: /product/zav/
+            - listitem [ref=f8e217]:
+              - link "Прочее" [ref=f8e218] [cursor=pointer]:
+                - /url: /product/other/
+        - generic [ref=f8e219]:
+          - generic [ref=f8e220]: Документация
+          - list [ref=f8e221]:
+            - listitem [ref=f8e222]:
+              - link "Образцы паспортов" [ref=f8e223] [cursor=pointer]:
+                - /url: /documents/passport-examples/
+            - listitem [ref=f8e224]:
+              - link "Руководство по эксплуатации" [ref=f8e225] [cursor=pointer]:
+                - /url: /documents/exp-manual/
+            - listitem [ref=f8e226]:
+              - link "Разрешительные документы" [ref=f8e227] [cursor=pointer]:
+                - /url: /documents/permitting-docs/
+            - listitem [ref=f8e228]:
+              - link "Статьи" [ref=f8e229] [cursor=pointer]:
+                - /url: /blog/
+        - generic [ref=f8e230]:
+          - generic [ref=f8e231]: Контакты
+          - list [ref=f8e232]:
+            - listitem [ref=f8e233]:
+              - link "Адреса и телефоны" [ref=f8e234] [cursor=pointer]:
+                - /url: /contacts/
+            - listitem [ref=f8e235]:
+              - link "Новости" [ref=f8e236] [cursor=pointer]:
+                - /url: /blog/
+            - listitem [ref=f8e237]:
+              - link "О компании" [ref=f8e238] [cursor=pointer]:
+                - /url: /about/
+      - list [ref=f8e240]:
+        - listitem [ref=f8e241]:
+          - link "Github" [ref=f8e242] [cursor=pointer]:
+            - /url: https://github.com/T-Damer
+        - listitem [ref=f8e245]:
+          - link "WhatsApp" [ref=f8e246] [cursor=pointer]:
+            - /url: https://wa.me/whatsappphonenumber?text=urlencodedtext
+  - generic [ref=f8e251]:
+    - button [ref=f8e252]
+    - button [ref=f8e258]
+    - button [ref=f8e262]
+    - button [ref=f8e270]
