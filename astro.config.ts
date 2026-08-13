@@ -29,7 +29,9 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/tag/') && !/\/product\/([^/]+)\/\1\//.test(page),
+    }),
     mdx(),
     icon({
       include: {

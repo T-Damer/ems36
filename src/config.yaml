@@ -15,6 +15,7 @@ metadata:
     follow: true
   openGraph:
     site_name: ems36
+    locale: ru_RU
     images:
       - url: '~/assets/images/default.png'
         width: 1200
@@ -26,7 +27,7 @@ metadata:
     cardType: summary_large_image
 
 i18n:
-  language: en
+  language: ru
   textDirection: ltr
 
 pages:

@@ -80,10 +80,16 @@ const {
             <div class="relative m-auto max-w-5xl">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
-              ) : typeof image.src === 'string' && image.src.endsWith('.mp4') ? (
+              ) : typeof image.src === 'string' && image.src.endsWith('.m3u8') ? (
                 <MuxPlayer
-                  playbackId="MB5Jt7GNoOJluRq4xQKLmWpxCKpn15eQfcBi5l02P0202I"
-                  metadata={{ video_title: 'ems36' }}
+                  src={image.src}
+                  poster="/videos/factory/poster.webp"
+                  title={image.alt}
+                  streamType="on-demand"
+                  preferPlayback="mse"
+                  preload="metadata"
+                  playsInline
+                  disableTracking
                   style={{
                     display: 'block',
                     aspectRatio: '16/9',

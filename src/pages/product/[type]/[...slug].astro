@@ -14,11 +14,32 @@ export const getStaticPaths = (async () => {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { product } = Astro.props;
+const { product, redirectTo } = Astro.props as Props & { redirectTo?: string };
+
+if (redirectTo) {
+  return Astro.redirect(redirectTo, 301);
+}
 
 if (!product) {
   return Astro.redirect('/product/');
 }
+
+const canonical = new URL(product.permalink, Astro.site);
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Главная', item: 'https://ems36.ru/' },
+    { '@type': 'ListItem', position: 2, name: 'Продукция', item: 'https://ems36.ru/product/' },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: product.type?.title || 'Продукция',
+      item: new URL(`/product/${product.type?.slug || ''}/`, Astro.site).href,
+    },
+    { '@type': 'ListItem', position: 4, name: product.title, item: canonical.href },
+  ],
+};
 
 const metadata = {
   title: product.title,
@@ -31,5 +52,6 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema).replace(/</g, '\\u003c')} />
   <Product product={product} />
 </Layout>
