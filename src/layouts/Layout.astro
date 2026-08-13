@@ -23,6 +23,25 @@ export interface Props {
 
 const { metadata = {} } = Astro.props;
 const { language, textDirection } = I18N;
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['Organization', 'LocalBusiness'],
+  '@id': 'https://ems36.ru/#organization',
+  name: 'ЭлеваторМельСервис',
+  legalName: 'ООО «ЭМС»',
+  url: 'https://ems36.ru/',
+  telephone: '+7-900-300-63-23',
+  email: 'elevatormelservis36@yandex.ru',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'ул. Краснодонская, д. 1А, офис 19',
+    addressLocality: 'Воронеж',
+    addressRegion: 'Воронежская область',
+    postalCode: '394019',
+    addressCountry: 'RU',
+  },
+  sameAs: ['https://yandex.ru/maps/org/elevatormelservis/8057948607/'],
+};
 ---
 
 <!doctype html>
@@ -33,6 +52,11 @@ const { language, textDirection } = I18N;
     <CustomStyles />
     <ApplyColorMode />
     <Metadata {...metadata} />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationSchema).replace(/</g, '\\u003c')}
+    />
     <SiteVerification />
     <Analytics />
 

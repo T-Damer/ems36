@@ -67,7 +67,7 @@ const getNormalizedProduct = async (product: CollectionEntry<'product'>): Promis
     metadata = {},
   } = data;
 
-  const slug = cleanSlug(id);
+  const slug = cleanSlug(id.split('/').pop() || id);
   const type = rawType
     ? {
         slug: cleanSlug(rawType),
@@ -196,19 +196,20 @@ export const getStaticPathsProduct = async () => {
   if (!isProductEnabled || !isProductRouteEnabled) return [];
 
   const products = await fetchProducts();
-  return products.map((product) => {
+  return products.flatMap((product) => {
     const type = product.type?.slug || 'valves';
     const slug = product.slug;
 
-    return {
-      params: {
-        type,
-        slug,
+    return [
+      {
+        params: { type, slug },
+        props: { product },
       },
-      props: {
-        product,
+      {
+        params: { type, slug: `${type}/${slug}` },
+        props: { redirectTo: product.permalink },
       },
-    };
+    ];
   });
 };
 

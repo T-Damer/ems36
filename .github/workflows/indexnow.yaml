@@ -1,19 +1,25 @@
 name: Submit to IndexNow
 on:
-  push:
-    branches: [ main ]
+  workflow_run:
+    workflows: [Deploy to GitHub Pages]
+    types: [completed]
 
 jobs:
   submit:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
-      - name: Submit URL to IndexNow
+      - name: Submit sitemap URLs to IndexNow
+        env:
+          INDEXNOW_KEY: 4f1a1c67614643f8b8d6ce380c049e1c
         run: |
-          response=$(curl -s -o /dev/null -w "%{http_code}" "https://yandex.ru/indexnow?url=http://ems36.ru/product.html&key=4f1a1c67614643f8b8d6ce380c049e1c&keyLocation=http://ems36.ru/4f1a1c67614643f8b8d6ce380c049e1c.txt")
-          
-          if [ "$response" -eq 200 ] || [ "$response" -eq 202 ]; then
-            echo "IndexNow submission successful"
-          else
-            echo "IndexNow submission failed with status code $response"
-            exit 1
-          fi
+          urls=$(curl --fail --silent -H 'Cache-Control: no-cache' "https://ems36.ru/sitemap-0.xml?deployment=${{ github.event.workflow_run.head_sha }}" | grep -o 'https://ems36.ru/[^<]*' | jq -R -s 'split("\n") | map(select(length > 0))')
+          jq -n \
+            --arg host ems36.ru \
+            --arg key "$INDEXNOW_KEY" \
+            --arg keyLocation "https://ems36.ru/$INDEXNOW_KEY.txt" \
+            --argjson urlList "$urls" \
+            '{host: $host, key: $key, keyLocation: $keyLocation, urlList: $urlList}' \
+            | curl --fail-with-body --silent --show-error \
+                -H 'Content-Type: application/json; charset=utf-8' \
+                --data-binary @- https://api.indexnow.org/indexnow
