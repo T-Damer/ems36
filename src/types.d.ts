@@ -205,6 +205,10 @@ export interface Form {
 
 // WIDGETS
 export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' | 'classes'> {
+  /** Small pill above the title, e.g. a link to a new product line. */
+  announcement?: string;
+  /** Render the tagline as the page <h1> (for pages without a title). */
+  taglineAsTitle?: boolean;
   content?: string;
   actions?: string | CallToAction[];
   image?: string | { src: string | ImageMetadata; alt?: string };
@@ -282,6 +286,9 @@ export interface ProductItem {
   description: string;
 }
 
+/** A gallery image: a public path (alt is taken from the file name) or an explicit src/alt pair. */
+export type ProductImage = string | { src: string; alt: string };
+
 export interface Product {
   /** A unique ID number that identifies a product. */
   id: string;
@@ -299,7 +306,7 @@ export interface Product {
   excerpt?: string;
 
   image?: ImageMetadata | string;
-  images?: string[];
+  images?: Array<ProductImage>;
 
   type?: Taxonomy;
   dimensions?: string;

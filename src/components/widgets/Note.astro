@@ -1,44 +1,75 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { getPermalink } from '~/utils/permalinks';
+
+const actions = [
+  {
+    href: 'tel:+79003006323',
+    icon: 'tabler:phone',
+    title: '+7 (900) 300-63-23',
+    subtitle: 'Позвонить',
+    tone: 'bg-primary/10 text-primary',
+  },
+  {
+    href: 'https://wa.link/8n75w8',
+    icon: 'tabler:brand-whatsapp',
+    title: 'WhatsApp',
+    subtitle: 'Написать в чат',
+    tone: 'bg-[#25D366]/15 text-[#128C4B]',
+    external: true,
+  },
+  {
+    href: getPermalink('/contacts'),
+    icon: 'tabler:address-book',
+    title: 'Контакты отделов',
+    subtitle: 'Продажи, снабжение, бухгалтерия',
+    tone: 'bg-slate-900/5 text-slate-700',
+  },
+];
 ---
 
-<section class="bg-blue-50 dark:bg-slate-800 not-prose">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-md text-center font-medium">
-    <div class="font-bold">
-      <Icon name="tabler:info-square" class="w-5 h-5 inline-block align-text-bottom" /> Нужна консультация?
+<section class="not-prose px-4 py-8 sm:px-6 md:py-10">
+  <div
+    class="relative mx-auto grid max-w-7xl items-center gap-6 overflow-hidden rounded-3xl bg-primary p-5 text-white sm:p-8 lg:grid-cols-12 lg:gap-10"
+  >
+    <div
+      class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl"
+      aria-hidden="true"
+    >
     </div>
-    <ul class="mx-auto mt-2 max-w-xl space-y-1 text-left">
-      <li>
-        <a
-          href="tel:+79003006323"
-          class="flex items-center gap-3 rounded-md px-3 py-2 hover:bg-white/60 dark:hover:bg-slate-700"
-        >
-          <Icon name="tabler:phone" class="h-5 w-5 flex-none" />
-          <span>
-            <span class="font-bold">Звоните</span>
-            <span class="font-bold italic underline">+7 (900) 300-63-23</span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://wa.link/8n75w8"
-          class="flex items-center gap-3 rounded-md px-3 py-2 font-bold italic underline hover:bg-white/60 dark:hover:bg-slate-700"
-        >
-          <Icon name="tabler:brand-whatsapp" class="h-5 w-5 flex-none" />
-          <span>Напишите в WhatsApp</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href={getPermalink('/contacts')}
-          class="flex items-center gap-3 rounded-md px-3 py-2 underline hover:bg-white/60 dark:hover:bg-slate-700"
-        >
-          <Icon name="tabler:address-book" class="h-5 w-5 flex-none" />
-          <span>Посмотрите контакты наших отделов</span>
-        </a>
-      </li>
+
+    <div class="relative lg:col-span-4">
+      <h2 class="font-heading text-2xl font-bold tracking-tight sm:text-3xl">Нужна консультация?</h2>
+      <p class="mt-2 text-white/90">Подскажем по оборудованию, срокам и цене — выберите удобный способ связи.</p>
+    </div>
+
+    <ul class="relative grid gap-3 sm:grid-cols-3 lg:col-span-8">
+      {
+        actions.map((action) => (
+          <li>
+            <a
+              href={action.href}
+              {...(action.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              class="group relative flex h-full items-center gap-4 rounded-2xl bg-white p-4 pr-10 text-slate-900 shadow-lg shadow-blue-950/20 transition hover:-translate-y-0.5 hover:bg-blue-50 hover:shadow-xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60 sm:flex-col sm:items-start sm:gap-3 sm:p-5"
+            >
+              <span
+                class:list={['inline-flex h-11 w-11 flex-none items-center justify-center rounded-xl', action.tone]}
+              >
+                <Icon name={action.icon} class="h-6 w-6" />
+              </span>
+              <span class="min-w-0 flex-1">
+                <span class="block font-semibold">{action.title}</span>
+                <span class="block text-sm text-slate-500">{action.subtitle}</span>
+              </span>
+              <Icon
+                name="tabler:arrow-up-right"
+                class="absolute right-3 top-3 h-5 w-5 text-slate-400 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                aria-hidden="true"
+              />
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </div>
 </section>

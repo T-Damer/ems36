@@ -1,0 +1,649 @@
+---
+import 'swiper/css';
+import { Icon } from 'astro-icon/components';
+import ReelVideo from '~/components/ui/ReelVideo.astro';
+import { smallVariant, ventSrcset, type VentReelItem } from '~/data/ventilation';
+
+interface Props {
+  items: VentReelItem[];
+  label?: string;
+  /**
+   * `overlay` — large arrows over the left/right edges, no bullets.
+   * `below` — small arrows under the track with progress bullets between them.
+   */
+  controls?: 'overlay' | 'below';
+  /** `sizes` for the card images; the default fits a full-width block. */
+  sizes?: string;
+}
+
+const {
+  items,
+  label = 'Изделия для вентиляции и аспирации',
+  controls = 'overlay',
+  sizes = '(min-width: 1280px) 26vw, (min-width: 768px) 28vw, (min-width: 480px) 42vw, 64vw',
+} = Astro.props;
+
+// Swiper's centred loop needs enough slides to fill both sides; short sets are repeated (the lightbox skips
+// the copies).
+const MIN_SLIDES = 9;
+const slides: Array<{ item: VentReelItem; index: number; copy: boolean }> = items.map((item, index) => ({
+  item,
+  index,
+  copy: false,
+}));
+while (items.length && slides.length < MIN_SLIDES) {
+  items.forEach((item, index) => slides.push({ item, index, copy: true }));
+}
+---
+
+<div class:list={['vent-carousel', `vent-carousel--${controls}`]} data-vent-carousel data-controls={controls}>
+  <div class="relative">
+    <div class="swiper" aria-roledescription="карусель" aria-label={label}>
+      <div class="swiper-wrapper">
+        {
+          slides.map(({ item, index, copy }, position) => {
+            const ImageCard = item.kind === 'image' && item.href ? 'a' : 'div';
+            return (
+              <div
+                class="swiper-slide vent-slide"
+                data-lb-index={index}
+                data-lb-copy={copy ? '' : undefined}
+                data-lb-kind={item.kind}
+                data-lb-src={item.kind === 'image' ? item.image.src : item.fullSrc}
+                data-lb-width={item.kind === 'image' ? item.image.width : undefined}
+                data-lb-height={item.kind === 'image' ? item.image.height : undefined}
+                data-lb-alt={item.kind === 'image' ? item.image.alt : item.title}
+                data-lb-poster={item.kind === 'video' ? (item.lightboxPoster ?? item.poster) : undefined}
+                data-lb-label={item.label}
+                data-lb-href={item.href}
+              >
+                {item.kind === 'image' ? (
+                  <ImageCard
+                    href={item.href}
+                    class="vent-card group"
+                    draggable="false"
+                    tabindex={item.href ? undefined : 0}
+                  >
+                    <img
+                      src={smallVariant(item.image.src)}
+                      srcset={ventSrcset(item.image)}
+                      sizes={sizes}
+                      width={item.image.width}
+                      height={item.image.height}
+                      alt={item.image.alt}
+                      loading={position < 2 ? 'eager' : 'lazy'}
+                      fetchpriority={position === 0 ? 'high' : undefined}
+                      decoding="async"
+                      draggable="false"
+                      class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                    <span class="vent-card__label">
+                      <span class="vent-card__text">
+                        <span class="vent-card__text-inner">{item.label}</span>
+                      </span>
+                      {item.href && <Icon name="tabler:arrow-up-right" class="h-5 w-5 flex-none" />}
+                    </span>
+                    <span class="vent-card__dim" aria-hidden="true" />
+                  </ImageCard>
+                ) : (
+                  <div class="vent-card">
+                    <ReelVideo
+                      src={item.src}
+                      fullSrc={item.fullSrc}
+                      poster={item.poster}
+                      title={item.title}
+                      duration={item.duration}
+                    />
+                    {item.href ? (
+                      <a href={item.href} class="vent-card__label hover:underline">
+                        <span class="vent-card__text">
+                          <span class="vent-card__text-inner">{item.label}</span>
+                        </span>
+                        <Icon name="tabler:arrow-up-right" class="h-5 w-5 flex-none" />
+                      </a>
+                    ) : (
+                      <span class="vent-card__label pointer-events-none">
+                        <span class="vent-card__text">
+                          <span class="vent-card__text-inner">{item.label}</span>
+                        </span>
+                      </span>
+                    )}
+                    <span class="vent-card__dim" aria-hidden="true" />
+                  </div>
+                )}
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    {
+      controls === 'overlay' && (
+        <>
+          <button
+            type="button"
+            class="vent-carousel__arrow left-1 sm:left-2"
+            aria-label="Предыдущий слайд"
+            data-vent-prev
+          >
+            <Icon name="tabler:chevron-left" class="h-7 w-7" />
+          </button>
+          <button
+            type="button"
+            class="vent-carousel__arrow right-1 sm:right-2"
+            aria-label="Следующий слайд"
+            data-vent-next
+          >
+            <Icon name="tabler:chevron-right" class="h-7 w-7" />
+          </button>
+        </>
+      )
+    }
+  </div>
+
+  {
+    controls === 'below' && (
+      <div class="mt-4 flex items-center justify-center gap-4">
+        <button type="button" class="vent-carousel__nav" aria-label="Предыдущий слайд" data-vent-prev>
+          <Icon name="tabler:chevron-left" class="h-5 w-5" />
+        </button>
+        <div class="vent-carousel__pagination" data-vent-pagination />
+        <button type="button" class="vent-carousel__nav" aria-label="Следующий слайд" data-vent-next>
+          <Icon name="tabler:chevron-right" class="h-5 w-5" />
+        </button>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .vent-carousel {
+    /* Card height is capped so the whole block fits one screen; set --vent-card-max-h from the parent. */
+    --vent-card-max-h: 32rem;
+    /* The loop moves slides around in the DOM; without this, scroll anchoring makes the page jump. */
+    overflow-anchor: none;
+  }
+
+  .vent-carousel .swiper {
+    overflow: hidden;
+    padding-block: 0.75rem;
+  }
+
+  /* Before Swiper starts (or without JS) the track simply scrolls. Slide widths and gaps match Swiper's
+     slidesPerView/spaceBetween per breakpoint so nothing shifts when it takes over. */
+  .vent-carousel {
+    --vent-per-view: 1.5;
+    --vent-gap: 8px;
+  }
+
+  @media (min-width: 480px) {
+    .vent-carousel {
+      --vent-per-view: 2.3;
+      --vent-gap: 10px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .vent-carousel {
+      --vent-per-view: 3.4;
+      --vent-gap: 12px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .vent-carousel {
+      --vent-per-view: 3.6;
+      --vent-gap: 16px;
+    }
+  }
+
+  .vent-carousel:not(.is-ready) .swiper-wrapper {
+    gap: var(--vent-gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* With JS on, keep the not-yet-started track invisible (its space stays reserved) to avoid a visible jump. */
+  @media (scripting: enabled) {
+    .vent-carousel:not(.is-ready) .swiper-wrapper {
+      visibility: hidden;
+    }
+  }
+
+  .vent-slide {
+    width: calc((100% - var(--vent-gap) * (var(--vent-per-view) - 1)) / var(--vent-per-view));
+    flex-shrink: 0;
+    scroll-snap-align: center;
+  }
+
+  /* --s: 0 at the centre → 1 one slide away; --t: 0 → 1 for cards cut by the edges. */
+  .vent-card {
+    --s: 0;
+    --t: 0;
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    max-height: var(--vent-card-max-h);
+    overflow: hidden;
+    container-type: inline-size;
+    border-radius: 1.25rem;
+    background: rgb(203 213 225);
+    box-shadow: 0 10px 30px -12px rgb(15 23 42 / 0.35);
+    transform: scale(calc(1 - 0.08 * var(--s) - 0.06 * var(--t)));
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :global(.dark) .vent-card {
+    background: rgb(51 65 85);
+  }
+
+  .vent-card__dim {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    background: rgb(15 23 42);
+    opacity: calc(var(--s) * 0.12 + var(--t) * 0.4);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .vent-card__label {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 2.5rem 0.875rem 0.875rem;
+    /* Scales with the card: small cards get smaller captions. */
+    font-size: clamp(0.75rem, 6.2cqi, 1rem);
+    font-weight: 600;
+    line-height: 1.25;
+    color: white;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0.3) 60%, transparent);
+  }
+
+  @media (min-width: 768px) {
+    .vent-card__label {
+      padding: 3rem 1rem 1rem;
+    }
+  }
+
+  /* Captions show up to two lines; longer ones become one line that slowly scrolls on the centre card
+     (side cards and reduced motion get an ellipsis). VentCarousel's script marks them .is-long. */
+  .vent-card__text {
+    display: -webkit-box;
+    min-width: 0;
+    flex: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .vent-card__text.is-long {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .vent-card__text-inner {
+    display: inline;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.swiper-slide-active) .vent-card__text.is-long {
+      text-overflow: clip;
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 0.75rem,
+        black calc(100% - 0.75rem),
+        transparent
+      );
+      mask-image: linear-gradient(to right, transparent, black 0.75rem, black calc(100% - 0.75rem), transparent);
+    }
+
+    :global(.swiper-slide-active) .vent-card__text.is-long .vent-card__text-inner {
+      display: inline-block;
+      padding-inline: 0.75rem;
+      margin-inline: -0.75rem;
+      animation: vent-marquee var(--marquee-duration, 10s) ease-in-out 0.8s infinite alternate;
+    }
+  }
+
+  @keyframes vent-marquee {
+    0%,
+    12% {
+      transform: translateX(0);
+    }
+
+    88%,
+    100% {
+      transform: translateX(var(--marquee-shift, 0));
+    }
+  }
+
+  /* Overlay variant: big round arrows over the edge cards. */
+  .vent-carousel__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 30;
+    display: inline-flex;
+    height: 3rem;
+    width: 3rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    /* Inverted against the page theme so the arrows stand out over the photos. */
+    background: rgb(15 23 42 / 0.9);
+    color: white;
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.15),
+      0 8px 24px -6px rgb(15 23 42 / 0.6);
+    backdrop-filter: blur(6px);
+    transform: translateY(-50%);
+    transition:
+      transform 0.2s,
+      background-color 0.2s;
+  }
+
+  .vent-carousel__arrow:hover {
+    background: rgb(15 23 42);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .vent-carousel__arrow:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 4px rgb(1 97 239 / 0.5),
+      0 8px 24px -6px rgb(15 23 42 / 0.45);
+  }
+
+  @media (min-width: 768px) {
+    .vent-carousel__arrow {
+      height: 3.5rem;
+      width: 3.5rem;
+    }
+  }
+
+  :global(.dark) .vent-carousel__arrow {
+    background: rgb(255 255 255 / 0.95);
+    color: rgb(15 23 42);
+    box-shadow: 0 8px 24px -6px rgb(0 0 0 / 0.6);
+  }
+
+  :global(.dark) .vent-carousel__arrow:hover {
+    background: white;
+  }
+
+  /* Below variant: small arrows + progress bullets. */
+  .vent-carousel__nav {
+    display: inline-flex;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: white;
+    color: rgb(15 23 42);
+    box-shadow:
+      0 1px 2px rgb(15 23 42 / 0.1),
+      0 0 0 1px rgb(226 232 240);
+    transition: background-color 0.2s;
+  }
+
+  .vent-carousel__nav:hover {
+    background: rgb(241 245 249);
+  }
+
+  :global(.dark) .vent-carousel__nav {
+    background: rgb(30 41 59);
+    color: white;
+    box-shadow: 0 0 0 1px rgb(51 65 85);
+  }
+
+  .vent-carousel__pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+
+  .vent-carousel__pagination :global(.vent-bullet) {
+    position: relative;
+    height: 0.5rem;
+    width: 0.5rem;
+    overflow: hidden;
+    border-radius: 9999px;
+    background: rgb(148 163 184 / 0.55);
+    cursor: pointer;
+    transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* The current bullet stretches and fills up while autoplay counts down to the next slide. */
+  .vent-carousel__pagination :global(.vent-bullet--active) {
+    width: 1.75rem;
+  }
+
+  .vent-carousel__pagination :global(.vent-bullet--active)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--aw-color-primary);
+    transform-origin: left;
+    transform: scaleX(var(--progress, 1));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vent-card,
+    .vent-card__dim {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Swiper is loaded when a carousel gets close to the viewport, so it doesn't slow the first render.
+  import type Swiper from 'swiper';
+  import { openLightbox, type LightboxItem } from '~/utils/lightbox';
+
+  const loadSwiper = () =>
+    Promise.all([import('swiper'), import('swiper/modules')]).then(([core, modules]) => ({
+      Swiper: core.default,
+      modules: [modules.A11y, modules.Autoplay, modules.Keyboard, modules.Navigation, modules.Pagination],
+    }));
+
+  const lightboxItem = (slide: HTMLElement): LightboxItem => {
+    const { lbKind, lbSrc, lbWidth, lbHeight, lbAlt, lbPoster, lbLabel, lbHref } = slide.dataset;
+    return {
+      kind: lbKind === 'video' ? 'video' : 'image',
+      src: lbSrc ?? '',
+      width: Number(lbWidth) || undefined,
+      height: Number(lbHeight) || undefined,
+      alt: lbAlt,
+      poster: lbPoster,
+      label: lbLabel,
+      href: lbHref,
+      element: slide.querySelector<HTMLElement>('.vent-card img') ?? undefined,
+      thumbCropped: true,
+    };
+  };
+
+  let instances: Swiper[] = [];
+  let lazyObserver: IntersectionObserver | undefined;
+
+  /** Marks captions that don't fit in two lines and sets how far/long their marquee runs. */
+  const measureCaptions = (root: HTMLElement) => {
+    root.querySelectorAll<HTMLElement>('.vent-card__text').forEach((text) => {
+      text.classList.remove('is-long');
+      const long = text.scrollHeight > text.clientHeight + 1;
+      text.classList.toggle('is-long', long);
+      if (!long) return;
+      const inner = text.querySelector<HTMLElement>('.vent-card__text-inner');
+      const shift = Math.max((inner?.scrollWidth ?? 0) - text.clientWidth, 0) + 12;
+      text.style.setProperty('--marquee-shift', `-${shift}px`);
+      text.style.setProperty('--marquee-duration', `${Math.max(shift / 22, 4).toFixed(1)}s`);
+    });
+  };
+
+  /** The centre card is the largest; neighbours shrink a little, cards cut by the edges shrink more and dim. */
+  const applyDepth = (swiper: Swiper) => {
+    const perView = typeof swiper.params.slidesPerView === 'number' ? swiper.params.slidesPerView : 1;
+    const fullyVisible = perView / 2 - 0.5;
+    swiper.slides.forEach((slide) => {
+      const progress = Math.abs((slide as HTMLElement & { progress?: number }).progress ?? 0);
+      const s = Math.min(progress, 1);
+      const t = Math.min(Math.max((progress - fullyVisible) / 0.5, 0), 1);
+      const card = slide.querySelector<HTMLElement>('.vent-card');
+      card?.style.setProperty('--s', s.toFixed(3));
+      card?.style.setProperty('--t', t.toFixed(3));
+    });
+  };
+
+  const destroyAll = () => {
+    lazyObserver?.disconnect();
+    instances.forEach((swiper) => swiper.destroy(true, true));
+    instances = [];
+  };
+
+  const mount = async (root: HTMLElement) => {
+    const container = root.querySelector<HTMLElement>('.swiper');
+    if (!container || root.dataset.mounted) return;
+    root.dataset.mounted = 'true';
+    const { Swiper, modules } = await loadSwiper();
+    if (!container.isConnected) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const paginationEl = root.querySelector<HTMLElement>('[data-vent-pagination]');
+
+    const swiper = new Swiper(container, {
+      modules,
+      loop: true,
+      centeredSlides: true,
+      grabCursor: true,
+      watchSlidesProgress: true,
+      speed: 750,
+      slidesPerView: 1.5,
+      spaceBetween: 8,
+      breakpoints: {
+        480: { slidesPerView: 2.3, spaceBetween: 10 },
+        768: { slidesPerView: 3.4, spaceBetween: 12 },
+        1280: { slidesPerView: 3.6, spaceBetween: 16 },
+      },
+      // Auto-scrolls until the visitor hovers or interacts; after that it stays put (reels keep autoplaying).
+      autoplay: reduceMotion ? false : { delay: 3000, disableOnInteraction: true },
+      keyboard: { enabled: true, onlyInViewport: true },
+      navigation: {
+        prevEl: root.querySelector<HTMLElement>('[data-vent-prev]'),
+        nextEl: root.querySelector<HTMLElement>('[data-vent-next]'),
+      },
+      pagination: paginationEl
+        ? {
+            el: paginationEl,
+            clickable: true,
+            bulletClass: 'vent-bullet',
+            bulletActiveClass: 'vent-bullet--active',
+          }
+        : false,
+      a11y: {
+        prevSlideMessage: 'Предыдущий слайд',
+        nextSlideMessage: 'Следующий слайд',
+        paginationBulletMessage: 'Перейти к слайду {{index}}',
+        slideLabelMessage: '{{index}} из {{slidesLength}}',
+      },
+      on: {
+        init: (s) => {
+          root.classList.add('is-ready');
+          applyDepth(s);
+          measureCaptions(root);
+        },
+        progress: applyDepth,
+        resize: (s) => {
+          applyDepth(s);
+          measureCaptions(root);
+        },
+        autoplayTimeLeft: (_s, _time, progress) => {
+          paginationEl
+            ?.querySelector<HTMLElement>('.vent-bullet--active')
+            ?.style.setProperty('--progress', (1 - progress).toFixed(3));
+        },
+        setTransition: (s, duration) => {
+          s.slides.forEach((slide) => {
+            slide.querySelectorAll<HTMLElement>('.vent-card, .vent-card__dim').forEach((el) => {
+              el.style.transitionDuration = `${Math.max(duration, 300)}ms`;
+            });
+          });
+        },
+      },
+    });
+
+    // A tap on a side card brings it to the centre first. A tap on the centre card opens the lightbox with all
+    // cards (its label stays a plain link to the product page).
+    container.addEventListener(
+      'click',
+      (event) => {
+        const target = event.target as HTMLElement;
+        const slide = target.closest<HTMLElement>('.swiper-slide');
+        if (!slide) return;
+        const slideIndex = (el: HTMLElement) => Number(el.dataset.swiperSlideIndex ?? 0);
+
+        if (!slide.classList.contains('swiper-slide-active')) {
+          event.preventDefault();
+          event.stopPropagation();
+          swiper.slideToLoop(slideIndex(slide));
+          return;
+        }
+        // Card captions are links only where the card has a page to go to.
+        if (slide.dataset.lbHref && target.closest('.vent-card__label')) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        const originals = [...swiper.slides]
+          .filter((el) => el.dataset.lbCopy === undefined)
+          .sort((a, b) => Number(a.dataset.lbIndex) - Number(b.dataset.lbIndex));
+        swiper.autoplay?.stop();
+        openLightbox(originals.map(lightboxItem), Number(slide.dataset.lbIndex ?? 0));
+      },
+      true
+    );
+
+    root.addEventListener(
+      'pointerenter',
+      (event) => {
+        if (event.pointerType === 'mouse') swiper.autoplay?.stop();
+      },
+      { once: true }
+    );
+    root.addEventListener('focusin', () => swiper.autoplay?.stop(), { once: true });
+
+    instances.push(swiper);
+  };
+
+  const init = () => {
+    destroyAll();
+    const roots = document.querySelectorAll<HTMLElement>('[data-vent-carousel]');
+    if (!roots.length) return;
+    lazyObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          lazyObserver?.unobserve(entry.target);
+          mount(entry.target as HTMLElement);
+        });
+      },
+      { rootMargin: '300px 0px' }
+    );
+    roots.forEach((root) => {
+      delete root.dataset.mounted;
+      lazyObserver?.observe(root);
+    });
+  };
+
+  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:before-swap', destroyAll);
+</script>

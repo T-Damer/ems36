@@ -2,10 +2,10 @@
 title: Ковшовый Ленточный
 excerpt: Ковшовый ленточный элеватор для вертикального перемещения сыпучих материалов
 images:
-  - /images/products/elevators/Нория1.jpg
-  - /images/products/elevators/Нория2.jpg
-  - /images/products/elevators/Нория3.jpg
-  - /images/products/elevators/Нория4.jpg
+  - /images/products/elevators/Нория1.webp
+  - /images/products/elevators/Нория2.webp
+  - /images/products/elevators/Нория3.webp
+  - /images/products/elevators/Нория4.webp
 type: elevators
 publishDate: 2025-04-22
 updateDate: 2025-04-22
@@ -13,7 +13,7 @@ updateDate: 2025-04-22
 
 Ковшовый ленточный элеватор применяется для вертикального перемещения зерна и других сыпучих материалов. Оборудование также известно как нория и используется в составе технологических линий.
 
-# Прайс
+## Прайс
 
 | Исполнение | 10          | 25          | 50          | 50Ф         | 100         | 100Ф        | 175           |
 | ---------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ------------- |

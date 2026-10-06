@@ -8,7 +8,7 @@ site:
 metadata:
   title:
     default: EMS36
-    template: '%s — ems36'
+    template: '%s — ЭлеваторМельСервис'
   description: 'Компания ЭлеваторМельСервис - производство транспортного технологического оборудования'
   robots:
     index: true

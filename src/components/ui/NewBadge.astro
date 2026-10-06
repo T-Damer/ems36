@@ -1,0 +1,95 @@
+---
+interface Props {
+  class?: string;
+  /** Pass false for a static badge (e.g. small inline usage). */
+  animated?: boolean;
+  label?: string;
+}
+
+const { class: className = 'w-24 h-24', animated = true, label = 'Новинка' } = Astro.props;
+
+// Hand-drawn looking starburst: alternating outer/inner points with uneven spike lengths.
+const spikes = 22;
+const outer = [97, 86, 94, 81, 98, 88, 83, 95, 79, 92, 87, 97, 82, 90, 96, 80, 93, 85, 98, 84, 91, 88];
+const inner = [70, 66, 72, 68, 65, 71, 67, 73, 66, 70, 68, 64, 71, 69, 66, 72, 67, 70, 65, 71, 68, 69];
+const points: string[] = [];
+for (let i = 0; i < spikes; i++) {
+  const a = (i / spikes) * Math.PI * 2 - Math.PI / 2;
+  const b = ((i + 0.5) / spikes) * Math.PI * 2 - Math.PI / 2;
+  const r1 = outer[i] * 0.98;
+  const r2 = inner[i] * 0.98;
+  points.push(`${(100 + r1 * Math.cos(a)).toFixed(1)},${(100 + r1 * Math.sin(a)).toFixed(1)}`);
+  points.push(`${(100 + r2 * Math.cos(b)).toFixed(1)},${(100 + r2 * Math.sin(b)).toFixed(1)}`);
+}
+const burst = points.join(' ');
+---
+
+<svg
+  viewBox="0 0 200 200"
+  role="img"
+  aria-label={label}
+  class:list={['new-badge select-none', { 'new-badge--animated': animated }, className]}
+>
+  <title>{label}</title>
+  <g class="new-badge__burst">
+    <polygon points={burst} fill="#D63A35"></polygon>
+    <polygon points={burst} fill="none" stroke="#B12A26" stroke-width="2" stroke-linejoin="round" opacity="0.5"
+    ></polygon>
+  </g>
+  <g transform="rotate(-24 100 100)">
+    <text
+      x="100"
+      y="100"
+      dy="0.35em"
+      text-anchor="middle"
+      fill="#fff"
+      font-family="'Inter Variable', 'Arial Black', Arial, sans-serif"
+      font-size="56"
+      font-weight="900"
+      letter-spacing="-1"
+      transform="skewX(-8)"
+      transform-origin="100 100">NEW</text
+    >
+  </g>
+</svg>
+
+<style>
+  .new-badge {
+    overflow: visible;
+    filter: drop-shadow(0 6px 10px rgb(214 58 53 / 0.35));
+  }
+
+  .new-badge__burst {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .new-badge--animated {
+      animation: new-badge-pop 3.2s ease-in-out infinite;
+    }
+
+    .new-badge--animated .new-badge__burst {
+      animation: new-badge-spin 40s linear infinite;
+    }
+  }
+
+  @keyframes new-badge-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes new-badge-pop {
+    0%,
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+    45% {
+      transform: scale(1.07) rotate(-3deg);
+    }
+    60% {
+      transform: scale(1.03) rotate(2deg);
+    }
+  }
+</style>

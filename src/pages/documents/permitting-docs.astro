@@ -5,11 +5,12 @@ import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
   title: 'Разрешительные документы',
+  description: 'Сертификаты и разрешительные документы на оборудование ЭлеваторМельСервис — скачать PDF.',
 };
 ---
 
 <Layout metadata={metadata}>
-  <Hero tagline={metadata.title}>
+  <Hero tagline={metadata.title} taglineAsTitle>
     <Fragment slot="content">
       <FileList dir="files/permitting-docs" />
     </Fragment>

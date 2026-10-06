@@ -1,0 +1,213 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  /** Clip played inline (muted, looped). */
+  src: string;
+  /** Full-quality clip for the lightbox; defaults to `src`. */
+  fullSrc?: string;
+  poster: string;
+  /** Full-size poster for the lightbox; defaults to `poster`. */
+  fullPoster?: string;
+  title: string;
+  /** Clip length in seconds, shown before metadata loads. */
+  duration?: number;
+  width?: number;
+  height?: number;
+  class?: string;
+}
+
+const {
+  src,
+  fullSrc = src,
+  poster,
+  fullPoster = poster,
+  title,
+  duration = 0,
+  width = 432,
+  height = 768,
+  class: className = '',
+} = Astro.props;
+
+const formatTime = (seconds: number) =>
+  `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+---
+
+<div class:list={['reel relative h-full w-full', className]} data-reel-wrap>
+  <video
+    class="h-full w-full object-cover"
+    poster={poster}
+    muted
+    loop
+    playsinline
+    disablepictureinpicture
+    preload="none"
+    width={width}
+    height={height}
+    aria-label={title}
+    data-reel
+    data-full-src={fullSrc}
+    data-full-poster={fullPoster}
+  >
+    <source src={src} type="video/mp4" />
+  </video>
+
+  <!-- Tapping the clip opens it in the lightbox, with sound and controls. -->
+  <button
+    type="button"
+    class="absolute inset-0 z-[5] cursor-zoom-in focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-white/60"
+    aria-label={`Смотреть со звуком: ${title}`}
+    aria-haspopup="dialog"
+    data-reel-open></button>
+
+  <!-- Telegram-style pill: time left + muted speaker. -->
+  <span
+    class="pointer-events-none absolute left-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/45 py-1 pl-2.5 pr-2 text-xs font-medium tabular-nums text-white backdrop-blur-sm"
+    aria-hidden="true"
+  >
+    <span data-reel-time>{formatTime(duration)}</span>
+    <Icon name="tabler:volume-3" class="h-3.5 w-3.5 opacity-90" />
+  </span>
+
+  <!-- Fullscreen shortcut, shown while the reel plays (opens the lightbox like a tap on the clip). -->
+  <button
+    type="button"
+    class="reel__fullscreen absolute bottom-3 right-3 z-[15] inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm transition hover:bg-black/65 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/60"
+    aria-label={`На весь экран: ${title}`}
+    data-reel-open
+  >
+    <Icon name="tabler:arrows-maximize" class="h-4 w-4" />
+  </button>
+
+  <span class="reel__loading pointer-events-none absolute inset-0 z-[6] items-center justify-center" aria-hidden="true">
+    <span class="aw-spinner h-8 w-8"></span>
+  </span>
+
+  <!-- Shown only when the browser refused to autoplay (e.g. iOS Low Power Mode). -->
+  <span class="reel__blocked pointer-events-none absolute inset-0 z-[6] items-center justify-center" aria-hidden="true">
+    <span
+      class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm"
+    >
+      <Icon name="tabler:player-play-filled" class="ml-0.5 h-6 w-6" />
+    </span>
+  </span>
+</div>
+
+<style>
+  .reel__blocked {
+    display: none;
+  }
+
+  .reel.is-blocked .reel__blocked {
+    display: flex;
+  }
+
+  .reel__fullscreen {
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+    transition:
+      opacity 0.25s,
+      transform 0.25s;
+  }
+
+  .reel.is-playing .reel__fullscreen,
+  .reel__fullscreen:focus-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .reel__loading {
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .reel.is-loading:not(.is-blocked) .reel__loading {
+    opacity: 1;
+    transition-delay: 0.25s;
+  }
+</style>
+
+<script>
+  // Reels play muted while at least 80% on screen and pause otherwise; the pill counts down the time left.
+  // Tapping one opens the site lightbox with sound (see BasicScripts / VentCarousel).
+  import { isLightboxOpen } from '~/utils/lightbox';
+
+  const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const formatTime = (seconds: number) =>
+    `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
+
+  let observer: IntersectionObserver | undefined;
+
+  const tryPlay = (video: HTMLVideoElement) => {
+    const wrap = video.closest('[data-reel-wrap]');
+    video.muted = true;
+    if (video.readyState < 3) wrap?.classList.add('is-loading');
+    video.play().then(
+      () => wrap?.classList.remove('is-blocked'),
+      (error: DOMException) => {
+        // After a client-side page change Chrome can reject the source ("URL safety check"): reload once.
+        if (error.name === 'NotSupportedError' && !video.dataset.reloaded) {
+          video.dataset.reloaded = 'true';
+          video.load();
+          tryPlay(video);
+          return;
+        }
+        wrap?.classList.remove('is-loading');
+        wrap?.classList.add('is-blocked');
+      }
+    );
+  };
+
+  const init = () => {
+    observer?.disconnect();
+    const videos = document.querySelectorAll<HTMLVideoElement>('video[data-reel]');
+    if (!videos.length) return;
+
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ target, isIntersecting, intersectionRatio: ratio, intersectionRect: rect }) => {
+          const video = target as HTMLVideoElement;
+          const visible = isIntersecting && (ratio >= 0.8 || rect.height >= window.innerHeight * 0.8);
+          if (!visible) video.pause();
+          else if (reduceMotion()) video.closest('[data-reel-wrap]')?.classList.add('is-blocked');
+          else if (!isLightboxOpen()) tryPlay(video);
+        });
+      },
+      { threshold: [0, 0.5, 0.8, 1] }
+    );
+
+    videos.forEach((video) => {
+      // The router builds new pages in a parsed document; restart loading now that the clip is in the live one.
+      if (!video.dataset.reloaded && video.networkState !== HTMLMediaElement.NETWORK_LOADING) {
+        video.dataset.reloaded = 'true';
+        video.load();
+      }
+      observer?.observe(video);
+      const wrap = video.closest<HTMLElement>('[data-reel-wrap]');
+      if (!wrap || wrap.dataset.bound) return;
+      wrap.dataset.bound = 'true';
+      const time = wrap.querySelector<HTMLElement>('[data-reel-time]');
+
+      video.addEventListener('timeupdate', () => {
+        if (time && video.duration) time.textContent = formatTime(Math.max(video.duration - video.currentTime, 0));
+      });
+      video.addEventListener('playing', () => {
+        wrap.classList.remove('is-blocked', 'is-loading');
+        wrap.classList.add('is-playing');
+      });
+      video.addEventListener('pause', () => wrap.classList.remove('is-playing'));
+      video.addEventListener('waiting', () => wrap.classList.add('is-loading'));
+      ['pause', 'error', 'canplay'].forEach((name) =>
+        video.addEventListener(name, () => {
+          if (name !== 'canplay' || !video.paused) wrap.classList.remove('is-loading');
+        })
+      );
+    });
+  };
+
+  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:before-swap', () => observer?.disconnect());
+</script>

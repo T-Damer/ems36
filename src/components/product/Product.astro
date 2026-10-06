@@ -3,12 +3,34 @@ import type { Product as ProductType } from '~/types';
 import ToProductLink from './ToProductLink.astro';
 import Image from 'astro/components/Image.astro';
 import Carousel from '../ui/Carousel.astro';
+import VentCarousel from '../widgets/VentCarousel.astro';
+import { publicImageSize } from '~/utils/publicImageSize';
+import { getFileNameFromPath } from '~/utils/getFilesFromDir';
+import { ventProductVideo, videoReelItem, type VentReelItem } from '~/data/ventilation';
 
 interface Props {
   product: ProductType;
 }
 
 const { product } = Astro.props;
+
+// Ventilation products use the homepage-style carousel: their photos plus one fitting video.
+let reel: VentReelItem[] | undefined;
+if (product.type?.slug === 'ventilation' && product.images?.length) {
+  reel = await Promise.all(
+    product.images.map(async (image): Promise<VentReelItem> => {
+      const { src, alt } = typeof image === 'string' ? { src: image, alt: getFileNameFromPath(image) } : image;
+      const { width = 960, height = 1280 } = await publicImageSize(src);
+      return { kind: 'image', label: alt, image: { src, alt, width, height } };
+    })
+  );
+  const video = ventProductVideo[product.slug];
+  if (video) {
+    const item = videoReelItem(video.video);
+    if (video.position === 'second') reel.splice(1, 0, item);
+    else reel.push(item);
+  }
+}
 ---
 
 <article class="prose prose-slate dark:prose-invert mx-auto px-4">
@@ -34,7 +56,19 @@ const { product } = Astro.props;
     )
   }
 
-  {product.images?.length ? <Carousel images={product.images} /> : null}
+  {
+    reel ? (
+      <div class="not-prose relative left-1/2 mb-8 w-screen max-w-5xl -translate-x-1/2 px-4 sm:px-6">
+        <VentCarousel
+          items={reel}
+          label={product.title}
+          sizes="(min-width: 1024px) 280px, (min-width: 768px) 28vw, (min-width: 480px) 42vw, 64vw"
+        />
+      </div>
+    ) : product.images?.length ? (
+      <Carousel images={product.images} title={product.title} />
+    ) : null
+  }
 
   <div class="mb-8">
     {product.Content ? <product.Content /> : <Fragment set:html={product.content || ''} />}

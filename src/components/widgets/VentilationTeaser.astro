@@ -1,0 +1,99 @@
+---
+import { Icon } from 'astro-icon/components';
+import NewBadge from '~/components/ui/NewBadge.astro';
+import VentCarousel from '~/components/widgets/VentCarousel.astro';
+import { VENTILATION_PATH, salesContacts, ventReel } from '~/data/ventilation';
+
+interface Props {
+  id?: string;
+}
+
+const { id = 'ventilation' } = Astro.props;
+---
+
+<section id={id} class="vent-teaser not-prose scroll-mt-16 px-4 py-10 sm:px-6 md:py-14" aria-labelledby={`${id}-title`}>
+  <div class="relative mx-auto max-w-7xl">
+    <NewBadge class="new-corner" />
+
+    <div
+      class="relative rounded-3xl bg-gradient-to-br from-slate-50 via-white to-blue-50 px-4 pb-4 pt-6 ring-1 ring-slate-200 sm:px-8 sm:pb-6 sm:pt-8 lg:px-10 lg:pt-10 dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 dark:ring-slate-700"
+    >
+      <div class="vent-teaser__grid pointer-events-none absolute inset-0 rounded-3xl" aria-hidden="true"></div>
+
+      <div class="relative grid gap-4 lg:grid-cols-12 lg:items-end lg:gap-10">
+        <div class="lg:col-span-7">
+          <h2
+            id={`${id}-title`}
+            class="font-heading text-[1.75rem] font-bold leading-tight tracking-tight text-gray-900 sm:text-4xl lg:text-[2.625rem] dark:text-white"
+          >
+            Производство вентиляции и&nbsp;аспирации
+          </h2>
+          <p class="mt-2 text-base text-muted sm:mt-3 sm:text-lg dark:text-slate-300">
+            Воздуховоды и фасонные изделия из оцинкованной стали для вентиляции и аспирации элеваторов, мельниц и цехов.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3 lg:col-span-5 lg:items-end lg:text-right">
+          <p class="text-sm text-muted dark:text-slate-400">
+            Цена — по запросу в отделе продаж:
+            <a
+              class="whitespace-nowrap font-semibold text-default underline dark:text-white"
+              href={salesContacts.phoneHref}>{salesContacts.phone}</a
+            >
+          </p>
+          <div class="flex gap-2 sm:gap-3">
+            <a
+              class="btn-primary flex-1 px-4 py-2.5 text-sm sm:flex-none sm:px-6 sm:py-3 sm:text-base"
+              href={VENTILATION_PATH}
+            >
+              Смотреть всё
+              <Icon name="tabler:arrow-right" class="ml-1 -mr-1 h-5 w-5" />
+            </a>
+            <a
+              class="btn-secondary flex-1 px-4 py-2.5 text-sm sm:flex-none sm:px-6 sm:py-3 sm:text-base"
+              href={salesContacts.phoneHref}
+            >
+              <Icon name="tabler:phone" class="-ml-1 mr-1 h-5 w-5" />
+              Узнать цену
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative mt-5 sm:mt-6">
+        <VentCarousel items={ventReel} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vent-teaser {
+    /* Everything except the cards (header, paddings, block text, controls); cards take the rest of the screen. */
+    --vent-chrome: 25.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .vent-teaser {
+      --vent-chrome: 26rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .vent-teaser {
+      --vent-chrome: 21rem;
+    }
+  }
+
+  .vent-teaser :global(.vent-carousel) {
+    --vent-card-max-h: max(15rem, calc(100svh - var(--vent-chrome)));
+  }
+
+  .vent-teaser__grid {
+    background-image:
+      linear-gradient(to right, rgb(1 97 239 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(1 97 239 / 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse at 15% 20%, black 15%, transparent 65%);
+  }
+</style>

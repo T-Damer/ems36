@@ -4,7 +4,7 @@
 
 <!-- Yandex.Metrika counter -->
 <script is:inline>
-  (function (m, e, t, r, i, k, a) {
+  (function (m, e, t, r, i) {
     m[i] =
       m[i] ||
       function () {
@@ -16,11 +16,26 @@
         return;
       }
     }
-    (k = e.createElement(t)),
-      (a = e.getElementsByTagName(t)[0]),
-      (k.async = 1),
-      (k.src = r),
-      a.parentNode.insertBefore(k, a);
+    // Calls queue in the stub right away; tag.js itself (heavy on slow phones) loads once the page is idle
+    // or on the first interaction, so it doesn't compete with the first render.
+    var loaded = false;
+    var load = function () {
+      if (loaded) return;
+      loaded = true;
+      var k = e.createElement(t);
+      k.async = true;
+      k.src = r;
+      e.head.appendChild(k);
+    };
+    var whenIdle = function () {
+      if ('requestIdleCallback' in m) m.requestIdleCallback(load, { timeout: 4000 });
+      else m.setTimeout(load, 2000);
+    };
+    if (e.readyState === 'complete') whenIdle();
+    else m.addEventListener('load', whenIdle, { once: true });
+    ['pointerdown', 'keydown', 'scroll'].forEach(function (name) {
+      m.addEventListener(name, load, { once: true, passive: true });
+    });
   })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
   ym(101260140, 'init', { webvisor: true, clickmap: true, accurateTrackBounce: true, trackLinks: true });

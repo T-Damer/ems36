@@ -1,0 +1,175 @@
+---
+// Thin overlay scrollbar for the page (Android-style): the native one is hidden so it never takes layout width
+// (no jump when the menu locks scrolling), and this thumb mirrors window scrolling. Scrolling itself stays native.
+---
+
+<div class="aw-scrollbar" aria-hidden="true" data-aw-scrollbar transition:persist>
+  <div class="aw-scrollbar__thumb" data-aw-scrollbar-thumb></div>
+</div>
+
+<style is:global>
+  html {
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  .aw-scrollbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    width: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .aw-scrollbar.is-active,
+  .aw-scrollbar.is-dragging {
+    opacity: 1;
+  }
+
+  /* Only fine pointers can grab the track; on touch it is just an indicator. */
+  @media (pointer: fine) {
+    .aw-scrollbar.is-scrollable {
+      pointer-events: auto;
+    }
+
+    .aw-scrollbar.is-scrollable:hover {
+      opacity: 1;
+    }
+  }
+
+  .aw-scrollbar__thumb {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    width: 4px;
+    min-height: 32px;
+    border-radius: 9999px;
+    background: rgb(15 23 42 / 0.42);
+    transition:
+      width 0.15s ease,
+      background-color 0.15s ease;
+    will-change: transform;
+  }
+
+  .dark .aw-scrollbar__thumb {
+    background: rgb(255 255 255 / 0.4);
+  }
+
+  .aw-scrollbar:hover .aw-scrollbar__thumb,
+  .aw-scrollbar.is-dragging .aw-scrollbar__thumb {
+    width: 7px;
+    background: rgb(15 23 42 / 0.6);
+  }
+
+  .dark .aw-scrollbar:hover .aw-scrollbar__thumb,
+  .dark .aw-scrollbar.is-dragging .aw-scrollbar__thumb {
+    background: rgb(255 255 255 / 0.6);
+  }
+
+  /* Hidden while the mobile menu (or anything else) locks page scrolling. */
+  html.overflow-hidden .aw-scrollbar {
+    display: none;
+  }
+
+  @media print {
+    .aw-scrollbar {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-aw-scrollbar]');
+  const thumb = document.querySelector<HTMLElement>('[data-aw-scrollbar-thumb]');
+
+  if (bar && thumb) {
+    const root = document.documentElement;
+    let thumbHeight = 0;
+    let maxScroll = 0;
+    let hideTimer: number | undefined;
+    let frame = 0;
+
+    const measure = () => {
+      const viewport = window.innerHeight;
+      maxScroll = Math.max(root.scrollHeight - viewport, 0);
+      thumbHeight = maxScroll ? Math.max((viewport / root.scrollHeight) * viewport, 32) : 0;
+      thumb.style.height = `${thumbHeight}px`;
+      bar.classList.toggle('is-scrollable', maxScroll > 0);
+    };
+
+    const position = () => {
+      frame = 0;
+      const travel = window.innerHeight - thumbHeight;
+      const y = maxScroll ? (window.scrollY / maxScroll) * travel : 0;
+      thumb.style.transform = `translateY(${Math.min(Math.max(y, 0), travel)}px)`;
+    };
+
+    const update = () => {
+      measure();
+      position();
+    };
+
+    const flash = () => {
+      if (!maxScroll) return;
+      bar.classList.add('is-active');
+      window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(() => bar.classList.remove('is-active'), 900);
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!frame) frame = requestAnimationFrame(position);
+        flash();
+      },
+      { passive: true }
+    );
+    window.addEventListener('resize', update);
+    new ResizeObserver(update).observe(root);
+    document.addEventListener('astro:after-swap', update);
+
+    // Drag the thumb, or click the track to jump there.
+    let dragStart = 0;
+    let scrollStart = 0;
+
+    thumb.addEventListener('pointerdown', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      thumb.setPointerCapture(event.pointerId);
+      bar.classList.add('is-dragging');
+      dragStart = event.clientY;
+      scrollStart = window.scrollY;
+    });
+
+    thumb.addEventListener('pointermove', (event) => {
+      if (!bar.classList.contains('is-dragging')) return;
+      const travel = window.innerHeight - thumbHeight;
+      if (travel <= 0) return;
+      window.scrollTo({ top: scrollStart + ((event.clientY - dragStart) / travel) * maxScroll, behavior: 'instant' });
+    });
+
+    const endDrag = () => {
+      bar.classList.remove('is-dragging');
+      flash();
+    };
+    thumb.addEventListener('pointerup', endDrag);
+    thumb.addEventListener('pointercancel', endDrag);
+
+    bar.addEventListener('pointerdown', (event) => {
+      if (event.target !== bar) return;
+      const travel = window.innerHeight - thumbHeight;
+      const ratio = travel > 0 ? (event.clientY - thumbHeight / 2) / travel : 0;
+      window.scrollTo({ top: Math.min(Math.max(ratio, 0), 1) * maxScroll, behavior: 'smooth' });
+    });
+
+    update();
+  }
+</script>
