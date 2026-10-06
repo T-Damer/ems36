@@ -2,6 +2,7 @@
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
 import { Icon } from 'astro-icon/components';
+import { placeholderStyle } from '~/utils/placeholder';
 
 import type { Hero as Props } from '~/types';
 
@@ -19,6 +20,8 @@ const {
   id,
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+const heroPosterPlaceholder = await placeholderStyle('/videos/factory/poster-480.webp');
 
 // Pages without a title (e.g. documents) can promote the tagline to the page's <h1>.
 const TaglineTag = taglineAsTitle && !title ? 'h1' : 'p';
@@ -96,6 +99,7 @@ const TaglineTag = taglineAsTitle && !title ? 'h1' : 'p';
                 >
                   <img
                     src="/videos/factory/poster-960.webp"
+                    style={heroPosterPlaceholder}
                     srcset="/videos/factory/poster-480.webp 480w, /videos/factory/poster-960.webp 960w, /videos/factory/poster.webp 1920w"
                     sizes="(min-width: 1024px) 1024px, 100vw"
                     width="1920"

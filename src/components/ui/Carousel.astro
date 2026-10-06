@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { getFileNameFromPath } from '~/utils/getFilesFromDir';
 import { publicImageSize } from '~/utils/publicImageSize';
+import { placeholderStyle } from '~/utils/placeholder';
 import type { ProductImage } from '~/types';
 
 interface Props {
@@ -26,7 +27,12 @@ const slides = await Promise.all(
     const thumb = slide.src.replace(/\.webp$/, '-sm.webp');
     const hasThumb =
       thumb !== slide.src && fs.existsSync(path.join(process.cwd(), 'public', decodeURIComponent(thumb)));
-    return { ...slide, thumb: hasThumb ? thumb : slide.src, ...(await publicImageSize(slide.src)) };
+    return {
+      ...slide,
+      thumb: hasThumb ? thumb : slide.src,
+      placeholder: await placeholderStyle(slide.src),
+      ...(await publicImageSize(slide.src)),
+    };
   })
 );
 ---
@@ -55,6 +61,8 @@ const slides = await Promise.all(
             width={600}
             height={600}
             src={slide.thumb}
+            style={slide.placeholder}
+            onload="this.style.backgroundImage='none'"
             alt={slide.alt}
             data-lightbox
             data-lightbox-src={slide.src}

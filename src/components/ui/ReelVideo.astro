@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { placeholderStyle } from '~/utils/placeholder';
 
 interface Props {
   /** Clip played inline (muted, looped). */
@@ -29,6 +30,8 @@ const {
   class: className = '',
 } = Astro.props;
 
+const posterPlaceholder = await placeholderStyle(poster);
+
 const formatTime = (seconds: number) =>
   `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
 ---
@@ -36,6 +39,7 @@ const formatTime = (seconds: number) =>
 <div class:list={['reel relative h-full w-full', className]} data-reel-wrap>
   <video
     class="h-full w-full object-cover"
+    style={posterPlaceholder}
     poster={poster}
     muted
     loop
