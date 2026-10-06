@@ -2,20 +2,20 @@
 title: Конвейер стационарный
 excerpt: Стационарный цепной конвейер для перемещения сыпучих материалов
 images:
-  - /images/products/conveyors/chain/Цепной1.png
-  - /images/products/conveyors/chain/Цепной2.jpg
-  - /images/products/conveyors/chain/Цепной3.jpg
-  - /images/products/conveyors/chain/Цепной4.jpg
-  - /images/products/conveyors/chain/Цепной6.jpg
-  - /images/products/conveyors/chain/Цепной7.jpg
-  - /images/products/conveyors/chain/Цепной8.jpg
-  - /images/products/conveyors/chain/Цепной9.jpg
-  - /images/products/conveyors/chain/Цепной10.jpg
-  - /images/products/conveyors/chain/Цепной11.jpg
-  - /images/products/conveyors/chain/Цепной12.png
-  - /images/products/conveyors/chain/Цепной13.jpg
-  - /images/products/conveyors/chain/Цепной14.png
-  - /images/products/conveyors/chain/Цепной15.jpg
+  - /images/products/conveyors/chain/Цепной1.webp
+  - /images/products/conveyors/chain/Цепной2.webp
+  - /images/products/conveyors/chain/Цепной3.webp
+  - /images/products/conveyors/chain/Цепной4.webp
+  - /images/products/conveyors/chain/Цепной6.webp
+  - /images/products/conveyors/chain/Цепной7.webp
+  - /images/products/conveyors/chain/Цепной8.webp
+  - /images/products/conveyors/chain/Цепной9.webp
+  - /images/products/conveyors/chain/Цепной10.webp
+  - /images/products/conveyors/chain/Цепной11.webp
+  - /images/products/conveyors/chain/Цепной12.webp
+  - /images/products/conveyors/chain/Цепной13.webp
+  - /images/products/conveyors/chain/Цепной14.webp
+  - /images/products/conveyors/chain/Цепной15.webp
 type: conveyors
 publishDate: 2025-04-22
 updateDate: 2025-04-22
@@ -23,7 +23,7 @@ updateDate: 2025-04-22
 
 Стационарный цепной конвейер применяется для перемещения зерна и других сыпучих материалов. Оборудование предназначено для включения в технологические линии элеваторов и зерноперерабатывающих предприятий.
 
-# Прайс
+## Прайс
 
 | Исполнение | Футеровка 6мм | 50          | 100         | 175           |
 | ---------- | ------------- | ----------- | ----------- | ------------- |

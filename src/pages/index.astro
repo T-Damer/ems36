@@ -7,13 +7,14 @@ import Features from '~/components/widgets/Features.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
+import VentilationTeaser from '~/components/widgets/VentilationTeaser.astro';
 
 import siloFieldImage from '~/assets/images/silo-field.png';
 
 const metadata = {
   title: 'ЭлеваторМельСервис',
   description:
-    'Производство транспортного технологического оборудования в Воронеже. Клапаны перекидные, одинарные, двойные, тройные. Конвйеры цепные и ленточные. Задвижки реечные и винтовые. Нории',
+    'Производство транспортного технологического оборудования в Воронеже: перекидные клапаны, цепные и ленточные конвейеры, задвижки, нории. Новое направление — воздуховоды и фасонные изделия для вентиляции и аспирации.',
   ignoreTitleTemplate: true,
   rel: 'canonical',
 };
@@ -32,16 +33,42 @@ const metadata = {
     ]}
     image={{ src: '/videos/factory/master.m3u8', alt: 'Рабочий процесс' }}
   >
+    <Fragment slot="announcement">
+      <a
+        href="/product/ventilation/"
+        class="group inline-flex items-center gap-2 rounded-full bg-white py-1 pl-1 pr-3 text-sm font-medium text-slate-700 shadow-sm ring-1 ring-slate-200 transition hover:shadow-md hover:ring-[#D63A35]/40 dark:bg-slate-800 dark:text-slate-200 dark:ring-slate-700"
+      >
+        <span class="rounded-full bg-[#D63A35] px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-white"
+          >Новое!</span
+        >
+        Вентиляция и аспирация
+        <svg
+          class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+        >
+      </a>
+    </Fragment>
+
     <Fragment slot="title">
-      <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
+      <span class="block text-3xl sm:text-4xl md:text-5xl font-bold mb-2">
         Элеватор<span class="text-accent dark:text-white highlight">Мель</span>Сервис
-      </h1>
+      </span>
     </Fragment>
 
     <Fragment slot="subtitle">
       Компания «ЭлеваторМельСервис» производство транспортного технологического оборудования
     </Fragment>
   </Hero>
+
+  <!-- New: ventilation & aspiration ** -->
+
+  <VentilationTeaser />
 
   <!-- Note Widget ******************* -->
 
@@ -65,8 +92,8 @@ const metadata = {
       },
       {
         title: 'Одна точка производства',
-        description: 'весь цикл производства располагается в одном месте',
-        icon: 'tabler:circle-dotted',
+        description: 'Весь цикл производства располагается в одном месте',
+        icon: 'tabler:asterisk',
       },
     ]}
   />

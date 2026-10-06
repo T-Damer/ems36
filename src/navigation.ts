@@ -7,6 +7,7 @@ export const headerData = {
       title: 'Продукция',
       links: [
         { text: 'Вся продукция', href: getPermalink('/product') },
+        { text: 'Вентиляция и аспирация', href: getPermalink('/product/ventilation'), badge: 'NEW' },
         {
           text: 'Клапаны',
           href: getPermalink('/product/valves'),
@@ -68,7 +69,7 @@ export const footerData = {
     {
       ariaLabel: 'WhatsApp',
       icon: 'tabler:brand-whatsapp',
-      href: 'https://wa.me/whatsappphonenumber?text=urlencodedtext',
+      href: 'https://wa.link/8n75w8',
       target: '_blank',
     },
   ],

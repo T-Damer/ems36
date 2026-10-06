@@ -1,7 +1,7 @@
 ---
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
-import { MuxPlayer } from '@mux/mux-player-astro';
+import { Icon } from 'astro-icon/components';
 
 import type { Hero as Props } from '~/types';
 
@@ -9,6 +9,8 @@ const {
   title = await Astro.slots.render('title'),
   subtitle = await Astro.slots.render('subtitle'),
   tagline,
+  taglineAsTitle = false,
+  announcement = await Astro.slots.render('announcement'),
 
   content = await Astro.slots.render('content'),
   actions = await Astro.slots.render('actions'),
@@ -17,6 +19,9 @@ const {
   id,
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+// Pages without a title (e.g. documents) can promote the tagline to the page's <h1>.
+const TaglineTag = taglineAsTitle && !title ? 'h1' : 'p';
 ---
 
 <section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
@@ -29,9 +34,10 @@ const {
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
     <div class="py-12 md:py-20">
       <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
+        {announcement && <div class="mb-5 flex justify-center" set:html={announcement} />}
         {
           tagline && (
-            <p
+            <TaglineTag
               class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
               set:html={tagline}
             />
@@ -81,23 +87,36 @@ const {
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : typeof image.src === 'string' && image.src.endsWith('.m3u8') ? (
-                <MuxPlayer
-                  src={new URL(image.src, Astro.url).href}
-                  poster="/videos/factory/poster.webp"
-                  title={image.alt}
-                  streamType="on-demand"
-                  preferPlayback="mse"
-                  preload="metadata"
-                  playsInline
-                  disableTracking
-                  style={{
-                    display: 'block',
-                    aspectRatio: '16/9',
-                    borderRadius: '0.5rem',
-                    overflow: 'hidden',
-                  }}
-                  accentColor="#0461EF"
-                />
+                <div
+                  class="hero-video group relative aspect-video overflow-hidden rounded-lg bg-slate-900"
+                  data-hero-video
+                  data-src={new URL(image.src, Astro.url).href}
+                  data-poster="/videos/factory/poster.webp"
+                  data-title={image.alt}
+                >
+                  <img
+                    src="/videos/factory/poster-960.webp"
+                    srcset="/videos/factory/poster-480.webp 480w, /videos/factory/poster-960.webp 960w, /videos/factory/poster.webp 1920w"
+                    sizes="(min-width: 1024px) 1024px, 100vw"
+                    width="1920"
+                    height="1080"
+                    alt={image.alt}
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
+                    class="h-full w-full object-cover"
+                  />
+                  <button
+                    type="button"
+                    class="absolute inset-0 flex items-center justify-center bg-black/10 transition hover:bg-black/20 focus-visible:outline-none"
+                    aria-label={`Смотреть видео: ${image.alt}`}
+                    data-hero-video-play
+                  >
+                    <span class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow-xl transition group-hover:scale-110 group-focus-visible:ring-4 group-focus-visible:ring-white/70 md:h-20 md:w-20">
+                      <Icon name="tabler:player-play-filled" class="ml-1 h-8 w-8 md:h-9 md:w-9" />
+                    </span>
+                  </button>
+                </div>
               ) : (
                 <Image
                   class="mx-auto rounded-md w-full"
@@ -116,3 +135,32 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  // Hero video facade: poster + play button; the Mux player (~300 KB of JS) loads only on click.
+  const start = async (wrap: HTMLElement) => {
+    if (wrap.dataset.loading) return;
+    wrap.dataset.loading = 'true';
+    const badge = wrap.querySelector('[data-hero-video-play] > span');
+    if (badge) badge.innerHTML = '<span class="aw-spinner border-slate-900/20 border-t-slate-900"></span>';
+    await import('@mux/mux-player');
+    const player = document.createElement('mux-player');
+    player.setAttribute('src', wrap.dataset.src ?? '');
+    player.setAttribute('poster', wrap.dataset.poster ?? '');
+    player.setAttribute('title', wrap.dataset.title ?? '');
+    player.setAttribute('stream-type', 'on-demand');
+    player.setAttribute('prefer-playback', 'mse');
+    player.setAttribute('accent-color', '#0461EF');
+    player.setAttribute('playsinline', '');
+    player.setAttribute('disable-tracking', '');
+    player.setAttribute('autoplay', '');
+    player.style.cssText = 'display:block;width:100%;height:100%;aspect-ratio:16/9';
+    wrap.replaceChildren(player);
+  };
+
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll<HTMLElement>('[data-hero-video]').forEach((wrap) => {
+      wrap.querySelector('[data-hero-video-play]')?.addEventListener('click', () => start(wrap), { once: true });
+    });
+  });
+</script>

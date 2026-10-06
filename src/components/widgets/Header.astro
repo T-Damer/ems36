@@ -18,6 +18,8 @@ interface Link {
 
 interface MenuLink extends Link {
   links?: Array<MenuLink>;
+  /** Small highlight pill shown next to the link text, e.g. "NEW". */
+  badge?: string;
 }
 
 export interface Props {
@@ -50,7 +52,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-10 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
+    'top-0 z-50 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
@@ -71,7 +73,8 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     ]}
   >
     <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
-      <a class="flex items-center" href={getHomePermalink()}>
+      <a class="relative flex items-center" href={getHomePermalink()}>
+        <span class="aw-logo-glow" aria-hidden="true"></span>
         <Logo />
       </a>
       <div class="flex items-center gap-1 lg:hidden">
@@ -134,9 +137,9 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                   </button>
                   <ul
                     id={`header-submenu-${index}`}
-                    class="dropdown-menu hidden lg:backdrop-blur-md dark:lg:bg-dark rounded lg:absolute pl-4 lg:pl-0 lg:hidden font-medium lg:bg-white/90 lg:min-w-[200px] drop-shadow-xl"
+                    class="dropdown-menu hidden lg:backdrop-blur-xl lg:backdrop-saturate-150 dark:lg:bg-[#030620]/80 rounded-xl lg:absolute lg:overflow-hidden pl-4 lg:pl-0 lg:hidden font-medium lg:bg-white/80 lg:min-w-[200px] lg:ring-1 lg:ring-slate-900/5 dark:lg:ring-white/10 drop-shadow-xl"
                   >
-                    {links.map(({ text: text2, href: href2 }) => (
+                    {links.map(({ text: text2, href: href2, badge }) => (
                       <li>
                         <a
                           class:list={[
@@ -146,6 +149,11 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                           href={href2}
                         >
                           {text2}
+                          {badge && (
+                            <span class="ml-1.5 rounded-full bg-[#D63A35] px-1.5 py-0.5 align-middle text-[0.625rem] font-bold leading-none tracking-wide text-white">
+                              {badge}
+                            </span>
+                          )}
                         </a>
                       </li>
                     ))}

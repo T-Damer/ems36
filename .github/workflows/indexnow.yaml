@@ -6,7 +6,8 @@ on:
 
 jobs:
   submit:
-    if: github.event.workflow_run.conclusion == 'success'
+    # Only after a real deploy (a push to main), not after pull-request builds.
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Submit sitemap URLs to IndexNow

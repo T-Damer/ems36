@@ -3,13 +3,20 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Pull requests only build (to catch errors); they never deploy.
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
+
+# One deploy at a time; a newer PR build replaces an older one.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
@@ -19,16 +26,18 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
       - run: npm ci
       - run: npm run build
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:

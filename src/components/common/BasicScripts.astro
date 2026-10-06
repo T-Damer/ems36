@@ -2,37 +2,6 @@
 import { UI } from 'astrowind:config';
 ---
 
-<link rel="stylesheet" href="https://unpkg.com/medium-zoom@1.0.8/dist/medium-zoom.min.css" />
-
-<style is:global>
-  .medium-zoom-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.3s;
-    will-change: opacity;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 999;
-  }
-
-  .medium-zoom-overlay--opened {
-    opacity: 1;
-  }
-
-  .medium-zoom-image {
-    z-index: 1000;
-  }
-
-  .medium-zoom-image--opened {
-    position: relative;
-    cursor: zoom-out;
-    will-change: transform;
-  }
-</style>
-
 <script is:inline define:vars={{ defaultTheme: UI.theme }}>
   if (window.basic_script) {
     return;
@@ -70,53 +39,6 @@ import { UI } from 'astrowind:config';
       });
     }
   }
-
-  let zoomInstance = null;
-  let overlayElement = null;
-
-  const createOverlay = () => {
-    if (!overlayElement) {
-      overlayElement = document.createElement('div');
-      overlayElement.className = 'medium-zoom-overlay';
-      document.body.appendChild(overlayElement);
-    }
-    return overlayElement;
-  };
-
-  const removeOverlay = () => {
-    if (overlayElement) {
-      overlayElement.remove();
-      overlayElement = null;
-    }
-  };
-
-  const setupImageZoom = () => {
-    // Clean up previous instance if it exists
-    if (zoomInstance) {
-      zoomInstance.detach();
-    }
-
-    // Create new instance
-    zoomInstance = window.mediumZoom('.prose img', {
-      margin: 24,
-      background: 'rgba(0,0,0,0.9)',
-      scrollOffset: 0,
-    });
-
-    // Ensure overlay is created and classes are applied
-    zoomInstance.on('open', () => {
-      const overlay = createOverlay();
-      overlay.classList.add('medium-zoom-overlay--opened');
-    });
-
-    zoomInstance.on('close', () => {
-      if (overlayElement) {
-        overlayElement.classList.remove('medium-zoom-overlay--opened');
-        // Add a small delay to allow the fade-out animation to complete
-        setTimeout(removeOverlay, 300);
-      }
-    });
-  };
 
   let menuScrollPosition = 0;
 
@@ -266,8 +188,6 @@ import { UI } from 'astrowind:config';
         ticking = true;
       }
     });
-
-    setupImageZoom();
   };
   const onPageShow = function () {
     document.documentElement.classList.add('motion-safe:scroll-smooth');
@@ -279,18 +199,15 @@ import { UI } from 'astrowind:config';
     document.getElementById('header')?.classList.remove('h-screen');
     document.getElementById('header')?.classList.remove('expanded');
     document.querySelector('#header nav')?.classList.add('hidden');
-
-    setupImageZoom();
   };
 
   window.onload = onLoad;
   window.onpageshow = onPageShow;
 
-  document.addEventListener('astro:before-swap', () => {
-    if (zoomInstance) {
-      zoomInstance.detach();
-    }
-    removeOverlay();
+  // Header glass and logo glow jump straight to their final state on page changes instead of animating.
+  document.addEventListener('astro:after-swap', () => document.documentElement.classList.add('aw-navigating'));
+  document.addEventListener('astro:page-load', () => {
+    window.setTimeout(() => document.documentElement.classList.remove('aw-navigating'), 400);
   });
 
   document.addEventListener('astro:after-swap', () => {
@@ -300,7 +217,42 @@ import { UI } from 'astrowind:config';
   });
 </script>
 
-<script src="https://unpkg.com/medium-zoom@1.0.8/dist/medium-zoom.min.js"></script>
+<script>
+  // Site-wide lightbox: images marked with data-lightbox (grouped by [data-lightbox-group]),
+  // images inside .prose content, and inline reels outside carousels (carousels open their own set).
+  import { itemFromImage, itemFromReel, openLightbox } from '~/utils/lightbox';
+
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    if (target.closest('[data-vent-carousel], .pswp')) return;
+
+    const reelButton = target.closest('[data-reel-open]');
+    if (reelButton) {
+      const video = reelButton.closest('[data-reel-wrap]')?.querySelector<HTMLVideoElement>('video[data-reel]');
+      if (video) {
+        event.preventDefault();
+        openLightbox([itemFromReel(video)]);
+      }
+      return;
+    }
+
+    const img = target.closest<HTMLImageElement>('img[data-lightbox], .prose img');
+    if (!img) return;
+    const marked = img.hasAttribute('data-lightbox');
+    // Plain content images that are already links keep working as links.
+    if (!marked && img.closest('a')) return;
+
+    const group = marked ? img.closest('[data-lightbox-group]') : img.closest('.prose');
+    const images = group
+      ? Array.from(
+          group.querySelectorAll<HTMLImageElement>(marked ? 'img[data-lightbox]' : 'img:not([data-lightbox])')
+        ).filter((item) => marked || !item.closest('a'))
+      : [img];
+
+    event.preventDefault();
+    openLightbox(images.map(itemFromImage), Math.max(images.indexOf(img), 0));
+  });
+</script>
 
 <script is:inline>
   /* Inspired by: https://github.com/heidkaemper/tailwindcss-intersect */

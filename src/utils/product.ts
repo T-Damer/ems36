@@ -13,6 +13,7 @@ const productNames = {
   pitfalls: 'Ямы завальные',
   zav: 'Зерноочистительные агрегаты',
   other: 'Другая продукция',
+  ventilation: 'Вентиляция и аспирация',
 };
 
 const generatePermalink = async ({

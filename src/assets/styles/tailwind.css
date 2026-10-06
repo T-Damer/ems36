@@ -46,29 +46,147 @@ html {
     @apply btn;
   }
 
+  /* "NEW" starburst pinned over the top-right corner of a block (see NewBadge.astro). */
+  .new-corner {
+    @apply pointer-events-none absolute -right-2 -top-6 z-20 h-16 w-16 sm:-right-5 sm:-top-8 sm:h-24 sm:w-24 lg:-right-7 lg:-top-10 lg:h-28 lg:w-28;
+    rotate: 12deg;
+  }
+
   .btn-tertiary {
     @apply btn border-none shadow-none text-muted hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
   }
 }
 
-#header.scroll > div:first-child {
-  @apply bg-page md:bg-white/90 md:backdrop-blur-md;
-  box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
+/* Frosted-glass header: translucent page colour + blur + a faint film grain (scrolled bar and open mobile menu). */
+#header {
+  --aw-glass-bg: rgb(255 255 255 / 0.72);
+  --aw-glass-bg-menu: rgb(255 255 255 / 0.7);
+  --aw-glass-border: rgb(15 23 42 / 0.08);
+  --aw-glass-grain-opacity: 0.05;
 }
-.dark #header.scroll > div:first-child,
-#header.scroll.dark > div:first-child {
-  @apply bg-page md:bg-[#030621e6] border-b border-gray-500/20;
+
+.dark #header,
+#header.dark {
+  --aw-glass-bg: rgb(3 6 32 / 0.66);
+  --aw-glass-bg-menu: rgb(3 6 32 / 0.78);
+  --aw-glass-border: rgb(255 255 255 / 0.08);
+  --aw-glass-grain-opacity: 0.08;
+}
+
+#header > div:first-child {
+  transition:
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+#header.scroll > div:first-child,
+#header.expanded > div:first-child {
+  background-color: var(--aw-glass-bg);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  backdrop-filter: blur(16px) saturate(170%);
+  box-shadow:
+    inset 0 -1px 0 var(--aw-glass-border),
+    0 0.375rem 1.5rem 0 rgb(15 23 42 / 0.08);
+}
+
+#header.expanded > div:first-child {
+  background-color: var(--aw-glass-bg-menu);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
   box-shadow: none;
 }
-/* #header.scroll > div:last-child {
-  @apply py-3;
-} */
+
+#header.scroll > div:first-child::after,
+#header.expanded > div:first-child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--aw-glass-grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* Droplet-shaped glow behind the logo: round head at the logo, tail pointing to the page centre. It sits under
+   the frosted header layer (z-index -1 in the header's stacking context), so the header's backdrop blur softens it.
+   It grows out of the logo once the frosted layer shows (scrolled header or open mobile menu). */
+.aw-logo-glow {
+  position: absolute;
+  left: -1.25rem;
+  top: 50%;
+  z-index: -1;
+  height: 3.5rem;
+  width: 11rem;
+  pointer-events: none;
+  /* Light blur of its own: the droplet keeps soft but readable edges even where the header glass is off. */
+  filter: blur(4px);
+  opacity: 0;
+  transform: translateY(-50%) scaleX(0.35);
+  transform-origin: 1.5rem 50%;
+  transition:
+    opacity 1.6s ease-in-out,
+    transform 1.6s cubic-bezier(0.45, 0, 0.25, 1);
+}
+
+.aw-logo-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 95% 120% at 12% 50%,
+    rgb(59 130 246 / 0.95),
+    rgb(1 97 239 / 0.5) 38%,
+    rgb(1 97 239 / 0.16) 72%,
+    transparent 100%
+  );
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 64' preserveAspectRatio='none'%3E%3Cpath d='M32 2C14 2 2 16 2 32s12 30 30 30c58 0 138-22 206-30C170 24 90 2 32 2Z'/%3E%3C/svg%3E")
+    center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 64' preserveAspectRatio='none'%3E%3Cpath d='M32 2C14 2 2 16 2 32s12 30 30 30c58 0 138-22 206-30C170 24 90 2 32 2Z'/%3E%3C/svg%3E")
+    center / 100% 100% no-repeat;
+}
+
+#header.scroll .aw-logo-glow,
+#header.expanded .aw-logo-glow {
+  opacity: 1;
+  transform: translateY(-50%);
+  transition:
+    opacity 1.4s ease,
+    transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 640px) {
+  .aw-logo-glow {
+    width: 17rem;
+  }
+}
+
+.dark .aw-logo-glow::before {
+  background: radial-gradient(
+    ellipse 95% 120% at 12% 50%,
+    rgb(96 165 250 / 0.85),
+    rgb(37 99 235 / 0.45) 38%,
+    rgb(1 97 239 / 0.14) 72%,
+    transparent 100%
+  );
+}
+/* No header/glow animations while the router swaps pages (BasicScripts toggles .aw-navigating). */
+html.aw-navigating #header > div:first-child,
+html.aw-navigating .aw-logo-glow {
+  transition: none !important;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  #header.scroll > div:first-child,
+  #header.expanded > div:first-child {
+    background-color: var(--aw-color-bg-page);
+  }
+}
 
 #header.expanded {
   position: fixed;
   inset: 0;
   height: 100dvh;
-  background-color: var(--aw-color-bg-page);
+  background-color: transparent;
 }
 
 #header.expanded nav {
@@ -78,12 +196,74 @@ html {
   right: 0;
   bottom: 0 !important;
   padding: 0 5px;
-  background-color: var(--aw-color-bg-page);
+  background-color: transparent;
   overscroll-behavior: contain;
 }
 
 [data-aw-toggle-submenu][aria-expanded='true'] > svg {
   transform: rotate(180deg);
+}
+
+/* Mobile menu: quick fade + staggered slide-in for items and opened submenus. */
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  #header.expanded nav {
+    animation: aw-menu-fade 0.18s ease-out both;
+  }
+
+  #header.expanded nav > ul > li,
+  #header .dropdown-menu:not(.hidden) > li {
+    animation: aw-menu-item 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  #header.expanded nav > ul > li:nth-child(2),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(2) {
+    animation-delay: 35ms;
+  }
+  #header.expanded nav > ul > li:nth-child(3),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(3) {
+    animation-delay: 70ms;
+  }
+  #header.expanded nav > ul > li:nth-child(4),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(4) {
+    animation-delay: 105ms;
+  }
+  #header.expanded nav > ul > li:nth-child(5),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(5) {
+    animation-delay: 140ms;
+  }
+  #header.expanded nav > ul > li:nth-child(6),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(6) {
+    animation-delay: 175ms;
+  }
+  #header.expanded nav > ul > li:nth-child(7),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(7) {
+    animation-delay: 210ms;
+  }
+  #header.expanded nav > ul > li:nth-child(8),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(8) {
+    animation-delay: 245ms;
+  }
+  #header.expanded nav > ul > li:nth-child(9),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(9) {
+    animation-delay: 280ms;
+  }
+  #header.expanded nav > ul > li:nth-child(10),
+  #header .dropdown-menu:not(.hidden) > li:nth-child(10) {
+    animation-delay: 315ms;
+  }
+}
+
+@keyframes aw-menu-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes aw-menu-item {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
 }
 
 @media (min-width: 1024px) {
@@ -125,4 +305,115 @@ svg[data-icon^='tabler:phone'] {
 
 .dd *:first-child {
   margin-top: 0;
+}
+
+/* Lightbox (PhotoSwipe, see src/utils/lightbox.ts) */
+.prose img:not(a img),
+img[data-lightbox] {
+  cursor: zoom-in;
+}
+
+.pswp {
+  --pswp-bg: #05070f;
+  --pswp-placeholder-bg: #1e293b;
+  --pswp-icon-color: #fff;
+  --pswp-icon-color-secondary: rgb(15 23 42 / 0.6);
+}
+
+.pswp__counter {
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.9;
+}
+
+.pswp-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem 1rem;
+  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
+  color: white;
+  font-size: 0.9375rem;
+  text-align: center;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.7), transparent);
+  transition: opacity 0.25s;
+}
+
+.pswp:not(.pswp--ui-visible) .pswp-caption {
+  opacity: 0;
+}
+
+.pswp-caption__title {
+  font-weight: 600;
+}
+
+.pswp-caption__link {
+  border-radius: 9999px;
+  background: rgb(255 255 255 / 0.15);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.pswp-caption__link:hover {
+  background: rgb(255 255 255 / 0.28);
+}
+
+.pswp-video {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 56px 8px 88px;
+  pointer-events: none;
+}
+
+.pswp-video video {
+  max-height: 100%;
+  max-width: 100%;
+  border-radius: 0.875rem;
+  background: black;
+  pointer-events: auto;
+}
+
+/* Small loading ring used by reels, lightbox videos and the hero video facade. */
+.aw-spinner {
+  display: inline-block;
+  height: 2.25rem;
+  width: 2.25rem;
+  border-radius: 9999px;
+  border: 3px solid rgb(255 255 255 / 0.3);
+  border-top-color: white;
+  animation: aw-spin 0.8s linear infinite;
+}
+
+@keyframes aw-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pswp-video {
+  position: relative;
+}
+
+.pswp-video__spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -1.125rem 0 0 -1.125rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.pswp-video.is-loading .pswp-video__spinner {
+  opacity: 1;
 }

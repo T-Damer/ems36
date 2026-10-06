@@ -83,8 +83,8 @@ export const adaptOpenGraphImages = async (
           // Handle public folder images - return as-is with default dimensions
           return {
             url: String(new URL(resolvedImage, astroSite)),
-            width: defaultWidth,
-            height: defaultHeight,
+            width: image.width ?? defaultWidth,
+            height: image.height ?? defaultHeight,
           };
         } else if (resolvedImage) {
           const dimensions =

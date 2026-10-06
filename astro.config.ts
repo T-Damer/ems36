@@ -25,6 +25,11 @@ export default defineConfig({
   site: 'https://ems36.ru',
   output: 'static',
 
+  // The whole stylesheet is small, so inline it instead of blocking the first render on extra requests.
+  build: {
+    inlineStylesheets: 'always',
+  },
+
   integrations: [
     tailwind({
       applyBaseStyles: false,

@@ -5,11 +5,13 @@ import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
   title: 'Образцы паспортов',
+  description:
+    'Образцы паспортов на оборудование ЭлеваторМельСервис: клапаны, конвейеры, нории, задвижки — скачать PDF.',
 };
 ---
 
 <Layout metadata={metadata}>
-  <Hero tagline={metadata.title}>
+  <Hero tagline={metadata.title} taglineAsTitle>
     <Fragment slot="content">
       <FileList dir="files/passports" />
     </Fragment>

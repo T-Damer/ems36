@@ -3,13 +3,15 @@ import type { GetStaticPaths } from 'astro';
 import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
 import { getPermalink } from '~/utils/permalinks';
-import { fetchProducts, getStaticPathsProduct } from '~/utils/product';
+import { fetchProducts } from '~/utils/product';
 
 export const prerender = true;
 
 export const getStaticPaths = (async () => {
   const products = await fetchProducts();
   const types = new Set(products.map((product) => product.type?.slug).filter(Boolean));
+  // /product/ventilation/ has its own landing page (src/pages/product/ventilation/index.astro)
+  types.delete('ventilation');
 
   return Array.from(types).map((type) => ({
     params: { type },
@@ -29,8 +31,10 @@ const typeProducts = products
 const typeName = typeProducts[0]?.type?.title || type;
 
 const metadata = {
-  title: `Продукция - ${typeName}`,
-  description: `Продукция типа ${typeName} от ЭлеваторМельСервис`,
+  title: `${typeName} — каталог продукции`,
+  description: `${typeName} от производителя ЭлеваторМельСервис (Воронеж): ${typeProducts
+    .map((product) => product.title)
+    .join(', ')}. Цена по запросу.`,
   robots: {
     index: true,
     follow: true,

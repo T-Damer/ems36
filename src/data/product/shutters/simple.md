@@ -2,14 +2,14 @@
 title: Задвижка
 excerpt: Реечные и винтовые задвижки для работы с сыпучими материалами
 images:
-  - '/images/products/shutters/Задвижка1.jpg'
-  - '/images/products/shutters/Задвижка2.jpg'
-  - '/images/products/shutters/Задвижка3.jpg'
-  - '/images/products/shutters/Задвижка4.jpg'
-  - '/images/products/shutters/Задвижка5.jpg'
-  - '/images/products/shutters/Задвижка6.jpg'
-  - '/images/products/shutters/Задвижка7.jpg'
-  - '/images/products/shutters/Задвижка8.jpg'
+  - '/images/products/shutters/Задвижка1.webp'
+  - '/images/products/shutters/Задвижка2.webp'
+  - '/images/products/shutters/Задвижка3.webp'
+  - '/images/products/shutters/Задвижка4.webp'
+  - '/images/products/shutters/Задвижка5.webp'
+  - '/images/products/shutters/Задвижка6.webp'
+  - '/images/products/shutters/Задвижка7.webp'
+  - '/images/products/shutters/Задвижка8.webp'
 type: shutters
 publishDate: 2025-04-22
 updateDate: 2025-04-22
@@ -17,7 +17,7 @@ updateDate: 2025-04-22
 
 Реечные и винтовые задвижки применяются для перекрытия или направления потока сыпучих материалов. Оборудование используется в составе транспортных и технологических линий.
 
-# Прайс
+## Прайс
 
 | Исполнение | э/д | Реечная    | Винтовая   |
 | ---------- | --- | ---------- | ---------- |

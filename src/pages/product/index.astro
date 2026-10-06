@@ -1,27 +1,16 @@
 ---
-import type { GetStaticPaths } from 'astro';
 import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
+import NewBadge from '~/components/ui/NewBadge.astro';
 import { getPermalink } from '~/utils/permalinks';
-import { fetchProducts } from '~/utils/product';
+import { VENTILATION_PATH, smallVariant, ventCategories, ventSrcset } from '~/data/ventilation';
 
 export const prerender = true;
 
-export const getStaticPaths = (async () => {
-  const products = await fetchProducts();
-  const types = new Set(products.map((product) => product.type?.slug).filter(Boolean));
-
-  return Array.from(types).map((type) => ({
-    params: { type },
-    props: { type },
-  }));
-}) satisfies GetStaticPaths;
-
-const { type } = Astro.props;
-
 const metadata = {
-  title: `Продукция ${type ? `- ${type}` : ''}`,
-  description: 'Производство транспортного технологического оборудования для элеваторов и мельниц',
+  title: 'Продукция',
+  description:
+    'Каталог оборудования ЭлеваторМельСервис: клапаны, конвейеры, нории, задвижки, завальные ямы, ЗАВ, а также воздуховоды и фасонные изделия для вентиляции и аспирации.',
   robots: {
     index: true,
     follow: true,
@@ -69,7 +58,46 @@ const links = [
 
 <Layout metadata={metadata}>
   <section class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold mb-8">Продукция {type ? `- ${type}` : ''}</h1>
+    <h1 class="text-3xl font-bold mb-10 lg:mb-14">Продукция</h1>
+
+    <div class="relative mb-6">
+      <NewBadge class="new-corner" />
+      <a
+        href={VENTILATION_PATH}
+        class="group relative grid items-center gap-6 overflow-hidden rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50 p-6 ring-1 ring-slate-200 transition-shadow hover:shadow-lg md:grid-cols-2 dark:from-slate-800 dark:to-slate-900 dark:ring-slate-700"
+      >
+        <div class="flex items-start gap-4">
+          <div>
+            <h2 class="text-xl font-semibold mb-2 sm:text-2xl">Вентиляция и аспирация</h2>
+            <p class="text-slate-600 dark:text-slate-400">
+              Воздуховоды, отводы, переходы, заглушки и дроссель-клапаны из оцинкованной стали
+            </p>
+            <span class="mt-3 inline-flex items-center gap-1 text-sm font-medium text-blue-700 dark:text-blue-400">
+              Смотреть новинку
+              <Icon name="tabler:arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </span>
+          </div>
+        </div>
+        <div class="grid grid-cols-4 gap-2" aria-hidden="true">
+          {
+            ventCategories.map((category) => (
+              <img
+                src={smallVariant(category.cover.src)}
+                srcset={ventSrcset(category.cover)}
+                sizes="(min-width: 768px) 12vw, 22vw"
+                width={category.cover.width}
+                height={category.cover.height}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                class="aspect-[3/4] w-full rounded-lg object-cover"
+              />
+            ))
+          }
+        </div>
+      </a>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {
         links.map((link) => (
