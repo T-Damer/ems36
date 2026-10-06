@@ -3,9 +3,12 @@ import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
 import NewBadge from '~/components/ui/NewBadge.astro';
 import { getPermalink } from '~/utils/permalinks';
+import { placeholderStyle } from '~/utils/placeholder';
 import { VENTILATION_PATH, smallVariant, ventCategories, ventSrcset } from '~/data/ventilation';
 
 export const prerender = true;
+
+const coverPlaceholders = await Promise.all(ventCategories.map((category) => placeholderStyle(category.cover.src)));
 
 const metadata = {
   title: 'Продукция',
@@ -80,9 +83,10 @@ const links = [
         </div>
         <div class="grid grid-cols-4 gap-2" aria-hidden="true">
           {
-            ventCategories.map((category) => (
+            ventCategories.map((category, index) => (
               <img
                 src={smallVariant(category.cover.src)}
+                style={coverPlaceholders[index]}
                 srcset={ventSrcset(category.cover)}
                 sizes="(min-width: 768px) 12vw, 22vw"
                 width={category.cover.width}

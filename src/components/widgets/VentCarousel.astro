@@ -2,6 +2,7 @@
 import 'swiper/css';
 import { Icon } from 'astro-icon/components';
 import ReelVideo from '~/components/ui/ReelVideo.astro';
+import { placeholderStyle } from '~/utils/placeholder';
 import { smallVariant, ventSrcset, type VentReelItem } from '~/data/ventilation';
 
 interface Props {
@@ -34,6 +35,13 @@ const slides: Array<{ item: VentReelItem; index: number; copy: boolean }> = item
 while (items.length && slides.length < MIN_SLIDES) {
   items.forEach((item, index) => slides.push({ item, index, copy: true }));
 }
+const placeholders = new Map(
+  await Promise.all(
+    items.map(
+      async (item) => [item, item.kind === 'image' ? await placeholderStyle(item.image.src) : undefined] as const
+    )
+  )
+);
 ---
 
 <div class:list={['vent-carousel', `vent-carousel--${controls}`]} data-vent-carousel data-controls={controls}>
@@ -66,6 +74,7 @@ while (items.length && slides.length < MIN_SLIDES) {
                   >
                     <img
                       src={smallVariant(item.image.src)}
+                      style={placeholders.get(item)}
                       srcset={ventSrcset(item.image)}
                       sizes={sizes}
                       width={item.image.width}
