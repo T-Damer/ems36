@@ -34,6 +34,8 @@ const BELT_CONVEYOR = 'conveyors/belt-conveyor';
 const SCREW_CONVEYOR = 'conveyors/screw-conveyor';
 const CHAIN_CONVEYOR = 'conveyors/stationary-chain-conveyor';
 const BELT_ELEVATOR = 'elevators/bucket-belt';
+/** No product page yet: the ventilation landing lists these in its aspiration card. */
+export const FILTERS = 'filters';
 
 const passport = (file: string, title: string, products?: string[]): SiteDocument => ({
   title,
@@ -78,7 +80,9 @@ export const documents: SiteDocument[] = [
   passport('Паспорт-элеватор-ковшовый-ленточный.pdf', 'Элеватор ковшовый ленточный ЭК(Л)', [BELT_ELEVATOR]),
   passport('Паспорт-элеватор-ковшовый-цепной.pdf', 'Элеватор ковшовый цепной ЭК(Ц)'),
   {
-    ...passport('Паспорт-фильтр-локальный-ФЛ.pdf', 'Фильтр локальный ФЛ — паспорт и руководство по эксплуатации'),
+    ...passport('Паспорт-фильтр-локальный-ФЛ.pdf', 'Фильтр локальный ФЛ — паспорт и руководство по эксплуатации', [
+      FILTERS,
+    ]),
     alsoIn: ['manual'],
   },
 
@@ -108,12 +112,14 @@ export const documents: SiteDocument[] = [
   permit('Декларация-ТР-ТС-004-020-элеваторы.pdf', 'Декларация о соответствии — элеваторы', TR_004_020, [
     BELT_ELEVATOR,
   ]),
-  permit('Декларация-ТР-ТС-004-020-фильтры.pdf', 'Декларация о соответствии — фильтры локальные', TR_004_020),
+  permit('Декларация-ТР-ТС-004-020-фильтры.pdf', 'Декларация о соответствии — фильтры локальные', TR_004_020, [
+    FILTERS,
+  ]),
 
   permit('Сертификат-ТР-ТС-012-задвижки.pdf', 'Сертификат соответствия — задвижки шиберные', TR_012, [SHUTTERS]),
   permit('Сертификат-ТР-ТС-012-клапаны.pdf', 'Сертификат соответствия — клапаны перекидные', TR_012, [VALVES]),
 
-  permit('Декларация-ТР-ТС-010-фильтры.pdf', 'Декларация о соответствии — фильтры локальные', TR_010),
+  permit('Декларация-ТР-ТС-010-фильтры.pdf', 'Декларация о соответствии — фильтры локальные', TR_010, [FILTERS]),
   permit('задвижки-декларация.pdf', 'Декларация о соответствии — задвижки', TR_010, [SHUTTERS]),
   permit('клапаны-декларация.pdf', 'Декларация о соответствии — клапаны', TR_010, [VALVES]),
   permit('конвейеры-декларация.pdf', 'Декларация о соответствии — конвейеры', TR_010, [CONVEYORS]),
@@ -145,12 +151,15 @@ export const permitsByRegulation = () => {
   return Array.from(groups, ([regulation, items]) => ({ regulation, items }));
 };
 
+/** Visible documents tagged with any of the `products` keys. */
+export const documentsFor = (...keys: string[]) =>
+  visible.filter((document) => document.products?.some((key) => keys.includes(key)));
+
 /** Visible documents for a product page, grouped by kind; kinds with nothing to show are left out. */
 export const productDocuments = (product: Pick<Product, 'slug' | 'type'>) => {
   const type = product.type?.slug;
   if (!type) return [];
-  const keys = [type, `${type}/${product.slug}`];
-  const matching = visible.filter((document) => document.products?.some((key) => keys.includes(key)));
+  const matching = documentsFor(type, `${type}/${product.slug}`);
   return (Object.keys(documentKinds) as DocumentKind[])
     .map((kind) => ({ kind, ...documentKinds[kind], items: matching.filter((document) => document.kind === kind) }))
     .filter((group) => group.items.length);
