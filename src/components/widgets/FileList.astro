@@ -1,24 +1,27 @@
 ---
 import { Icon } from 'astro-icon/components';
-import getFilesFromDir, { getFileNameFromPath } from '~/utils/getFilesFromDir';
+import type { SiteDocument } from '~/data/documents';
+import { assertDocumentsMatchFiles } from '~/utils/getFilesFromDir';
 
 interface Props {
-  dir: string;
+  files: SiteDocument[];
+  title?: string;
 }
 
-const { dir } = Astro.props;
-const fileList = await getFilesFromDir(dir);
+const { files, title } = Astro.props;
+await assertDocumentsMatchFiles();
 ---
 
-<section class="flex flex-col gap-y-2 border border-slate-200 rounded-2xl max-w-4xl p-4 mx-auto">
+<section class="w-full flex flex-col gap-y-2 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-4xl p-4 mx-auto">
+  {title && <h2 class="text-left font-semibold leading-tight pb-1">{title}</h2>}
   {
-    fileList.map((href) => (
-      <a href={href} target="_blank" class="border-b-2 border-slate-200">
+    files.map(({ href, title }) => (
+      <a href={encodeURI(href)} target="_blank" class="border-b-2 border-slate-200 dark:border-slate-700">
         <div class="flex gap-x-2 items-center">
           <div>
             <Icon name="tabler:file-type-pdf" />
           </div>
-          <span class="text-left leading-tight">{getFileNameFromPath(href)}</span>
+          <span class="text-left leading-tight">{title}</span>
         </div>
       </a>
     ))

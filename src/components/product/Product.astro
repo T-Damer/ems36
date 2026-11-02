@@ -1,6 +1,7 @@
 ---
 import type { Product as ProductType } from '~/types';
 import ToProductLink from './ToProductLink.astro';
+import ProductDocuments from './ProductDocuments.astro';
 import Image from 'astro/components/Image.astro';
 import Carousel from '../ui/Carousel.astro';
 import VentCarousel from '../widgets/VentCarousel.astro';
@@ -73,6 +74,8 @@ if (product.type?.slug === 'ventilation' && product.images?.length) {
   <div class="mb-8">
     {product.Content ? <product.Content /> : <Fragment set:html={product.content || ''} />}
   </div>
+
+  <ProductDocuments product={product} />
 
   <ToProductLink />
 </article>

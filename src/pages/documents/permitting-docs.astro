@@ -2,17 +2,21 @@
 import FileList from '~/components/widgets/FileList.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import { permitsByRegulation } from '~/data/documents';
 
 const metadata = {
   title: 'Разрешительные документы',
-  description: 'Сертификаты и разрешительные документы на оборудование ЭлеваторМельСервис — скачать PDF.',
+  description:
+    'Сертификаты и декларации ЕАЭС (ТР ТС 004, 010, 012, 020) на оборудование ЭлеваторМельСервис — скачать PDF.',
 };
 ---
 
 <Layout metadata={metadata}>
   <Hero tagline={metadata.title} taglineAsTitle>
     <Fragment slot="content">
-      <FileList dir="files/permitting-docs" />
+      <div class="flex flex-col gap-y-6">
+        {permitsByRegulation().map(({ regulation, items }) => <FileList title={regulation} files={items} />)}
+      </div>
     </Fragment>
   </Hero>
 </Layout>
