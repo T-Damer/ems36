@@ -117,3 +117,4 @@ Do not use the SSH backend address (`90.156.142.59`). The domain has no mail rec
 ## Change log
 
 - 2026-11-03: ems36.ru was added as a separate site on u543238 (panel site id 1967994, extra site at 60 ₽/month, no DDoS protection); `www.ems36.ru` is its alias. The Masterhost deploy, `.htaccess` and certificate scripts were added. GitHub Pages still serves the site.
+- 2026-11-03: first certificate issued by DNS validation and installed in the panel by `masterhost-ssl-upload.py`. DNS at REG.RU switched to the four Masterhost frontends (`www` CNAME `ems36.ru.`, no AAAA), the certificate reissued by HTTP validation (renewals now need no DNS edits), and the panel redirects `www.ems36.ru → ems36.ru` and `HTTP → HTTPS` switched on. ems36.ru is in `~/.config/services-bar/certs.json` with automatic upload. GitHub Pages stays published as a fallback for a day or two.
