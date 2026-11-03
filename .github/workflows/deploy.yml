@@ -1,0 +1,52 @@
+name: Deploy to Masterhost
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Deploys run one after another; ops/install-release.sh also holds a lock.
+concurrency:
+  group: masterhost
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      # Only for this job: a deploy key that is allowed into the Masterhost account,
+      # pinned to the host's known keys. See DEPLOYMENT.md.
+      - name: Configure SSH
+        env:
+          MASTERHOST_SSH_KEY: ${{ secrets.MASTERHOST_SSH_KEY }}
+          MASTERHOST_KNOWN_HOSTS: ${{ secrets.MASTERHOST_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$MASTERHOST_SSH_KEY" > ~/.ssh/masterhost
+          printf '%s\n' "$MASTERHOST_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<'EOF'
+          Host masterhost
+            HostName u543238.ssh.masterhost.ru
+            User u543238
+            IdentityFile ~/.ssh/masterhost
+            IdentitiesOnly yes
+            StrictHostKeyChecking yes
+          EOF
+          chmod 600 ~/.ssh/masterhost ~/.ssh/known_hosts ~/.ssh/config
+
+      - name: Deploy
+        env:
+          REVISION: ${{ github.sha }}
+        run: ops/deploy.sh

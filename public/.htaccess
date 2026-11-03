@@ -1,0 +1,21 @@
+# Apache on Masterhost (see DEPLOYMENT.md). Redirect targets are absolute:
+# relative ones resolve to the internal proxy's http:// scheme.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.ems36\.ru$ [NC]
+RewriteRule ^ https://ems36.ru%{REQUEST_URI} [R=301,L,NE]
+
+# mod_dir would add the missing trailing slash with the proxy's http:// scheme,
+# costing an extra hop; redirect straight to the canonical URL.
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*[^/])$ https://ems36.ru/$1/ [R=301,L,NE]
+
+DirectoryIndex index.html
+Options -Indexes
+AddDefaultCharset utf-8
+ErrorDocument 404 /404.html
+
+# Astro fingerprints everything under /_astro/, so it never changes in place.
+<IfModule mod_headers.c>
+  SetEnvIf Request_URI "^/_astro/" IMMUTABLE_ASSET
+  Header set Cache-Control "public, max-age=31536000, immutable" env=IMMUTABLE_ASSET
+</IfModule>
