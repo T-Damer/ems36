@@ -94,5 +94,15 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          // Shared chunks (e.g. lightbox) otherwise get one-letter export names in the
+          // order their importers happen to be processed, which varies between CI runs:
+          // every build then renamed the scripts and changed every page's HTML.
+          minifyInternalExports: false,
+        },
+      },
+    },
   },
 });
