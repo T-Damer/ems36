@@ -1,5 +1,9 @@
 name: Deploy to Masterhost
 
+# Every push also publishes the same build to GitHub Pages, a standby copy that
+# serves no one until DNS is switched to it (DEPLOYMENT.md, "Failover to GitHub
+# Pages"). Only the Masterhost install sends IndexNow pings.
+
 on:
   push:
     branches: [main]
@@ -20,6 +24,8 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    outputs:
+      standby: ${{ steps.standby.outcome }}
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node
@@ -29,6 +35,18 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+
+      # Uploaded before the Masterhost deploy, so the standby is still updated
+      # when Masterhost is down. Apache's .htaccess means nothing on Pages.
+      - name: Prepare standby copy
+        if: github.event_name != 'pull_request'
+        run: rsync -a --exclude=.htaccess dist/ "$RUNNER_TEMP/pages/"
+      - name: Upload standby copy
+        id: standby
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/pages
 
       # Only for this job: a deploy key that is allowed into the Masterhost account,
       # pinned to the host's known keys. See DEPLOYMENT.md.
@@ -56,3 +74,18 @@ jobs:
         env:
           REVISION: ${{ github.sha }}
         run: ops/deploy.sh
+
+  standby:
+    needs: deploy
+    if: ${{ !cancelled() && needs.deploy.outputs.standby == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish standby copy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

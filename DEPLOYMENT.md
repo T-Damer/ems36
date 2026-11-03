@@ -25,6 +25,7 @@ A push to `main` runs `.github/workflows/deploy.yml` (a pull request only runs s
 2. `ops/deploy.sh` rsyncs `dist/` into `deploy/ems36.ru/upload/` (only changed files are sent: the site is ~200 MB, mostly PDFs and videos) and copies the two ops scripts.
 3. `ops/install-release.sh` on the server checks the build (`index.html`, `404.html`, `robots.txt`, `sitemap-index.xml`, `.htaccess`, IndexNow key), copies the live site to `rollback/`, syncs the new build into the document root (leaving `.well-known/` alone), requests `http://ems36.ru/` through frontend `90.156.201.94` and restores the previous release if that fails.
 4. It records the revision and sends the sitemap URLs whose HTML changed to IndexNow (best effort; a failure does not undo the release).
+5. The same build (without `.htaccess`) is published to GitHub Pages as a standby copy, even when the Masterhost steps fail. It serves no one while DNS points at Masterhost; see [Failover to GitHub Pages](#failover-to-github-pages).
 
 Concurrent installs are blocked with `flock`; a second one exits without installing, and `ops/deploy.sh` then fails because the recorded revision differs.
 
@@ -50,6 +51,30 @@ ssh masterhost "rsync -a --delete --exclude='.well-known/' ~/deploy/ems36.ru/rol
 ```
 
 The next successful deploy installs `main` again. To undo a change for good, `git revert` it and push.
+
+## Failover to GitHub Pages
+
+GitHub Pages (`T-Damer/ems36`, custom domain `ems36.ru`, source: GitHub Actions) holds an up-to-date copy of the site. Switching to it is a DNS change at REG.RU and is never automatic.
+
+The menu bar dashboard on the Mac has a **Failover** row (`~/Projects/Personal/services-bar/sections/failover.5m.py`). It turns red ("down") when every Masterhost frontend has failed two checks in a row, five minutes apart, and then offers **Switch DNS to GitHub Pages…**. It also turns orange when the standby deployment fails or falls behind `main`. The switch uses the REG.RU API; set that up once as described in the services-bar README ("Failover"): an alternative API password, this Mac's IP in the allowed ranges, and the Keychain entry.
+
+The switch changes these records (by hand: Домены → ems36.ru → DNS-серверы и управление зоной):
+
+| Name | Masterhost (normal) | GitHub Pages (standby) |
+|---|---|---|
+| `@` A | `90.156.201.30`, `.53`, `.94`, `.106` | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` |
+| `www` CNAME | `ems36.ru.` | `t-damer.github.io.` |
+
+After switching to GitHub:
+
+1. Visitors follow within the zone TTL (300 s).
+2. GitHub needs a valid certificate for ems36.ru. The one it still holds from before the move expires on 2026-12-13 and cannot be renewed while DNS points at Masterhost, so after that date HTTPS fails for up to about an hour after a switch, until GitHub issues a new one. `http://` works meanwhile because "Enforce HTTPS" is off. Check with `gh api repos/T-Damer/ems36/pages --jq .https_certificate`; once its state is `approved`, turn enforcement on with `gh api -X PUT repos/T-Damer/ems36/pages -F https_enforced=true`.
+3. Pushes keep updating GitHub Pages. The Masterhost step fails while Masterhost is down; that is expected.
+4. IndexNow is not pinged from the standby.
+
+To switch back, wait until the Failover row shows all four Masterhost frontends answering, use **Switch DNS to Masterhost…**, and turn "Enforce HTTPS" off again (`-F https_enforced=false`), so a later failover can serve `http://` while GitHub's certificate is renewed. A Masterhost certificate renewal that falls due during a long failover waits until you switch back, because HTTP validation reaches Masterhost only through DNS.
+
+Keep the `_github-pages-challenge-t-damer` TXT record: it verifies ems36.ru for the GitHub account, so no one else can attach the domain to their own Pages site.
 
 ## HTTPS certificate
 
@@ -107,8 +132,9 @@ ssh masterhost /home/u543238/deploy/ems36.ru/renew-certificate.sh webroot
 | `@` | A | `90.156.201.94` |
 | `@` | A | `90.156.201.106` |
 | `www` | CNAME | `ems36.ru.` |
+| `_github-pages-challenge-t-damer` | TXT | GitHub domain verification (keep) |
 
-Do not use the SSH backend address (`90.156.142.59`). The domain has no mail records.
+Zone TTL: 300 s, so a [failover](#failover-to-github-pages) reaches visitors within five minutes (`~/Projects/Personal/services-bar/sections/failover.5m.py set-ttl ems36.ru 300`, or the zone settings at REG.RU). Do not use the SSH backend address (`90.156.142.59`). The domain has no mail records.
 
 ## Redirects
 
@@ -119,3 +145,4 @@ Do not use the SSH backend address (`90.156.142.59`). The domain has no mail rec
 - 2026-11-03: ems36.ru was added as a separate site on u543238 (panel site id 1967994, extra site at 60 ₽/month, no DDoS protection); `www.ems36.ru` is its alias. The Masterhost deploy, `.htaccess` and certificate scripts were added. GitHub Pages still serves the site.
 - 2026-11-03: first certificate issued by DNS validation and installed in the panel by `masterhost-ssl-upload.py`. DNS at REG.RU switched to the four Masterhost frontends (`www` CNAME `ems36.ru.`, no AAAA), the certificate reissued by HTTP validation (renewals now need no DNS edits), and the panel redirects `www.ems36.ru → ems36.ru` and `HTTP → HTTPS` switched on. ems36.ru is in `~/.config/services-bar/certs.json` with automatic upload. GitHub Pages stays published as a fallback for a day or two.
 - 2026-11-03: GitHub Pages unpublished. Its workflows (`actions.yaml`, `indexnow.yaml`), `public/CNAME` and `public/_headers` were removed (the cache header lives in `.htaccess`). Pull requests now run a build-only check in `deploy.yml`.
+- 2026-11-03: GitHub Pages re-enabled as a standby: `deploy.yml` publishes every build there too, and the Mac's menu bar dashboard watches both hosts and switches DNS through the REG.RU API on request. See "Failover to GitHub Pages".
