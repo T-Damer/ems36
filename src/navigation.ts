@@ -27,6 +27,7 @@ export const headerData = {
       text: 'Документация',
       title: 'Документация',
       links: [
+        { text: 'Все документы', href: getPermalink('/documents') },
         {
           text: 'Образцы паспортов',
           href: getPermalink('/documents/passport-examples'),

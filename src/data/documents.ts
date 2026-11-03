@@ -17,10 +17,22 @@ export interface SiteDocument {
   hidden?: boolean;
 }
 
-export const documentKinds: Record<DocumentKind, { title: string; href: string }> = {
-  passport: { title: 'Паспорта', href: '/documents/passport-examples' },
-  manual: { title: 'Руководства по эксплуатации', href: '/documents/exp-manual' },
-  permit: { title: 'Разрешительные документы', href: '/documents/permitting-docs' },
+export const documentKinds: Record<DocumentKind, { title: string; href: string; subtitle: string }> = {
+  passport: {
+    title: 'Паспорта',
+    href: '/documents/passport-examples',
+    subtitle: 'Образцы паспортов на задвижки, клапаны, конвейеры, элеваторы и фильтры',
+  },
+  manual: {
+    title: 'Руководства по эксплуатации',
+    href: '/documents/exp-manual',
+    subtitle: 'Монтаж, пуск, обслуживание и безопасная работа оборудования',
+  },
+  permit: {
+    title: 'Разрешительные документы',
+    href: '/documents/permitting-docs',
+    subtitle: 'Сертификаты и декларации ЕАЭС по ТР ТС 004, 010, 012 и 020',
+  },
 };
 
 const TR_004_020 = 'ТР ТС 004/2011 и ТР ТС 020/2011 — низковольтное оборудование и электромагнитная совместимость';
