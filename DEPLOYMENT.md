@@ -19,7 +19,7 @@ Masterhost cannot build the site (128 MB per process, glibc too old for Node 22)
 
 ## How a deploy works
 
-A push to `main` runs `.github/workflows/deploy.yml`:
+A push to `main` runs `.github/workflows/deploy.yml` (a pull request only runs step 1, the build, and never deploys):
 
 1. `npm ci` and `npm run build`.
 2. `ops/deploy.sh` rsyncs `dist/` into `deploy/ems36.ru/upload/` (only changed files are sent: the site is ~200 MB, mostly PDFs and videos) and copies the two ops scripts.
@@ -118,3 +118,4 @@ Do not use the SSH backend address (`90.156.142.59`). The domain has no mail rec
 
 - 2026-11-03: ems36.ru was added as a separate site on u543238 (panel site id 1967994, extra site at 60 ₽/month, no DDoS protection); `www.ems36.ru` is its alias. The Masterhost deploy, `.htaccess` and certificate scripts were added. GitHub Pages still serves the site.
 - 2026-11-03: first certificate issued by DNS validation and installed in the panel by `masterhost-ssl-upload.py`. DNS at REG.RU switched to the four Masterhost frontends (`www` CNAME `ems36.ru.`, no AAAA), the certificate reissued by HTTP validation (renewals now need no DNS edits), and the panel redirects `www.ems36.ru → ems36.ru` and `HTTP → HTTPS` switched on. ems36.ru is in `~/.config/services-bar/certs.json` with automatic upload. GitHub Pages stays published as a fallback for a day or two.
+- 2026-11-03: GitHub Pages unpublished. Its workflows (`actions.yaml`, `indexnow.yaml`), `public/CNAME` and `public/_headers` were removed (the cache header lives in `.htaccess`). Pull requests now run a build-only check in `deploy.yml`.

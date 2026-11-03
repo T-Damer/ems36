@@ -3,15 +3,19 @@ name: Deploy to Masterhost
 on:
   push:
     branches: [main]
+  # Pull requests only build (to catch errors); they never deploy.
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
-# Deploys run one after another; ops/install-release.sh also holds a lock.
+# Deploys run one after another (ops/install-release.sh also holds a lock); a
+# newer build of the same pull request replaces an older one.
 concurrency:
-  group: masterhost
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.ref) || 'masterhost' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   deploy:
@@ -29,6 +33,7 @@ jobs:
       # Only for this job: a deploy key that is allowed into the Masterhost account,
       # pinned to the host's known keys. See DEPLOYMENT.md.
       - name: Configure SSH
+        if: github.event_name != 'pull_request'
         env:
           MASTERHOST_SSH_KEY: ${{ secrets.MASTERHOST_SSH_KEY }}
           MASTERHOST_KNOWN_HOSTS: ${{ secrets.MASTERHOST_KNOWN_HOSTS }}
@@ -47,6 +52,7 @@ jobs:
           chmod 600 ~/.ssh/masterhost ~/.ssh/known_hosts ~/.ssh/config
 
       - name: Deploy
+        if: github.event_name != 'pull_request'
         env:
           REVISION: ${{ github.sha }}
         run: ops/deploy.sh

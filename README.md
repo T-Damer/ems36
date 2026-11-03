@@ -78,7 +78,7 @@ Inside **AstroWind** template, you'll see the following folders and files:
 ```
 /
 ├── public/
-│   ├── _headers
+│   ├── .htaccess
 │   └── robots.txt
 ├── src/
 │   ├── assets/
@@ -241,6 +241,8 @@ To customize Font families, Colors or more Elements refer to the following files
 - `src/assets/styles/tailwind.css`
 
 ### Deploy
+
+ems36.ru is hosted on Masterhost and deployed by `.github/workflows/deploy.yml` on every push to `main`; see [DEPLOYMENT.md](DEPLOYMENT.md). The sections below come from the AstroWind template.
 
 #### Deploy to production (manual)
 
