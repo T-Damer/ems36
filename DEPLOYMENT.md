@@ -44,6 +44,36 @@ ship status
 ship log
 ```
 
+### URLs that must keep working
+
+Equipment nameplates carry a printed QR code or barcode that links to a technical-documentation page, so these URLs cannot change. `ops/check-urls.sh` checks the `/documents/` pages, every PDF under `/files/` (Cyrillic names, `application/pdf`, exact size) and the redirects that lead to them. Every variant must end on the canonical URL with status 200:
+
+| Request | Must end at |
+|---|---|
+| `https://ems36.ru/documents/passport-examples/` | itself, no redirect |
+| `https://ems36.ru/documents/passport-examples` (no slash) | `https://ems36.ru/documents/passport-examples/`, one 301 |
+| `http://ems36.ru/…`, `http://www.ems36.ru/…`, `https://www.ems36.ru/…` | `https://ems36.ru/` + the same path |
+| `…/passport-examples?src=qr` | `…/passport-examples/?src=qr` (query kept) |
+| `/files/<Cyrillic name>.pdf`, percent-encoded as UTF-8 NFC | the PDF |
+| `/no-such-page/` | 404 |
+
+Run it after any change to hosting, redirects or `public/files/`, on each frontend:
+
+```bash
+for ip in 90.156.201.30 90.156.201.53 90.156.201.94 90.156.201.106; do ops/check-urls.sh "$ip"; done
+```
+
+Add the exact path printed on the nameplates to `ops/plate-urls.txt` once the client confirms it (still unknown on 2026-11-04). For the GitHub Pages standby, run the check from Masterhost, because Browsec on the Mac drops these requests to GitHub's addresses:
+
+```bash
+ssh masterhost 'FILES_DIR=$HOME/ems36.ru/www/files bash -s 185.199.108.153' < ops/check-urls.sh
+```
+
+Results on 2026-11-04: all 129 checks pass on each Masterhost frontend and through public DNS. On GitHub Pages, everything matches except that `http://` stays on `http://`, because "Enforce HTTPS" is off until a failover (see below).
+
+- A request for `http://www.ems36.ru/<page>` takes three redirects (www → `http://ems36.ru`, by the panel; → `https`; → trailing slash) but keeps the path and query.
+- File names are NFC, as git stores them. A link that spells «й» decomposed (`и` + U+0306, as macOS may name files) gets a 404. The site's own links and the server files are NFC; a hand-typed QR target made on a Mac is worth checking with the script.
+
 ### Rollback
 
 ```bash
@@ -67,7 +97,7 @@ The switch changes these records (by hand: Домены → ems36.ru → DNS-с�
 
 After switching to GitHub:
 
-1. Visitors follow within the zone TTL (300 s).
+1. Visitors follow within the zone TTL (300 s once lowered; see [DNS at REG.RU](#dns-at-regru)).
 2. GitHub needs a valid certificate for ems36.ru. The one it still holds from before the move expires on 2026-12-13 and cannot be renewed while DNS points at Masterhost, so after that date HTTPS fails for up to about an hour after a switch, until GitHub issues a new one. `http://` works meanwhile because "Enforce HTTPS" is off. Check with `gh api repos/T-Damer/ems36/pages --jq .https_certificate`; once its state is `approved`, turn enforcement on with `gh api -X PUT repos/T-Damer/ems36/pages -F https_enforced=true`.
 3. Pushes keep updating GitHub Pages. The Masterhost step fails while Masterhost is down; that is expected.
 4. IndexNow is not pinged from the standby.
@@ -134,7 +164,7 @@ ssh masterhost /home/u543238/deploy/ems36.ru/renew-certificate.sh webroot
 | `www` | CNAME | `ems36.ru.` |
 | `_github-pages-challenge-t-damer` | TXT | GitHub domain verification (keep) |
 
-Zone TTL: 300 s, so a [failover](#failover-to-github-pages) reaches visitors within five minutes (`~/Projects/Personal/services-bar/sections/failover.5m.py set-ttl ems36.ru 300`, or the zone settings at REG.RU). Do not use the SSH backend address (`90.156.142.59`). The domain has no mail records.
+Zone TTL: should be 300 s, so a [failover](#failover-to-github-pages) reaches visitors within five minutes (`~/Projects/Personal/services-bar/sections/failover.5m.py set-ttl ems36.ru 300`, or the zone settings at REG.RU). On 2026-11-04 it is still 3600 s; the client's team changes it at REG.RU in a couple of days. Until then a failover takes up to an hour to reach everyone. Do not use the SSH backend address (`90.156.142.59`). The domain has no mail records.
 
 ## Redirects
 
@@ -146,3 +176,4 @@ Zone TTL: 300 s, so a [failover](#failover-to-github-pages) reaches visitors wit
 - 2026-11-03: first certificate issued by DNS validation and installed in the panel by `masterhost-ssl-upload.py`. DNS at REG.RU switched to the four Masterhost frontends (`www` CNAME `ems36.ru.`, no AAAA), the certificate reissued by HTTP validation (renewals now need no DNS edits), and the panel redirects `www.ems36.ru → ems36.ru` and `HTTP → HTTPS` switched on. ems36.ru is in `~/.config/services-bar/certs.json` with automatic upload. GitHub Pages stays published as a fallback for a day or two.
 - 2026-11-03: GitHub Pages unpublished. Its workflows (`actions.yaml`, `indexnow.yaml`), `public/CNAME` and `public/_headers` were removed (the cache header lives in `.htaccess`). Pull requests now run a build-only check in `deploy.yml`.
 - 2026-11-03: GitHub Pages re-enabled as a standby: `deploy.yml` publishes every build there too, and the Mac's menu bar dashboard watches both hosts and switches DNS through the REG.RU API on request. See "Failover to GitHub Pages".
+- 2026-11-04: `ops/check-urls.sh` added for the URLs printed on equipment nameplates (documentation pages, Cyrillic PDFs, redirects). All checks pass on the four frontends; on the GitHub standby only `http://` differs (no HTTPS enforcement). The nameplate path goes in `ops/plate-urls.txt` once the client confirms it.

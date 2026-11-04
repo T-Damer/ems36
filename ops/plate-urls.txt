@@ -1,0 +1,4 @@
+# Paths printed as QR codes / barcodes on equipment nameplates, one per line,
+# as the canonical URL (with the trailing slash). ops/check-urls.sh checks each
+# one together with its http, www, no-slash and query-string variants.
+# The exact path on the plates is still to be confirmed with the client.
